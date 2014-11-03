@@ -42,9 +42,6 @@ import java.util.List;
 
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 public class GuiMain {
 
