@@ -16,5 +16,5 @@ gradle-app.setting
 *~.nib
 *.project
 *.classpath
-*/.settings
 /bin
+/.settings
