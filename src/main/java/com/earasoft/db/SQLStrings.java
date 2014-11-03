@@ -5,4 +5,5 @@ public class SQLStrings {
     public static final String CREATE_PERSON_INDEX = "";
     public static final String DROP_PERSON_TABLE = "DROP TABLE IF exists person";
     
+    
 }

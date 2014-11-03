@@ -78,14 +78,8 @@ public class PersonDAO {
 	
 	public void setLastName(String lastName) throws SQLException {
 	    this.lastName = lastName;
-	    
-		String sql = "UPDATE person SET lastName = ? where personId = ?;";
-		
-		PreparedStatement prep = connection.prepareStatement(sql);
-		
-		prep.setString(1, this.lastName);
-		prep.setInt(2, this.personId);
-		
+		PreparedStatement prep = setLastNamePrepStatement(this.lastName, this.personId);
+		prep.executeUpdate();
 		prep.close();
 	}
 	
@@ -121,6 +115,17 @@ public class PersonDAO {
         } else if (!personId.equals(other.personId))
             return false;
         return true;
+    }
+    
+    /*
+     * Prepared Statements 
+     */
+    public PreparedStatement setLastNamePrepStatement(String lastName, Integer personId) throws SQLException{
+        String sql = "UPDATE person SET lastName = ? where personId = ?;";
+        PreparedStatement prep = connection.prepareStatement(sql);
+        prep.setString(1, lastName);
+        prep.setInt(2, personId);
+        return prep;
     }
 	
 }

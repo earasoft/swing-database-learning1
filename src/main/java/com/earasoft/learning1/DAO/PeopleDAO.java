@@ -7,32 +7,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PeopleDAO {
 	private final Connection connection;
 	
+	//TODO Change this to Database Class
 	public PeopleDAO(Connection connection){
 		this.connection = connection;
 	}
 	
 	public ArrayList<PersonDAO> getPeople() throws SQLException{
-		ArrayList<PersonDAO> people = new ArrayList<PersonDAO>();
+	    PreparedStatement prep = getPeoplePrepStatement();
+		ResultSet rs = prep.executeQuery();
 		
-		Statement statement = connection.createStatement();
-		statement.setQueryTimeout(10);
-		ResultSet rs = statement.executeQuery("SELECT personId, firstName, lastName, phoneNumber FROM person");
+		ArrayList<PersonDAO> people = resultSetPeopleListFillerHelper(rs);
 		
-		while(rs.next()){
-		    Integer personId = rs.getInt("personId");
-			String firstName = rs.getString("firstName");
-			String lastName = rs.getString("lastName");
-			String phoneNumber = rs.getString("phoneNumber");
-			
-			people.add(new PersonDAO(personId, firstName, lastName, phoneNumber,this.connection));
-		}
 		rs.close();
-		statement.close();
+		prep.close();
 
 		return people;
 	}
@@ -51,17 +42,8 @@ public class PeopleDAO {
 	}
 	
 	public PersonDAO addPerson(PersonDAO person) throws SQLException{
-		String sql = "INSERT INTO person (firstName, lastName, phoneNumber) VALUES (?,?,?);";
-		
-		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setQueryTimeout(10);
-
-		prep.setString(1, person.getFirstName());
-		prep.setString(2, person.getLastName());
-		prep.setString(3, person.getPhoneNumber());
-		
+		PreparedStatement prep = addPersonPrepStatement(person.getFirstName(), person.getLastName(), person.getPhoneNumber());		
 		prep.executeUpdate();
-		
 		prep.close();
 		person.setConnection(connection);
 		return person;
@@ -69,25 +51,61 @@ public class PeopleDAO {
 	
 	
 	public ArrayList<PersonDAO> getPeopleByLastname(String lastNameSearch) throws SQLException{
-		ArrayList<PersonDAO> people = new ArrayList<PersonDAO>();
-		
-		String sql = "SELECT personId, firstName, lastName, phoneNumber FROM person WHERE lastname like ? ;";
-		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setString(1, lastNameSearch);
-		
+		PreparedStatement prep = getPeopleByLastnamePrepStatement(lastNameSearch);
 		ResultSet rs = prep.executeQuery();
 		
-		while(rs.next()){
-		    Integer personId = rs.getInt("personId");
-			String firstName = rs.getString("firstName");
-			String lastName = rs.getString("lastName");
-			String phoneNumber = rs.getString("phoneNumber");
-			people.add(new PersonDAO(personId, firstName, lastName, phoneNumber, this.connection));
-		}
+		ArrayList<PersonDAO> peopleList  = resultSetPeopleListFillerHelper(rs);
 		
 		rs.close();
 		prep.close();
-		return people;
+		return peopleList;
 	}
 	
+	 /*
+     * Helper Methods
+     */
+	 
+	public ArrayList<PersonDAO> resultSetPeopleListFillerHelper(ResultSet rs) throws SQLException{
+	       ArrayList<PersonDAO> peopleList = new ArrayList<PersonDAO>();
+	       
+	       while(rs.next()){
+	            Integer personId = rs.getInt("personId");
+	            String firstName = rs.getString("firstName");
+	            String lastName = rs.getString("lastName");
+	            String phoneNumber = rs.getString("phoneNumber");
+	            peopleList.add(new PersonDAO(personId, firstName, lastName, phoneNumber, this.connection));
+	        }
+	       
+	       return peopleList;
+	}
+	
+	/*
+	 * Prepared Statements 
+	 */
+	
+    public PreparedStatement addPersonPrepStatement(String firstName, String lastName, String phoneNumber) throws SQLException{
+        String sql = "INSERT INTO person (firstName, lastName, phoneNumber) VALUES (?,?,?);";
+        PreparedStatement prep = connection.prepareStatement(sql);
+        prep.setQueryTimeout(10);
+        prep.setString(1, firstName);
+        prep.setString(2, lastName);
+        prep.setString(3, phoneNumber);
+        return prep;
+    }
+    
+    public PreparedStatement getPeopleByLastnamePrepStatement(String lastNameSearch) throws SQLException{
+        String sql = "SELECT personId, firstName, lastName, phoneNumber FROM person WHERE lastName like ?;";
+        PreparedStatement prep = connection.prepareStatement(sql);
+        prep.setString(1, lastNameSearch);
+        return prep;
+    }
+    
+    public PreparedStatement getPeoplePrepStatement() throws SQLException{
+        String sql = "SELECT personId, firstName, lastName, phoneNumber FROM person;";
+        PreparedStatement prep = connection.prepareStatement(sql);
+        return prep;
+    }
+    
+    //SELECT personId, firstName, lastName, phoneNumber FROM person WHERE personId IN (1,3,5)
+    
 }
