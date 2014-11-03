@@ -19,8 +19,6 @@ public class DatabaseManager {
 	
 	private Connection currentConnection = null;
 	
-	private static final String CREATE_HISTORY_TABLE = "CREATE TABLE IF NOT EXISTS person (hashCode varchar(100), firstName varchar(100),lastName varchar(255),phoneNumber varchar(32));";
-	
 	public DatabaseManager(Configuration storageConfig) throws Exception{
 		this.databaseString = storageConfig.getString(DATABASE_KEY, DATABASE_KEY_DEFAULT).trim();
 		if(this.databaseString.equals("sqlite")){
@@ -42,9 +40,7 @@ public class DatabaseManager {
 	public void openDatabase() throws SQLException, ClassNotFoundException{
 		if(this.isOpen() == false)
 			this.currentConnection = this.database.getConnection();
-		Statement statement = this.currentConnection.createStatement();
-		statement.setQueryTimeout(10);  // set timeout to 10 sec.
-		statement.executeUpdate(CREATE_HISTORY_TABLE);
+		this.database.init(currentConnection);
 	}
 	
 	public void clearDatabase() throws SQLException, ClassNotFoundException{
@@ -52,7 +48,8 @@ public class DatabaseManager {
 			this.currentConnection = this.database.getConnection();
 		Statement statement = this.currentConnection.createStatement();
 		statement.setQueryTimeout(10);  // set timeout to 10 sec.
-		statement.executeUpdate("DROP TABLE IF exists person");
+		statement.executeUpdate(SQLStrings.DROP_PERSON_TABLE);
+		statement.close();
 	}
 	
 	public Connection getConnection(){

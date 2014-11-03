@@ -17,5 +17,7 @@ public interface DatabaseI {
 	 */
 	public String getName();
 
+    public void init(Connection currentConnection) throws SQLException;
+
 
 }

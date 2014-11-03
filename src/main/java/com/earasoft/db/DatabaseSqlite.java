@@ -3,6 +3,7 @@ package com.earasoft.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -30,4 +31,12 @@ public class DatabaseSqlite implements DatabaseI {
 	public String getName() {
 		return String.format("[]");
 	}
+
+    @Override
+    public void init(Connection currentConnection) throws SQLException {
+        Statement statement = currentConnection.createStatement();
+        statement.setQueryTimeout(10);
+        statement.executeUpdate(SQLStrings.CREATE_PERSON_TABLE);
+        statement.close();
+    }
 }
