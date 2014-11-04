@@ -1,4 +1,4 @@
-package com.earasoft.db.manager;
+package com.earasoft.db.database.manager;
 
 import java.io.File;
 import java.sql.Connection;
@@ -10,20 +10,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.SQLStrings;
-import com.earasoft.db.impl.mysql.MySqlDatabase;
-import com.earasoft.db.impl.sqlite.SqliteDatabase;
+import com.earasoft.db.database.Database;
+import com.earasoft.db.database.mysql.MySqlDatabase;
+import com.earasoft.db.database.sqlite.SqliteDatabase;
 
-public class DatabaseManager {
-	private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class);
+public class DatabaseManagerImpl implements DatabaseManager {
+	private static final Logger logger = LoggerFactory.getLogger(DatabaseManagerImpl.class);
 	public static final String DATABASE_KEY = "database";
     public static final String DATABASE_KEY_DEFAULT = "sqlite";
     
-	final private DatabaseI database;
+	final private Database database;
 	final private String databaseString;
 	
 	private Connection currentConnection = null;
 	
-	public DatabaseManager(Configuration storageConfig) throws Exception{
+	public DatabaseManagerImpl(Configuration storageConfig) throws Exception{
 		this.databaseString = storageConfig.getString(DATABASE_KEY, DATABASE_KEY_DEFAULT).trim();
 		
 		logger.info(this.databaseString);
@@ -36,6 +37,10 @@ public class DatabaseManager {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.earasoft.db.manager.DatabaseManagerI#isOpen()
+	 */
+	@Override
 	public boolean isOpen(){
 		if(currentConnection == null){
 			return false;
@@ -43,25 +48,44 @@ public class DatabaseManager {
 			return true;
 		}
 	}
+	/* (non-Javadoc)
+	 * @see com.earasoft.db.manager.DatabaseManagerI#openDatabase()
+	 */
+	@Override
 	public void openDatabase() throws SQLException, ClassNotFoundException{
 		if(this.isOpen() == false)
 			this.currentConnection = this.database.getConnection();
+		//currentConnection.setAutoCommit(false);
 		this.database.init(currentConnection);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.earasoft.db.manager.DatabaseManagerI#clearDatabase()
+	 */
+	@Override
 	public void clearDatabase() throws SQLException, ClassNotFoundException{
 		if(this.isOpen() == false)
 			this.currentConnection = this.database.getConnection();
+		//currentConnection.setAutoCommit(false);
 		Statement statement = this.currentConnection.createStatement();
 		statement.setQueryTimeout(10);  // set timeout to 10 sec.
 		statement.executeUpdate(SQLStrings.DROP_PERSON_TABLE);
 		statement.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.earasoft.db.manager.DatabaseManagerI#getConnection()
+	 */
+	@Override
 	public Connection getConnection(){
+		
 		return currentConnection;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.earasoft.db.manager.DatabaseManagerI#close()
+	 */
+	@Override
 	public void close() throws SQLException{
 		if(currentConnection == null){
 			//No Connection to close

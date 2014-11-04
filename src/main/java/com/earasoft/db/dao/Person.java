@@ -1,17 +1,18 @@
-package com.earasoft.db;
+package com.earasoft.db.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public interface PersonI {
+import com.earasoft.db.database.Database;
+import com.earasoft.db.database.manager.DatabaseManager;
+
+public interface Person {
     
     public abstract Integer getPersonId();
     
     public abstract void setPersonId(Integer personId);
     
     public abstract String getFirstName();
-    
-    public abstract void setConnection(Connection connection);
     
     public abstract void setFirstName(String firstName) throws SQLException;
     
@@ -24,5 +25,9 @@ public interface PersonI {
     public abstract void setPhoneNumber(String phoneNumber) throws SQLException;
 
 	public abstract String toStringFull();
+
+	public abstract void setDatabase(DatabaseManager databaseManager);
+	
+	public abstract void setConnection(Connection connection);
     
 }

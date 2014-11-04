@@ -1,4 +1,4 @@
-package com.earasoft.db.impl.sqlite;
+package com.earasoft.db.database.sqlite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.SQLStrings;
-import com.earasoft.db.manager.DatabaseI;
+import com.earasoft.db.database.Database;
 
-public class SqliteDatabase implements DatabaseI {
+public class SqliteDatabase implements Database {
 	private static final Logger logger = LoggerFactory.getLogger(SqliteDatabase.class);
     
 	public static final String FILENAME_KEY = "filename";

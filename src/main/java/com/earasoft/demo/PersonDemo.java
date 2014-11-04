@@ -2,32 +2,35 @@ package com.earasoft.demo;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import com.earasoft.db.PeopleI;
-import com.earasoft.db.PersonI;
-import com.earasoft.db.doa.PeopleDAO;
-import com.earasoft.db.doa.PersonDAO;
-import com.earasoft.db.manager.DatabaseManager;
-import com.earasoft.db.manager.DatabaseManagerBuilder;
+import com.earasoft.db.dao.People;
+import com.earasoft.db.dao.Person;
+import com.earasoft.db.dao.impl.PeopleDAO;
+import com.earasoft.db.dao.impl.PersonDAO;
+import com.earasoft.db.database.manager.DatabaseManagerImpl;
+import com.earasoft.db.database.manager.DatabaseManagerBuilder;
 
 public class PersonDemo {
 
 	public static void main(String[] args) throws Exception {
 		PropertiesConfiguration propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
-		DatabaseManager DbMgrDemo = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
+		
+		DatabaseManagerImpl DbMgrDemo = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
 		//DbMgrDemo.clearDatabase();
 		DbMgrDemo.openDatabase();
 		
-		PeopleI personDAO = new PeopleDAO(DbMgrDemo);
+		People personDAO = new PeopleDAO(DbMgrDemo);
 		
 		//System.out.println(personDAO.checkIfPersonExist("1549490016"));
 		
 		//personDAO.addPerson(new PersonDAO("first","R4","445-555-4446"));
-		personDAO.addPerson(new PersonDAO("f54","R4","555-555-4444"));
-		
-		
-		personDAO.getPeopleByLastname("R4");
-		
-		for(PersonI person : personDAO.getPeople()){
+		for(int i = 1; i<=1000; i++){
+			personDAO.addPerson(new PersonDAO("f54","R4","555-555-4444"));
+			System.out.println("person: " + i);
+		}
+		personDAO.getPeople();
+		personDAO.getPeople();
+		personDAO.getPeople();
+		for(Person person : personDAO.getPeople()){
 			System.out.println(person.toStringFull());
 		}
 		//System.out.println(personDAO.getPeopleByLastname("Rive%"));

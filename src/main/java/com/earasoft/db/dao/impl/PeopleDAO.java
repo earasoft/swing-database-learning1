@@ -1,4 +1,4 @@
-package com.earasoft.db.doa;
+package com.earasoft.db.dao.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,28 +11,29 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 
-import com.earasoft.db.PeopleI;
-import com.earasoft.db.PersonI;
-import com.earasoft.db.manager.DatabaseManager;
+import com.earasoft.db.dao.People;
+import com.earasoft.db.dao.Person;
+import com.earasoft.db.database.manager.DatabaseManagerImpl;
 
-public class PeopleDAO implements PeopleI {
+public class PeopleDAO implements People {
 	private final Connection connection;
-	private final DatabaseManager databaseManager;
+	private final DatabaseManagerImpl databaseManager;
 	
-	public PeopleDAO(DatabaseManager databaseManager){
+	public PeopleDAO(DatabaseManagerImpl databaseManager){
 	    this.databaseManager = databaseManager;
 		this.connection = this.databaseManager.getConnection();
+		
 	}
 	
 	/* (non-Javadoc)
      * @see com.earasoft.db.doa.PeopleDAOI#getPeople()
      */
 	@Override
-    public List<PersonI> getPeople() throws SQLException{
+    public List<Person> getPeople() throws SQLException{
 	    PreparedStatement prep = getPeoplePrepStatement();
 		ResultSet rs = prep.executeQuery();
 		
-		List<PersonI> people = resultSetPeopleListFillerHelper(rs);
+		List<Person> people = resultSetPeopleListFillerHelper(rs);
 		
 		rs.close();
 		prep.close();
@@ -40,32 +41,19 @@ public class PeopleDAO implements PeopleI {
 		return people;
 	}
 	
-	public PersonI checkIfPersonExist(String hashCode){
-		return PeopleUtils.checkIfPersonExist(hashCode, connection);
-	}
-	
-	/* (non-Javadoc)
-     * @see com.earasoft.db.doa.PeopleDAOI#getPerson(com.earasoft.db.doa.PersonDAO)
-     */
-	@Override
-    public PersonI getPerson(PersonI person) throws Exception{
-		PersonI personDAO = checkIfPersonExist(person+"");
-		if(personDAO != null){
-			return personDAO;
-		}else{
-			throw new Exception("Person Not Found");
-		}
+	public Person checkIfPersonExist(Integer personId){
+		return PeopleUtils.checkIfPersonExist(personId, this.databaseManager);
 	}
 	
 	/* (non-Javadoc)
      * @see com.earasoft.db.doa.PeopleDAOI#addPerson(com.earasoft.db.doa.PersonDAO)
      */
 	@Override
-    public PersonI addPerson(PersonI person) throws SQLException{
+    public Person addPerson(Person person) throws SQLException{
 		PreparedStatement prep = addPersonPrepStatement(person.getFirstName(), person.getLastName(), person.getPhoneNumber());		
 		prep.executeUpdate();
 		prep.close();
-		person.setConnection(connection);
+		person.setDatabase(databaseManager);
 		return person;
 	}
 	
@@ -74,11 +62,11 @@ public class PeopleDAO implements PeopleI {
      * @see com.earasoft.db.doa.PeopleDAOI#getPeopleByLastname(java.lang.String)
      */
 	@Override
-    public List<PersonI> getPeopleByLastname(String lastNameSearch) throws SQLException{
+    public List<Person> getPeopleByLastname(String lastNameSearch) throws SQLException{
 		PreparedStatement prep = getPeopleByLastnamePrepStatement(lastNameSearch);
 		ResultSet rs = prep.executeQuery();
 		
-		List<PersonI> peopleList  = resultSetPeopleListFillerHelper(rs);
+		List<Person> peopleList  = resultSetPeopleListFillerHelper(rs);
 		
 		rs.close();
 		prep.close();
@@ -88,8 +76,8 @@ public class PeopleDAO implements PeopleI {
 	 /*
      * Helper Methods
      */
-	private List<PersonI> resultSetPeopleListFillerHelper(ResultSet rs) throws SQLException{
-	       List<PersonI> peopleList = new ArrayList<PersonI>();
+	private List<Person> resultSetPeopleListFillerHelper(ResultSet rs) throws SQLException{
+	       List<Person> peopleList = new ArrayList<Person>();
 	       
 	       while(rs.next()){
 	            Integer personId = rs.getInt("personId");
@@ -109,7 +97,7 @@ public class PeopleDAO implements PeopleI {
     private PreparedStatement addPersonPrepStatement(String firstName, String lastName, String phoneNumber) throws SQLException{
         String sql = "INSERT INTO person (firstName, lastName, phoneNumber) VALUES (?,?,?);";
         PreparedStatement prep = connection.prepareStatement(sql);
-        prep.setQueryTimeout(10);
+        prep.setQueryTimeout(30);
         prep.setString(1, firstName);
         prep.setString(2, lastName);
         prep.setString(3, phoneNumber);
@@ -130,13 +118,25 @@ public class PeopleDAO implements PeopleI {
     }
 
 	@Override
-	public PersonI getPersonById(Integer id) throws SQLException {
+	public Person getPersonById(Integer id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PersonI deletePersonById(Integer id) throws SQLException {
+	public Person deletePersonById(Integer id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Person getPersonByIds(List<Integer> idList) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Person deletePersonByIsds(List<Integer> idList) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

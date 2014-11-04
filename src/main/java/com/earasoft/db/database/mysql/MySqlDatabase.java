@@ -1,4 +1,4 @@
-package com.earasoft.db.impl.mysql;
+package com.earasoft.db.database.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,10 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.SQLStrings;
-import com.earasoft.db.manager.DatabaseI;
+import com.earasoft.db.database.Database;
 import com.earasoft.learning1.Settings;
 
-public class MySqlDatabase implements DatabaseI {
+public class MySqlDatabase implements Database {
 	private static final Logger logger = LoggerFactory.getLogger(MySqlDatabase.class);
 
 	public static final String HOSTNAME_KEY = "hostname";
@@ -44,7 +44,7 @@ public class MySqlDatabase implements DatabaseI {
 		 this.database = storageConfig.getString(DATABASE_KEY, DATABASE_KEY_DEFAULT).trim(); 
 		 this.username = storageConfig.getString(USERNAME_KEY, USERNAME_KEY_DEFAULT).trim();
 		 this.password = storageConfig.getString(PASSWORD_KEY, PASSWORD_KEY_DEFAULT).trim();
-		 this.url = String.format("jdbc:mysql://%s:$s/%s", this.hostname, this.port, this.database); 
+		 this.url = String.format("jdbc:mysql://%s:%s/%s", this.hostname, this.port, this.database); 
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class MySqlDatabase implements DatabaseI {
     public void init(Connection currentConnection) throws SQLException {
         Statement statement = currentConnection.createStatement();
         statement.setQueryTimeout(10);
-        statement.executeUpdate(SQLStrings.CREATE_PERSON_TABLE);
+        statement.executeUpdate(SQLStrings.CREATE_PERSON_TABLE_MYSQL);
         statement.close();
     }
 	

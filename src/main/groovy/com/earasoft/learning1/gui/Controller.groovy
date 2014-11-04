@@ -1,5 +1,14 @@
 package com.earasoft.learning1.gui;
 
+import org.apache.commons.configuration.PropertiesConfiguration;
+
+import com.earasoft.db.dao.People;
+import com.earasoft.db.dao.Person;
+import com.earasoft.db.dao.impl.PeopleDAO;
+import com.earasoft.db.dao.impl.PersonDAO;
+import com.earasoft.db.database.manager.DatabaseManagerBuilder;
+import com.earasoft.db.database.manager.DatabaseManagerImpl;
+
 public class Controller {
     private ViewBind view;
     
@@ -8,8 +17,29 @@ public class Controller {
     }
     
     public init(){
-		for (int i = 0; i < 15; i++)
-			Models.getListModel().addElement("Element " + i);
+		
+		PropertiesConfiguration propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
+		
+		DatabaseManagerImpl DbMgrDemo = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
+		//DbMgrDemo.clearDatabase();
+		DbMgrDemo.openDatabase();
+		
+		People personDAO = new PeopleDAO(DbMgrDemo);
+		
+		//System.out.println(personDAO.checkIfPersonExist("1549490016"));
+		
+		//personDAO.addPerson(new PersonDAO("first","R4","445-555-4446"));
+		for(int i = 1; i<=1000; i++){
+			personDAO.addPerson(new PersonDAO("f54","R4","555-555-4444"));
+			System.out.println("person: " + i);
+		}
+
+		for(Person person : personDAO.getPeople()){
+			Models.getListModel().addElement(person);
+		}
+		
+		
+	
     }
 	
 	public void exit(){

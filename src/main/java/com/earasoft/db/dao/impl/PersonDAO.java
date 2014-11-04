@@ -1,4 +1,4 @@
-package com.earasoft.db.doa;
+package com.earasoft.db.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.earasoft.db.PersonI;
-import com.earasoft.db.manager.DatabaseManager;
+import com.earasoft.db.dao.Person;
+import com.earasoft.db.database.manager.DatabaseManager;
 
-public class PersonDAO implements PersonI {
+public class PersonDAO implements Person {
     private Integer personId;
 	private String firstName;
 	private String lastName;
@@ -102,8 +102,8 @@ public class PersonDAO implements PersonI {
 		return lastName;
 	}
 	
-	public PersonI checkIfPersonExist(String hashCode){
-		return PeopleUtils.checkIfPersonExist(hashCode, connection);
+	private Person checkIfPersonExist(Integer personId){
+		return PeopleUtils.checkIfPersonExist(personId, this.databaseManager);
 	}
 	
 	/* (non-Javadoc)
@@ -169,5 +169,11 @@ public class PersonDAO implements PersonI {
         prep.setInt(2, personId);
         return prep;
     }
+
+	@Override
+	public void setDatabase(DatabaseManager databaseManager) {
+		this.databaseManager = databaseManager;
+		
+	}
 	
 }

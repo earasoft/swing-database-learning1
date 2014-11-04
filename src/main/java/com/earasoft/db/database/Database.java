@@ -1,9 +1,9 @@
-package com.earasoft.db.manager;
+package com.earasoft.db.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public interface DatabaseI {
+public interface Database {
 	
 	/**
 	 * Opens a connection to the database
