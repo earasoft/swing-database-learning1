@@ -9,6 +9,9 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.earasoft.db.impl.mysql.MySqlDatabase;
+import com.earasoft.db.impl.sqlite.SqliteDatabase;
+
 public class DatabaseManager {
 	private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class);
 	public static final String DATABASE_KEY = "database";
@@ -24,9 +27,9 @@ public class DatabaseManager {
 		
 		logger.info(this.databaseString);
 		if(this.databaseString.equals("sqlite")){
-			this.database = new DatabaseSqlite(storageConfig.subset("database.sqlite"));
+			this.database = new SqliteDatabase(storageConfig.subset("database.sqlite"));
 		}else if(this.databaseString.equals("mysql")){
-	    	this.database = new DatabaseMySql(storageConfig.subset("database.mysql"));
+	    	this.database = new MySqlDatabase(storageConfig.subset("database.mysql"));
 		}else{
 			throw new Exception("Database ["+this.databaseString+"] not found");
 		}

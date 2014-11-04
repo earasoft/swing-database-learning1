@@ -1,4 +1,4 @@
-package com.earasoft.db;
+package com.earasoft.db.impl.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,10 +9,12 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.earasoft.db.DatabaseI;
+import com.earasoft.db.SQLStrings;
 import com.earasoft.learning1.Settings;
 
-public class DatabaseMySql implements DatabaseI {
-	private static final Logger logger = LoggerFactory.getLogger(DatabaseMySql.class);
+public class MySqlDatabase implements DatabaseI {
+	private static final Logger logger = LoggerFactory.getLogger(MySqlDatabase.class);
 
 	public static final String HOSTNAME_KEY = "hostname";
     public static final String HOSTNAME_KEY_DEFAULT = "127.0.0.1";
@@ -36,7 +38,7 @@ public class DatabaseMySql implements DatabaseI {
     protected final String password;
     protected final String url;
     	
-	public DatabaseMySql(Configuration storageConfig){
+	public MySqlDatabase(Configuration storageConfig){
 		 this.hostname = storageConfig.getString(HOSTNAME_KEY, HOSTNAME_KEY_DEFAULT).trim();
 		 this.port = storageConfig.getString(PORT_KEY, PORT_KEY_DEFAULT).trim();
 		 this.database = storageConfig.getString(DATABASE_KEY, DATABASE_KEY_DEFAULT).trim(); 

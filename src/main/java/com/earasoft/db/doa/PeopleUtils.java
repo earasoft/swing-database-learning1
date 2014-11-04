@@ -1,4 +1,4 @@
-package com.earasoft.learning1.DAO;
+package com.earasoft.db.doa;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class PeopleUtils {
 
-	public static PersonDAO checkIfPersonExist(String hashCode, Connection connection){
+	public static PersonI checkIfPersonExist(String hashCode, Connection connection){
 		try {
 			String sql = "SELECT firstName, lastName, phoneNumber FROM person WHERE hashcode like ? ;";
 			PreparedStatement prep = connection.prepareStatement(sql);
@@ -16,7 +16,7 @@ public class PeopleUtils {
 			ResultSet rs = prep.executeQuery();
 			
 			boolean exist = rs.next();
-			PersonDAO person = null;
+			PersonI person = null;
 			if(exist){
 				person = new PersonDAO(rs.getString("firstName"), rs.getString("lastName"), rs.getString("phoneNumber"));
 				person.setConnection(connection);

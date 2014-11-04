@@ -1,4 +1,4 @@
-package com.earasoft.learning1.DAO;
+package com.earasoft.db.doa;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,12 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PersonDAO {
+import com.earasoft.db.DatabaseManager;
+
+public class PersonDAO implements PersonI {
     private Integer personId;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
 	private Connection connection;
+	private DatabaseManager databaseManager;
 	
 	public PersonDAO(String firstName, String lastName, String phoneNumber) {
 		super();
@@ -20,27 +23,37 @@ public class PersonDAO {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public PersonDAO(String firstName, String lastName, String phoneNumber, Connection connection){
+	public PersonDAO(String firstName, String lastName, String phoneNumber, DatabaseManager databaseManager){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
-		this.connection = connection;
+		this.databaseManager = databaseManager;
+        this.connection = this.databaseManager.getConnection();
 	}
 
 	public PersonDAO(Integer personId, String firstName, String lastName,
-            String phoneNumber, Connection connection) {
+            String phoneNumber, DatabaseManager databaseManager) {
 	    this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.connection = connection;
+        this.databaseManager = databaseManager;
+        this.connection = this.databaseManager.getConnection();
     }
 
 	
+    /* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#getPersonId()
+     */
+    @Override
     public Integer getPersonId() {
         return personId;
     }
 
+    /* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#setPersonId(java.lang.Integer)
+     */
+    @Override
     public void setPersonId(Integer personId) {
         //this.personId = personId;
     }
@@ -56,38 +69,66 @@ public class PersonDAO {
 				+ ", phoneNumber=" + phoneNumber + "]";
 	}
 	
-	public String getFirstName() {
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#getFirstName()
+     */
+	@Override
+    public String getFirstName() {
 		return firstName;
 	}
 	
-	public void setConnection(Connection connection) {
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#setConnection(java.sql.Connection)
+     */
+	@Override
+    public void setConnection(Connection connection) {
 		this.connection = connection;
 	}
 
-	public void setFirstName(String firstName) {
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#setFirstName(java.lang.String)
+     */
+	@Override
+    public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 	
-	public String getLastName() {
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#getLastName()
+     */
+	@Override
+    public String getLastName() {
 		return lastName;
 	}
 	
-	public PersonDAO checkIfPersonExist(String hashCode){
+	public PersonI checkIfPersonExist(String hashCode){
 		return PeopleUtils.checkIfPersonExist(hashCode, connection);
 	}
 	
-	public void setLastName(String lastName) throws SQLException {
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#setLastName(java.lang.String)
+     */
+	@Override
+    public void setLastName(String lastName) throws SQLException {
 	    this.lastName = lastName;
 		PreparedStatement prep = setLastNamePrepStatement(this.lastName, this.personId);
 		prep.executeUpdate();
 		prep.close();
 	}
 	
-	public String getPhoneNumber() {
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#getPhoneNumber()
+     */
+	@Override
+    public String getPhoneNumber() {
 		return phoneNumber;
 	}
 	
-	public void setPhoneNumber(String phoneNumber) {
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PersonI#setPhoneNumber(java.lang.String)
+     */
+	@Override
+    public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

@@ -1,4 +1,4 @@
-package com.earasoft.learning1.DAO;
+package com.earasoft.db.doa;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,15 +8,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class PeopleDAO {
+import com.earasoft.db.DatabaseManager;
+
+public class PeopleDAO implements PeopleI {
 	private final Connection connection;
+	private final DatabaseManager databaseManager;
 	
-	//TODO Change this to Database Class
-	public PeopleDAO(Connection connection){
-		this.connection = connection;
+	public PeopleDAO(DatabaseManager databaseManager){
+	    this.databaseManager = databaseManager;
+		this.connection = this.databaseManager.getConnection();
 	}
 	
-	public ArrayList<PersonDAO> getPeople() throws SQLException{
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PeopleDAOI#getPeople()
+     */
+	@Override
+    public ArrayList<PersonDAO> getPeople() throws SQLException{
 	    PreparedStatement prep = getPeoplePrepStatement();
 		ResultSet rs = prep.executeQuery();
 		
@@ -28,12 +35,16 @@ public class PeopleDAO {
 		return people;
 	}
 	
-	public PersonDAO checkIfPersonExist(String hashCode){
+	public PersonI checkIfPersonExist(String hashCode){
 		return PeopleUtils.checkIfPersonExist(hashCode, connection);
 	}
 	
-	public PersonDAO getPerson(PersonDAO person) throws Exception{
-		PersonDAO personDAO = checkIfPersonExist(person+"");
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PeopleDAOI#getPerson(com.earasoft.db.doa.PersonDAO)
+     */
+	@Override
+    public PersonI getPerson(PersonI person) throws Exception{
+		PersonI personDAO = checkIfPersonExist(person+"");
 		if(personDAO != null){
 			return personDAO;
 		}else{
@@ -41,7 +52,11 @@ public class PeopleDAO {
 		}
 	}
 	
-	public PersonDAO addPerson(PersonDAO person) throws SQLException{
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PeopleDAOI#addPerson(com.earasoft.db.doa.PersonDAO)
+     */
+	@Override
+    public PersonI addPerson(PersonI person) throws SQLException{
 		PreparedStatement prep = addPersonPrepStatement(person.getFirstName(), person.getLastName(), person.getPhoneNumber());		
 		prep.executeUpdate();
 		prep.close();
@@ -50,7 +65,11 @@ public class PeopleDAO {
 	}
 	
 	
-	public ArrayList<PersonDAO> getPeopleByLastname(String lastNameSearch) throws SQLException{
+	/* (non-Javadoc)
+     * @see com.earasoft.db.doa.PeopleDAOI#getPeopleByLastname(java.lang.String)
+     */
+	@Override
+    public ArrayList<PersonDAO> getPeopleByLastname(String lastNameSearch) throws SQLException{
 		PreparedStatement prep = getPeopleByLastnamePrepStatement(lastNameSearch);
 		ResultSet rs = prep.executeQuery();
 		
@@ -73,7 +92,7 @@ public class PeopleDAO {
 	            String firstName = rs.getString("firstName");
 	            String lastName = rs.getString("lastName");
 	            String phoneNumber = rs.getString("phoneNumber");
-	            peopleList.add(new PersonDAO(personId, firstName, lastName, phoneNumber, this.connection));
+	            peopleList.add(new PersonDAO(personId, firstName, lastName, phoneNumber, this.databaseManager));
 	        }
 	       
 	       return peopleList;

@@ -1,4 +1,4 @@
-package com.earasoft.learning1.DAO;
+package com.earasoft.db.doa;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 
@@ -13,7 +13,7 @@ public class PersonDemo {
 		//DbMgrDemo.clearDatabase();
 		DbMgrDemo.openDatabase();
 		
-		PeopleDAO personDAO = new PeopleDAO(DbMgrDemo.getConnection());
+		PeopleI personDAO = new PeopleDAO(DbMgrDemo);
 		
 		//System.out.println(personDAO.checkIfPersonExist("1549490016"));
 		
