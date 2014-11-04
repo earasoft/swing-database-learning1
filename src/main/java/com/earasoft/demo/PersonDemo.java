@@ -1,9 +1,13 @@
-package com.earasoft.db.doa;
+package com.earasoft.demo;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import com.earasoft.db.DatabaseManager;
-import com.earasoft.db.DatabaseManagerBuilder;
+import com.earasoft.db.PeopleI;
+import com.earasoft.db.PersonI;
+import com.earasoft.db.doa.PeopleDAO;
+import com.earasoft.db.doa.PersonDAO;
+import com.earasoft.db.manager.DatabaseManager;
+import com.earasoft.db.manager.DatabaseManagerBuilder;
 
 public class PersonDemo {
 
@@ -23,7 +27,7 @@ public class PersonDemo {
 		
 		personDAO.getPeopleByLastname("R4");
 		
-		for(PersonDAO person : personDAO.getPeople()){
+		for(PersonI person : personDAO.getPeople()){
 			System.out.println(person.toStringFull());
 		}
 		//System.out.println(personDAO.getPeopleByLastname("Rive%"));

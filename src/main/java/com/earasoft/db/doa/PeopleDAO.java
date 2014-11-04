@@ -7,8 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
-import com.earasoft.db.DatabaseManager;
+import javax.swing.AbstractListModel;
+
+import com.earasoft.db.PeopleI;
+import com.earasoft.db.PersonI;
+import com.earasoft.db.manager.DatabaseManager;
 
 public class PeopleDAO implements PeopleI {
 	private final Connection connection;
@@ -23,11 +28,11 @@ public class PeopleDAO implements PeopleI {
      * @see com.earasoft.db.doa.PeopleDAOI#getPeople()
      */
 	@Override
-    public ArrayList<PersonDAO> getPeople() throws SQLException{
+    public List<PersonI> getPeople() throws SQLException{
 	    PreparedStatement prep = getPeoplePrepStatement();
 		ResultSet rs = prep.executeQuery();
 		
-		ArrayList<PersonDAO> people = resultSetPeopleListFillerHelper(rs);
+		List<PersonI> people = resultSetPeopleListFillerHelper(rs);
 		
 		rs.close();
 		prep.close();
@@ -69,11 +74,11 @@ public class PeopleDAO implements PeopleI {
      * @see com.earasoft.db.doa.PeopleDAOI#getPeopleByLastname(java.lang.String)
      */
 	@Override
-    public ArrayList<PersonDAO> getPeopleByLastname(String lastNameSearch) throws SQLException{
+    public List<PersonI> getPeopleByLastname(String lastNameSearch) throws SQLException{
 		PreparedStatement prep = getPeopleByLastnamePrepStatement(lastNameSearch);
 		ResultSet rs = prep.executeQuery();
 		
-		ArrayList<PersonDAO> peopleList  = resultSetPeopleListFillerHelper(rs);
+		List<PersonI> peopleList  = resultSetPeopleListFillerHelper(rs);
 		
 		rs.close();
 		prep.close();
@@ -83,9 +88,8 @@ public class PeopleDAO implements PeopleI {
 	 /*
      * Helper Methods
      */
-	 
-	public ArrayList<PersonDAO> resultSetPeopleListFillerHelper(ResultSet rs) throws SQLException{
-	       ArrayList<PersonDAO> peopleList = new ArrayList<PersonDAO>();
+	private List<PersonI> resultSetPeopleListFillerHelper(ResultSet rs) throws SQLException{
+	       List<PersonI> peopleList = new ArrayList<PersonI>();
 	       
 	       while(rs.next()){
 	            Integer personId = rs.getInt("personId");
@@ -102,7 +106,7 @@ public class PeopleDAO implements PeopleI {
 	 * Prepared Statements 
 	 */
 	
-    public PreparedStatement addPersonPrepStatement(String firstName, String lastName, String phoneNumber) throws SQLException{
+    private PreparedStatement addPersonPrepStatement(String firstName, String lastName, String phoneNumber) throws SQLException{
         String sql = "INSERT INTO person (firstName, lastName, phoneNumber) VALUES (?,?,?);";
         PreparedStatement prep = connection.prepareStatement(sql);
         prep.setQueryTimeout(10);
@@ -112,18 +116,30 @@ public class PeopleDAO implements PeopleI {
         return prep;
     }
     
-    public PreparedStatement getPeopleByLastnamePrepStatement(String lastNameSearch) throws SQLException{
+    private PreparedStatement getPeopleByLastnamePrepStatement(String lastNameSearch) throws SQLException{
         String sql = "SELECT personId, firstName, lastName, phoneNumber FROM person WHERE lastName like ?;";
         PreparedStatement prep = connection.prepareStatement(sql);
         prep.setString(1, lastNameSearch);
         return prep;
     }
     
-    public PreparedStatement getPeoplePrepStatement() throws SQLException{
+    private PreparedStatement getPeoplePrepStatement() throws SQLException{
         String sql = "SELECT personId, firstName, lastName, phoneNumber FROM person;";
         PreparedStatement prep = connection.prepareStatement(sql);
         return prep;
     }
+
+	@Override
+	public PersonI getPersonById(Integer id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PersonI deletePersonById(Integer id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     //SELECT personId, firstName, lastName, phoneNumber FROM person WHERE personId IN (1,3,5)
     

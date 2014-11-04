@@ -1,4 +1,4 @@
-package com.earasoft.db;
+package com.earasoft.db.manager;
 
 import org.apache.commons.configuration.Configuration;
 

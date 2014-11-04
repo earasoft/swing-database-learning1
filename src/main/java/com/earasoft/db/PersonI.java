@@ -1,4 +1,4 @@
-package com.earasoft.db.doa;
+package com.earasoft.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,5 +22,7 @@ public interface PersonI {
     public abstract String getPhoneNumber();
     
     public abstract void setPhoneNumber(String phoneNumber) throws SQLException;
+
+	public abstract String toStringFull();
     
 }

@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.earasoft.db.DatabaseManager;
+import com.earasoft.db.PersonI;
+import com.earasoft.db.manager.DatabaseManager;
 
 public class PersonDAO implements PersonI {
     private Integer personId;

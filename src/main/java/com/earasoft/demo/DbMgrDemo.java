@@ -1,7 +1,9 @@
-package com.earasoft.db;
+package com.earasoft.demo;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+
+import com.earasoft.db.manager.DatabaseManager;
 
 public class DbMgrDemo {
 

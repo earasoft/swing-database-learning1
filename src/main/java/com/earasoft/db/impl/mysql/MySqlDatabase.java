@@ -9,8 +9,8 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.earasoft.db.DatabaseI;
 import com.earasoft.db.SQLStrings;
+import com.earasoft.db.manager.DatabaseI;
 import com.earasoft.learning1.Settings;
 
 public class MySqlDatabase implements DatabaseI {

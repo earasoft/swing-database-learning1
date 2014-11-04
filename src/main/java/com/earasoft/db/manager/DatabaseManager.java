@@ -1,4 +1,4 @@
-package com.earasoft.db;
+package com.earasoft.db.manager;
 
 import java.io.File;
 import java.sql.Connection;
@@ -9,6 +9,7 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.earasoft.db.SQLStrings;
 import com.earasoft.db.impl.mysql.MySqlDatabase;
 import com.earasoft.db.impl.sqlite.SqliteDatabase;
 

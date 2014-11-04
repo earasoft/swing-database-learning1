@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.earasoft.db.PersonI;
+
 public class PeopleUtils {
 
 	public static PersonI checkIfPersonExist(String hashCode, Connection connection){
