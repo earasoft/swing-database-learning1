@@ -21,6 +21,8 @@ public class DatabaseManager {
 	
 	public DatabaseManager(Configuration storageConfig) throws Exception{
 		this.databaseString = storageConfig.getString(DATABASE_KEY, DATABASE_KEY_DEFAULT).trim();
+		
+		logger.info(this.databaseString);
 		if(this.databaseString.equals("sqlite")){
 			this.database = new DatabaseSqlite(storageConfig.subset("database.sqlite"));
 		}else if(this.databaseString.equals("mysql")){

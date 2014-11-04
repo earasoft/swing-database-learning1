@@ -17,8 +17,8 @@ ext {
     implementationTitle = 'swing-database-learning1'
 }
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 jar {
     manifest {
@@ -60,6 +60,11 @@ task jarDist(type: Jar, dependsOn: copyAllDependencies){
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'org.apache.logging.log4j:log4j-api:2.1'
+    compile 'org.apache.logging.log4j:log4j-core:2.1'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.1'
+
+    
 	compile 'org.xerial:sqlite-jdbc:3.7.2'
 	compile 'mysql:mysql-connector-java:5.1.33'
 	compile 'org.apache.commons:commons-lang3:3.3.2'
