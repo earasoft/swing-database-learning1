@@ -17,8 +17,11 @@ public class PersonDemo {
 		
 		//System.out.println(personDAO.checkIfPersonExist("1549490016"));
 		
-		personDAO.addPerson(new PersonDAO("first","R4","445-555-444"));
-		personDAO.addPerson(new PersonDAO("f54","R4","555-555-44"));
+		//personDAO.addPerson(new PersonDAO("first","R4","445-555-4446"));
+		personDAO.addPerson(new PersonDAO("f54","R4","555-555-4444"));
+		
+		
+		personDAO.getPeopleByLastname("R4");
 		
 		for(PersonDAO person : personDAO.getPeople()){
 			System.out.println(person.toStringFull());
