@@ -27,6 +27,8 @@ public class PersonDemo {
 			personDAO.addPerson(new PersonDAO("f54","R4","555-555-4444"));
 			System.out.println("person: " + i);
 		}
+		personDAO.commit();
+		
 		personDAO.getPeople();
 		personDAO.getPeople();
 		personDAO.getPeople();

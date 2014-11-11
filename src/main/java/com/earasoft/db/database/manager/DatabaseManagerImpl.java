@@ -55,7 +55,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
 	public void openDatabase() throws SQLException, ClassNotFoundException{
 		if(this.isOpen() == false)
 			this.currentConnection = this.database.getConnection();
-		//currentConnection.setAutoCommit(false);
+		    this.currentConnection.setAutoCommit(false);
 		this.database.init(currentConnection);
 	}
 	
@@ -66,7 +66,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
 	public void clearDatabase() throws SQLException, ClassNotFoundException{
 		if(this.isOpen() == false)
 			this.currentConnection = this.database.getConnection();
-		//currentConnection.setAutoCommit(false);
+	        //this.currentConnection.setAutoCommit(false);
 		Statement statement = this.currentConnection.createStatement();
 		statement.setQueryTimeout(10);  // set timeout to 10 sec.
 		statement.executeUpdate(SQLStrings.DROP_PERSON_TABLE);

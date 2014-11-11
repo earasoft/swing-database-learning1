@@ -37,7 +37,6 @@ public class PeopleDAO implements People {
 		
 		rs.close();
 		prep.close();
-
 		return people;
 	}
 	
@@ -57,7 +56,9 @@ public class PeopleDAO implements People {
 		return person;
 	}
 	
-	
+	public void commit() throws SQLException{
+	    this.connection.commit();
+	}
 	/* (non-Javadoc)
      * @see com.earasoft.db.doa.PeopleDAOI#getPeopleByLastname(java.lang.String)
      */
