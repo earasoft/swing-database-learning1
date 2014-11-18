@@ -33,6 +33,7 @@ public class Controller {
         
         SwingWorker<Boolean, Void> worker1 = new SwingWorker<Boolean, Void>() {
             public Boolean doInBackground() throws SQLException {
+                view.setStatus("Connecting to database")
                 DbMgrDemo.openDatabase();
                 return true
             }
@@ -42,17 +43,16 @@ public class Controller {
                     def doc = get();
                     System.out.println(doc);
                     //display(doc);
+                    view.setStatus("Success Connecting to database")
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    view.setStatus("Error Connecting to database")
                 }
             }
         };
         worker1.execute();
-        
-        
-        
-		
+
         println "he"
 		
         init_people()
@@ -85,6 +85,8 @@ public class Controller {
                     for(Person person : doc){
                         Models.getListModel().addElement(person);
                     }
+                    
+                    
                     
                 } catch (Exception ex) {
                     ex.printStackTrace();

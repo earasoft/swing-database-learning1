@@ -43,6 +43,7 @@ import java.util.List;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.border.BevelBorder;
 
 public class GuiMain {
 
@@ -51,6 +52,7 @@ public class GuiMain {
 	int counter = 15;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JLabel lblStatus;
 	/**
 	 * Launch the application.
 	 */
@@ -81,72 +83,87 @@ public class GuiMain {
 	private void initialize() {
 		frmRexster = new JFrame();
 		frmRexster.setTitle("Client");
-		frmRexster.setBounds(100, 100, 796, 645);
+		frmRexster.setBounds(100, 100, 837, 657);
 		frmRexster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JPanel panelStatus = new JPanel();
+		panelStatus.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		GroupLayout groupLayout = new GroupLayout(frmRexster.getContentPane());
 		groupLayout.setHorizontalGroup(
 		    groupLayout.createParallelGroup(Alignment.LEADING)
-		        .addGroup(groupLayout.createSequentialGroup()
-		            .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-		                .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
-		                .addComponent(panel, GroupLayout.PREFERRED_SIZE, 780, GroupLayout.PREFERRED_SIZE))
+		        .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+		            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
 		            .addContainerGap())
+		        .addComponent(panelStatus, GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
 		    groupLayout.createParallelGroup(Alignment.LEADING)
 		        .addGroup(groupLayout.createSequentialGroup()
-		            .addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 553, Short.MAX_VALUE)
+		            .addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(panel, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+		            .addComponent(panelStatus, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
 		);
+		
+		lblStatus = new JLabel("Status");
+		GroupLayout gl_panelStatus = new GroupLayout(panelStatus);
+		gl_panelStatus.setHorizontalGroup(
+		    gl_panelStatus.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_panelStatus.createSequentialGroup()
+		            .addComponent(lblStatus, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
+		            .addContainerGap(490, Short.MAX_VALUE))
+		);
+		gl_panelStatus.setVerticalGroup(
+		    gl_panelStatus.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_panelStatus.createSequentialGroup()
+		            .addComponent(lblStatus)
+		            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelStatus.setLayout(gl_panelStatus);
 		
 		JPanel userInfo = new JPanel();
 		tabbedPane.addTab("People", null, userInfo, null);
 		
-		JPanel panel_1 = new JPanel();
+		JPanel panelPersonInfo = new JPanel();
 		
-		JLabel label = new JLabel("First Name");
+		JLabel lblFirstName = new JLabel("First Name");
 		
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		JLabel label_1 = new JLabel("Last Name");
+		JLabel lblLastName = new JLabel("Last Name");
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-		    gl_panel_1.createParallelGroup(Alignment.LEADING)
+		GroupLayout gl_panelPersonInfo = new GroupLayout(panelPersonInfo);
+		gl_panelPersonInfo.setHorizontalGroup(
+		    gl_panelPersonInfo.createParallelGroup(Alignment.LEADING)
 		        .addGap(0, 450, Short.MAX_VALUE)
-		        .addGroup(gl_panel_1.createSequentialGroup()
+		        .addGroup(gl_panelPersonInfo.createSequentialGroup()
 		            .addContainerGap()
-		            .addComponent(label)
+		            .addComponent(lblFirstName)
 		            .addPreferredGap(ComponentPlacement.RELATED)
 		            .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		            .addPreferredGap(ComponentPlacement.UNRELATED)
-		            .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+		            .addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
 		            .addPreferredGap(ComponentPlacement.RELATED)
 		            .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		            .addContainerGap(138, Short.MAX_VALUE))
 		);
-		gl_panel_1.setVerticalGroup(
-		    gl_panel_1.createParallelGroup(Alignment.LEADING)
+		gl_panelPersonInfo.setVerticalGroup(
+		    gl_panelPersonInfo.createParallelGroup(Alignment.LEADING)
 		        .addGap(0, 333, Short.MAX_VALUE)
-		        .addGroup(gl_panel_1.createSequentialGroup()
+		        .addGroup(gl_panelPersonInfo.createSequentialGroup()
 		            .addContainerGap()
-		            .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-		                .addComponent(label)
+		            .addGroup(gl_panelPersonInfo.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(lblFirstName)
 		                .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                .addComponent(label_1)
+		                .addComponent(lblLastName)
 		                .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		            .addContainerGap(302, Short.MAX_VALUE))
 		);
-		panel_1.setLayout(gl_panel_1);
+		panelPersonInfo.setLayout(gl_panelPersonInfo);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
@@ -162,7 +179,7 @@ public class GuiMain {
 		                .addGroup(gl_userInfo.createSequentialGroup()
 		                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 		                    .addPreferredGap(ComponentPlacement.UNRELATED)
-		                    .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		                    .addComponent(panelPersonInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		                .addGroup(gl_userInfo.createSequentialGroup()
 		                    .addGap(10)
 		                    .addComponent(button, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))
@@ -176,7 +193,7 @@ public class GuiMain {
 		        .addGroup(gl_userInfo.createSequentialGroup()
 		            .addGap(12)
 		            .addGroup(gl_userInfo.createParallelGroup(Alignment.LEADING)
-		                .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                .addComponent(panelPersonInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		                .addGroup(gl_userInfo.createSequentialGroup()
 		                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 409, GroupLayout.PREFERRED_SIZE)
 		                    .addPreferredGap(ComponentPlacement.RELATED)

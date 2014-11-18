@@ -12,24 +12,10 @@ class ViewBind{
         this.guiMain = guiMain;
     }
     
-    public String getProjectName(){
-        return guiMain.getTxtProjectname().getText().trim();
-    }
+
     
-    public String getIpAddress(){
-        return guiMain.getTxtRexsterip().getText().trim();
-    }
-    
-    public void setIpAddress(String hostname){
-        guiMain.getTxtRexsterip().setText(hostname);
-    }
-    
-    public void setTextOutput(String output){
-        guiMain.getDtrpnOutput().setText(output);
-    }
-    
-    public void resetTextOutput(){
-        guiMain.getDtrpnOutput().setText("");
+    public void setStatus(String status){
+        guiMain.lblStatus.setText(status);
     }
     
 }
