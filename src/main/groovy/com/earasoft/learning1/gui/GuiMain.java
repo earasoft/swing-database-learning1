@@ -42,18 +42,15 @@ import java.util.List;
 
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.border.TitledBorder;
 
 public class GuiMain {
 
 	private JFrame frmRexster;
 	private Controller controller;
-
-
-	private JButton btnAddbutton;
-	private JButton btnRemovebutton;
 	int counter = 15;
-	private JTextField txtFirstName;
-	private JTextField txtLastName;
+	private JTextField textField;
+	private JTextField textField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -86,101 +83,115 @@ public class GuiMain {
 		frmRexster.setTitle("Client");
 		frmRexster.setBounds(100, 100, 796, 645);
 		frmRexster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-
-		JPanel panel = new JPanel();
-
-		JScrollPane scrollPane = new JScrollPane();
-
-		btnAddbutton = new JButton("addButton");
-
-		btnRemovebutton = new JButton("removeButton");
 		
-		JPanel panel_1 = new JPanel();
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GroupLayout groupLayout = new GroupLayout(frmRexster.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
-					.addGap(180))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnAddbutton)
-					.addContainerGap(676, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnRemovebutton)
-					.addContainerGap(654, Short.MAX_VALUE))
+		    groupLayout.createParallelGroup(Alignment.LEADING)
+		        .addGroup(groupLayout.createSequentialGroup()
+		            .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		                .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+		                .addComponent(panel, GroupLayout.PREFERRED_SIZE, 780, GroupLayout.PREFERRED_SIZE))
+		            .addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 409, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnAddbutton)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnRemovebutton))
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE))
-					.addGap(62))
+		    groupLayout.createParallelGroup(Alignment.LEADING)
+		        .addGroup(groupLayout.createSequentialGroup()
+		            .addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 553, Short.MAX_VALUE)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(panel, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
 		);
 		
-		JLabel lblFirstName = new JLabel("First Name");
+		JPanel userInfo = new JPanel();
+		tabbedPane.addTab("People", null, userInfo, null);
 		
-		txtFirstName = new JTextField();
-		txtFirstName.setColumns(10);
+		JPanel panel_1 = new JPanel();
 		
-		JLabel lblLastName = new JLabel("Last Name");
+		JLabel label = new JLabel("First Name");
 		
-		txtLastName = new JTextField();
-		txtLastName.setColumns(10);
+		textField = new JTextField();
+		textField.setColumns(10);
+		
+		JLabel label_1 = new JLabel("Last Name");
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblFirstName)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(46, Short.MAX_VALUE))
+		    gl_panel_1.createParallelGroup(Alignment.LEADING)
+		        .addGap(0, 450, Short.MAX_VALUE)
+		        .addGroup(gl_panel_1.createSequentialGroup()
+		            .addContainerGap()
+		            .addComponent(label)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		            .addPreferredGap(ComponentPlacement.UNRELATED)
+		            .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		            .addContainerGap(138, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFirstName)
-						.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblLastName)
-						.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(305, Short.MAX_VALUE))
+		    gl_panel_1.createParallelGroup(Alignment.LEADING)
+		        .addGap(0, 333, Short.MAX_VALUE)
+		        .addGroup(gl_panel_1.createSequentialGroup()
+		            .addContainerGap()
+		            .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(label)
+		                .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                .addComponent(label_1)
+		                .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		            .addContainerGap(302, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
-
-		final JList list = new JList();
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		JButton button = new JButton("addButton");
+		
+		JButton button_1 = new JButton("removeButton");
+		GroupLayout gl_userInfo = new GroupLayout(userInfo);
+		gl_userInfo.setHorizontalGroup(
+		    gl_userInfo.createParallelGroup(Alignment.TRAILING)
+		        .addGroup(Alignment.LEADING, gl_userInfo.createSequentialGroup()
+		            .addContainerGap()
+		            .addGroup(gl_userInfo.createParallelGroup(Alignment.LEADING)
+		                .addGroup(gl_userInfo.createSequentialGroup()
+		                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+		                    .addPreferredGap(ComponentPlacement.UNRELATED)
+		                    .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		                .addGroup(gl_userInfo.createSequentialGroup()
+		                    .addGap(10)
+		                    .addComponent(button, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))
+		                .addGroup(gl_userInfo.createSequentialGroup()
+		                    .addGap(10)
+		                    .addComponent(button_1)))
+		            .addContainerGap(143, Short.MAX_VALUE))
+		);
+		gl_userInfo.setVerticalGroup(
+		    gl_userInfo.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_userInfo.createSequentialGroup()
+		            .addGap(12)
+		            .addGroup(gl_userInfo.createParallelGroup(Alignment.LEADING)
+		                .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                .addGroup(gl_userInfo.createSequentialGroup()
+		                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 409, GroupLayout.PREFERRED_SIZE)
+		                    .addPreferredGap(ComponentPlacement.RELATED)
+		                    .addComponent(button)))
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(button_1)
+		            .addGap(46))
+		);
+		
+		JList list = new JList();
 		scrollPane.setViewportView(list);
-		list.setModel(Models.getListModel());
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 780, Short.MAX_VALUE)
-				);
-		gl_panel.setVerticalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 42, Short.MAX_VALUE)
-				);
-		panel.setLayout(gl_panel);
+		userInfo.setLayout(gl_userInfo);
+		
+		JPanel panel_3 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_3, null);
 		frmRexster.getContentPane().setLayout(groupLayout);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -199,25 +210,6 @@ public class GuiMain {
 
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
-
-
-		btnAddbutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Models.getListModel().addElement("Element " + counter);
-				counter++;
-			}
-		});
-		btnRemovebutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (Models.getListModel().getSize() > 0){
-					for(int index : list.getSelectedIndices()){
-						System.out.print(index);
-						Models.getListModel().removeElementAt(index);
-
-					}
-				}
-			}
-		});
 		//last lines
 		controller = new Controller(this);
 		controller.init();
