@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.SQLStrings;
+import com.earasoft.db.dao.People;
+import com.earasoft.db.dao.Person;
+import com.earasoft.db.dao.impl.PeopleDAO;
 import com.earasoft.db.database.Database;
 import com.earasoft.db.database.mysql.MySqlDatabase;
 import com.earasoft.db.database.sqlite.SqliteDatabase;
@@ -94,4 +97,15 @@ public class DatabaseManagerImpl implements DatabaseManager {
 			currentConnection.close();
 		}
 	}
+
+    @Override
+    public People people() {
+        return new PeopleDAO(this);
+    }
+
+    @Override
+    public Person person() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

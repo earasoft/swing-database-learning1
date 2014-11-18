@@ -141,6 +141,12 @@ public class PeopleDAO implements People {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    @Override
+    public void rollback() throws SQLException {
+        this.connection.rollback();
+        
+    }
     
     //SELECT personId, firstName, lastName, phoneNumber FROM person WHERE personId IN (1,3,5)
     
