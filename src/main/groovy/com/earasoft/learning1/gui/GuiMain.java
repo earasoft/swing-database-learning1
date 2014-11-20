@@ -24,6 +24,7 @@ import javax.swing.JPasswordField;
 import java.awt.CardLayout;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -45,14 +46,29 @@ import javax.swing.AbstractListModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
 
+import com.earasoft.db.dao.Person;
+
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.EtchedBorder;
+
 public class GuiMain {
 
 	private JFrame frmRexster;
 	private Controller controller;
+	private ViewBind view;
+	
 	int counter = 15;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JLabel lblStatus;
+	protected JTextField txtFirstName;
+	protected JTextField txtLastName;
+	protected JLabel lblStatus;
+	private JButton btnSavePersonForm;
+	private JList<Person> lstPeople;
 	/**
 	 * Launch the application.
 	 */
@@ -81,6 +97,9 @@ public class GuiMain {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+	    controller = new Controller(this);
+        view = controller.getView();
+        
 		frmRexster = new JFrame();
 		frmRexster.setTitle("Client");
 		frmRexster.setBounds(100, 100, 837, 657);
@@ -110,9 +129,7 @@ public class GuiMain {
 		GroupLayout gl_panelStatus = new GroupLayout(panelStatus);
 		gl_panelStatus.setHorizontalGroup(
 		    gl_panelStatus.createParallelGroup(Alignment.LEADING)
-		        .addGroup(gl_panelStatus.createSequentialGroup()
-		            .addComponent(lblStatus, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
-		            .addContainerGap(490, Short.MAX_VALUE))
+		        .addComponent(lblStatus, GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
 		);
 		gl_panelStatus.setVerticalGroup(
 		    gl_panelStatus.createParallelGroup(Alignment.LEADING)
@@ -122,90 +139,123 @@ public class GuiMain {
 		);
 		panelStatus.setLayout(gl_panelStatus);
 		
-		JPanel userInfo = new JPanel();
-		tabbedPane.addTab("People", null, userInfo, null);
+		JPanel panelPeople = new JPanel();
+		tabbedPane.addTab("People", null, panelPeople, null);
 		
-		JPanel panelPersonInfo = new JPanel();
+		JPanel panelPersonForm = new JPanel();
+		panelPersonForm.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		JLabel lblFirstName = new JLabel("First Name");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		txtFirstName = new JTextField();
+		txtFirstName.setColumns(10);
 		
 		JLabel lblLastName = new JLabel("Last Name");
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		GroupLayout gl_panelPersonInfo = new GroupLayout(panelPersonInfo);
-		gl_panelPersonInfo.setHorizontalGroup(
-		    gl_panelPersonInfo.createParallelGroup(Alignment.LEADING)
-		        .addGap(0, 450, Short.MAX_VALUE)
-		        .addGroup(gl_panelPersonInfo.createSequentialGroup()
+		txtLastName = new JTextField();
+		txtLastName.setColumns(10);
+		
+		btnSavePersonForm = new JButton("Save");
+		btnSavePersonForm.setEnabled(false);
+		btnSavePersonForm.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        controller.savePersonOnForm();
+		        
+		    }
+		});
+		GroupLayout gl_panelPersonForm = new GroupLayout(panelPersonForm);
+		gl_panelPersonForm.setHorizontalGroup(
+		    gl_panelPersonForm.createParallelGroup(Alignment.TRAILING)
+		        .addGroup(gl_panelPersonForm.createSequentialGroup()
 		            .addContainerGap()
 		            .addComponent(lblFirstName)
 		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		            .addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		            .addPreferredGap(ComponentPlacement.UNRELATED)
 		            .addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
 		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		            .addContainerGap(138, Short.MAX_VALUE))
+		            .addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		            .addPreferredGap(ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+		            .addComponent(btnSavePersonForm)
+		            .addContainerGap())
 		);
-		gl_panelPersonInfo.setVerticalGroup(
-		    gl_panelPersonInfo.createParallelGroup(Alignment.LEADING)
-		        .addGap(0, 333, Short.MAX_VALUE)
-		        .addGroup(gl_panelPersonInfo.createSequentialGroup()
+		gl_panelPersonForm.setVerticalGroup(
+		    gl_panelPersonForm.createParallelGroup(Alignment.TRAILING)
+		        .addGroup(gl_panelPersonForm.createSequentialGroup()
 		            .addContainerGap()
-		            .addGroup(gl_panelPersonInfo.createParallelGroup(Alignment.BASELINE)
+		            .addGroup(gl_panelPersonForm.createParallelGroup(Alignment.BASELINE)
 		                .addComponent(lblFirstName)
-		                .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                .addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		                .addComponent(lblLastName)
-		                .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		            .addContainerGap(302, Short.MAX_VALUE))
+		                .addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		            .addPreferredGap(ComponentPlacement.RELATED, 335, Short.MAX_VALUE)
+		            .addComponent(btnSavePersonForm)
+		            .addContainerGap())
 		);
-		panelPersonInfo.setLayout(gl_panelPersonInfo);
+		panelPersonForm.setLayout(gl_panelPersonForm);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPanePeople = new JScrollPane();
 		
-		JButton button = new JButton("addButton");
+		JButton btnPersonAdd = new JButton("Add");
+		btnPersonAdd.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        
+		    }
+		});
 		
-		JButton button_1 = new JButton("removeButton");
-		GroupLayout gl_userInfo = new GroupLayout(userInfo);
-		gl_userInfo.setHorizontalGroup(
-		    gl_userInfo.createParallelGroup(Alignment.TRAILING)
-		        .addGroup(Alignment.LEADING, gl_userInfo.createSequentialGroup()
+		JButton btnPersonRemove = new JButton("Remove");
+		GroupLayout gl_panelPeople = new GroupLayout(panelPeople);
+		gl_panelPeople.setHorizontalGroup(
+		    gl_panelPeople.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_panelPeople.createSequentialGroup()
 		            .addContainerGap()
-		            .addGroup(gl_userInfo.createParallelGroup(Alignment.LEADING)
-		                .addGroup(gl_userInfo.createSequentialGroup()
-		                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+		            .addGroup(gl_panelPeople.createParallelGroup(Alignment.LEADING)
+		                .addGroup(gl_panelPeople.createSequentialGroup()
+		                    .addComponent(scrollPanePeople, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 		                    .addPreferredGap(ComponentPlacement.UNRELATED)
-		                    .addComponent(panelPersonInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		                .addGroup(gl_userInfo.createSequentialGroup()
+		                    .addComponent(panelPersonForm, GroupLayout.PREFERRED_SIZE, 608, GroupLayout.PREFERRED_SIZE))
+		                .addGroup(gl_panelPeople.createSequentialGroup()
 		                    .addGap(10)
-		                    .addComponent(button, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))
-		                .addGroup(gl_userInfo.createSequentialGroup()
-		                    .addGap(10)
-		                    .addComponent(button_1)))
-		            .addContainerGap(143, Short.MAX_VALUE))
+		                    .addGroup(gl_panelPeople.createParallelGroup(Alignment.TRAILING, false)
+		                        .addComponent(btnPersonRemove, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		                        .addComponent(btnPersonAdd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))))
+		            .addContainerGap(22, Short.MAX_VALUE))
 		);
-		gl_userInfo.setVerticalGroup(
-		    gl_userInfo.createParallelGroup(Alignment.LEADING)
-		        .addGroup(gl_userInfo.createSequentialGroup()
+		gl_panelPeople.setVerticalGroup(
+		    gl_panelPeople.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_panelPeople.createSequentialGroup()
 		            .addGap(12)
-		            .addGroup(gl_userInfo.createParallelGroup(Alignment.LEADING)
-		                .addComponent(panelPersonInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                .addGroup(gl_userInfo.createSequentialGroup()
-		                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 409, GroupLayout.PREFERRED_SIZE)
-		                    .addPreferredGap(ComponentPlacement.RELATED)
-		                    .addComponent(button)))
+		            .addGroup(gl_panelPeople.createParallelGroup(Alignment.TRAILING, false)
+		                .addComponent(panelPersonForm, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		                .addComponent(scrollPanePeople, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE))
 		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(button_1)
-		            .addGap(46))
+		            .addComponent(btnPersonAdd)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(btnPersonRemove)
+		            .addGap(58))
 		);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
-		userInfo.setLayout(gl_userInfo);
+		lstPeople = new JList<Person>();
+		lstPeople.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount() == 2){
+                    int index = lstPeople.locationToIndex(e.getPoint());
+                    ListModel<Person> dlm = lstPeople.getModel();
+                    Person person = (Person) dlm.getElementAt(index);
+                    lstPeople.ensureIndexIsVisible(index);
+                    
+                    //System.out.println("Double clicked on " + person.toStringFull());
+                    
+                    view.personForm.show(person);//  showPersonOnForm(person);
+                    view.setStatus("Opened Person: " + person);
+                }
+		    }
+		});
+
+		lstPeople.setModel(Models.getListModel());
+		scrollPanePeople.setViewportView(lstPeople);
+		panelPeople.setLayout(gl_panelPeople);
 		
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_3, null);
@@ -228,7 +278,7 @@ public class GuiMain {
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		//last lines
-		controller = new Controller(this);
+		
 		controller.init();
 	}
 }

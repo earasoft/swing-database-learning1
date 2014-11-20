@@ -4,12 +4,14 @@ import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
+import com.earasoft.db.dao.Person;
+
 public class Models {
-	private static DefaultListModel<String> listModel;
+	private static DefaultListModel<Person> listModel;
 	
-	public static DefaultListModel<String> getListModel(){
+	public static DefaultListModel<Person> getListModel(){
 		if(listModel==null){
-			listModel = new DefaultListModel<String>();
+			listModel = new DefaultListModel<Person>();
 			
 			
 			listModel.addListDataListener(new ListDataListener(){
@@ -17,7 +19,7 @@ public class Models {
 				@Override
 				public void intervalAdded(ListDataEvent e) {
 					// TODO Auto-generated method stub
-					System.out.println(e);
+					//System.out.println(e);
 				}
 
 				@Override

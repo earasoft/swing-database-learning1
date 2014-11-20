@@ -61,8 +61,7 @@ public class PersonDAO implements Person {
 
     @Override
 	public String toString() {
-		return "Person [firstName=" + firstName + ", lastName=" + lastName
-				+ ", phoneNumber=" + phoneNumber + "]";
+		return lastName + ", "+ firstName;
 	}
 	
 	public String toStringFull() {
@@ -110,12 +109,10 @@ public class PersonDAO implements Person {
      * @see com.earasoft.db.doa.PersonI#setLastName(java.lang.String)
      */
 	@Override
-    public void setLastName(String lastName) throws SQLException {
+    public void setLastName(String lastName){
 	    this.lastName = lastName;
-		PreparedStatement prep = setLastNamePrepStatement(this.lastName, this.personId);
-		prep.executeUpdate();
-		prep.close();
 	}
+	
 	
 	/* (non-Javadoc)
      * @see com.earasoft.db.doa.PersonI#getPhoneNumber()
@@ -159,14 +156,24 @@ public class PersonDAO implements Person {
         return true;
     }
     
+    
+    @Override
+    public void save() throws SQLException {
+        // TODO Auto-generated method stub
+        PreparedStatement prep = setLastNamePrepStatement(this.lastName, this.firstName, this.personId);
+        prep.executeUpdate();
+        prep.close();
+    }
+    
     /*
      * Prepared Statements 
      */
-    public PreparedStatement setLastNamePrepStatement(String lastName, Integer personId) throws SQLException{
-        String sql = "UPDATE person SET lastName = ? where personId = ?;";
+    public PreparedStatement setLastNamePrepStatement(String lastName,String firstName, Integer personId) throws SQLException{
+        String sql = "UPDATE person SET lastName = ?, firstName = ? where personId = ?;";
         PreparedStatement prep = connection.prepareStatement(sql);
         prep.setString(1, lastName);
-        prep.setInt(2, personId);
+        prep.setString(2, firstName);
+        prep.setInt(3, personId);
         return prep;
     }
 
@@ -175,5 +182,7 @@ public class PersonDAO implements Person {
 		this.databaseManager = databaseManager;
 		
 	}
+
+
 	
 }
