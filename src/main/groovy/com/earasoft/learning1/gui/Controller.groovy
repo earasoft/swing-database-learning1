@@ -16,6 +16,7 @@ import com.earasoft.db.dao.impl.PeopleDAO;
 import com.earasoft.db.dao.impl.PersonDAO;
 import com.earasoft.db.database.manager.DatabaseManagerBuilder;
 import com.earasoft.db.database.manager.DatabaseManagerImpl;
+import com.earasoft.learning1.gui.views.About;
 
 public class Controller {
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
@@ -26,8 +27,8 @@ public class Controller {
     
     boolean successfulInit = false
     
-    public Controller(GuiMain view){
-        this.view = new ViewBind(view);
+    public Controller(){
+        this.view = new ViewBind();
     }
     
     public init(){
@@ -35,7 +36,7 @@ public class Controller {
             public Boolean doInBackground() throws SQLException, ConfigurationException {
                 propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
                 DbMgrDemo = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
-                view.setStatus("Connecting to database")
+                view.guiMainView.setStatus("Connecting to database")
                 DbMgrDemo.openDatabase();
                 return true
             }
@@ -45,18 +46,18 @@ public class Controller {
                     def doc = get();
                     System.out.println(doc);
                     
-                    view.setStatus("Success Connecting to database")
+                    view.notifyAllViews("Success Connecting to database")
                     successfulInit = true
                     loadPeople()
                     
                 } catch (Exception ex) {
                     Throwable ee = ex.getCause()
                     if (ee instanceof SQLException){
-                        view.setStatus("Database Error: " + ee.message)
+                        view.notifyAllViews("Database Error: " + ee.message)
                     } else if (ee instanceof ConfigurationException){
-                        view.setStatus("Configuration Error: " + ee.message)
+                        view.notifyAllViews("Configuration Error: " + ee.message)
                     }else {
-                        view.setStatus("Error: " + ex.message)
+                        view.notifyAllViews("Error: " + ex.message)
                     }
                 }
             }
@@ -92,14 +93,14 @@ public class Controller {
             public void done() {
                 try {
                     List<Person> doc = get();
-                    view.showPeopleList(doc)
-                    view.setStatus("Loaded $doc.size People")
+                    view.guiMainView.showPeopleList(doc)
+                    view.guiMainView.setStatus("Loaded $doc.size People")
                 } catch (Exception ex) {
                      Throwable ee = ex.getCause()
                     if (ee instanceof SQLException){
-                        view.setStatus("Error Connecting to database: " + ee.message)
+                        view.guiMainView.setStatus("Error Connecting to database: " + ee.message)
                     }else {
-                        view.setStatus("Error: " + ex.message)
+                        view.guiMainView.setStatus("Error: " + ex.message)
                     }
                 }
             }
@@ -115,7 +116,7 @@ public class Controller {
        if(initCheck() == false) return
        if(checkDatabase() == false) return
        
-       Map formInfo = view.personForm.getFormInfo()
+       Map formInfo = view.guiMainView.personForm.getFormInfo()
        println (formInfo.toString())
        
        try{
@@ -124,12 +125,24 @@ public class Controller {
            currentPerson.setLastName(formInfo["data"]["lastName"])
            currentPerson.save()
            DbMgrDemo.connection.commit()
-           view.setStatus("Saved Person: " + currentPerson)
+           view.guiMainView.setStatus("Saved Person: " + currentPerson)
        }catch(SQLException ex){
            DbMgrDemo.connection.rollback()
-           view.setStatus("Database Error: " + ex.getMessage())
+           view.guiMainView.setStatus("Database Error: " + ex.getMessage())
+       }catch(Exception ex){
+           view.guiMainView.setStatus("Error: " + ex.getMessage())
        }
        
-       view.repaintPeopleList()
+       view.guiMainView.repaintPeopleList()
+   }
+   
+   private About aboutWindow
+   
+   public void setAboutWindow(About window){
+       this.aboutWindow = window
+   }
+   
+   public About getAboutWindow(){
+       return this.aboutWindow
    }
 }
