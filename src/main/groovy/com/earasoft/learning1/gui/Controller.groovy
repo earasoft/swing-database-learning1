@@ -115,11 +115,13 @@ public class Controller {
    public void savePersonOnForm(){
        if(initCheck() == false) return
        if(checkDatabase() == false) return
-       
+       if(view.guiMainView.personForm.validate() == false) return
+	   
        Map formInfo = view.guiMainView.personForm.getFormInfo()
        println (formInfo.toString())
        
        try{
+		   
            Person currentPerson = formInfo["orgPersonObj"]
            currentPerson.setFirstName(formInfo["data"]["firstName"])
            currentPerson.setLastName(formInfo["data"]["lastName"])
@@ -132,7 +134,6 @@ public class Controller {
        }catch(Exception ex){
            view.guiMainView.setStatus("Error: " + ex.getMessage())
        }
-       
        view.guiMainView.repaintPeopleList()
    }
    

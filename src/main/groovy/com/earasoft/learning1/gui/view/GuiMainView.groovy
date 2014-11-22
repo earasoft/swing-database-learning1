@@ -1,17 +1,19 @@
 package com.earasoft.learning1.gui.view;
 
-import java.util.List;
-import java.util.Map;
+import java.awt.Color
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JTextField
 
-import com.earasoft.db.dao.Person;
-import com.earasoft.learning1.gui.Models;
-import com.earasoft.learning1.gui.windows.GuiMain;
-import com.earasoft.learning1.gui.ViewBind;
+import com.earasoft.db.dao.Person
+import com.earasoft.learning1.gui.Models
+import com.earasoft.learning1.gui.ViewBind
+import com.earasoft.learning1.gui.windows.GuiMain
 
 public class GuiMainView{
 	
     private GuiMain guiMain;
-    public PersonForm personForm = new PersonForm()
+    public PersonForm personForm = new PersonForm(this)
     
     public GuiMainView(GuiMain guiMain){
         this.guiMain = guiMain
@@ -32,26 +34,44 @@ public class GuiMainView{
     }
     
     class PersonForm{
-        Person person
+		GuiMainView guiMainView
+		Person person
         Integer personId
         boolean isNewPerson
         
+		public PersonForm(GuiMainView guiMainView){
+			this.guiMainView  = guiMainView
+		}
+		
         public show(Person person){
             isNewPerson = false
             this.person = person
-            guiMain.txtFirstName.setText(person.getFirstName())
-            guiMain.txtLastName.setText(person.getLastName())
+			
+			resetTextField(guiMain.txtFirstName, person.getFirstName())
+			resetTextField(guiMain.txtLastName, person.getLastName())
+			
             personId = person.getPersonId()
             guiMain.btnSavePersonForm.setEnabled(true)
+			validate()
         }
         
+		public resetTextField(JTextField textField, String input = null){
+			textField.setText("")
+			textField.setEnabled(true)
+			textField.setBackground(Color.WHITE)
+			
+			if(input != null)
+				textField.setText(input)
+		}
+		
         public reset(){
             person = null
             personId = null
-            
             isNewPerson = true
-            guiMain.txtFirstName.setText("")
-            guiMain.txtLastName.setText("")
+			resetTextField(guiMain.txtFirstName)
+			resetTextField(guiMain.txtLastName)
+			guiMain.btnSavePersonForm.setEnabled(false)
+			this.guiMainView.setStatus("Form Reset: Ready to add new person")
         }
         
         public Map getFormInfo(){
@@ -61,6 +81,36 @@ public class GuiMainView{
                             "firstName": guiMain.txtFirstName.getText(),
                             "lastName": guiMain.txtLastName.getText()]]
         }
+		
+		public boolean validate(){
+			boolean valid = true
+			List fieldsToFix = []
+			
+			if(guiMain.txtFirstName.getText().trim().size() == 0){
+				guiMain.txtFirstName.setBackground(Color.RED)
+				valid = false
+				fieldsToFix.add("First Name")
+			}else{
+				guiMain.txtFirstName.setBackground(Color.WHITE)
+			}
+			
+			if(guiMain.txtLastName.getText().trim().size() == 0){
+				guiMain.txtLastName.setBackground(Color.RED)
+				valid = false
+				fieldsToFix.add("Last Name")
+			}else{
+				guiMain.txtLastName.setBackground(Color.WHITE)
+			}
+			
+			if(valid){
+				guiMain.btnSavePersonForm.setEnabled(true)
+				guiMainView.setStatus("Fields are valid")
+			}else{
+				guiMain.btnSavePersonForm.setEnabled(false)
+				guiMainView.setStatus("Please fix fields: " + fieldsToFix)
+			}
+			return valid
+		}
         
     }
 	

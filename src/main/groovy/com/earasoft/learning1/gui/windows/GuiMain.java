@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JTree;
@@ -72,6 +73,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GuiMain {
     private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
@@ -92,7 +95,6 @@ public class GuiMain {
 	public static void main(String[] args) {
 		Init init = new Init();
 	}
-
 
 
 	/**
@@ -213,19 +215,32 @@ public class GuiMain {
 		JLabel lblFirstName = new JLabel("First Name");
 		
 		txtFirstName = new JTextField();
+		txtFirstName.setEnabled(false);
+		txtFirstName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				view.getGuiMainView().personForm.validate();
+			}
+		});
 		txtFirstName.setColumns(10);
 		
 		JLabel lblLastName = new JLabel("Last Name");
 		
 		txtLastName = new JTextField();
+		txtLastName.setEnabled(false);
+		txtLastName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				view.getGuiMainView().personForm.validate();
+			}
+		});
 		txtLastName.setColumns(10);
 		
 		btnSavePersonForm = new JButton("Save");
 		btnSavePersonForm.setEnabled(false);
 		btnSavePersonForm.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        controller.savePersonOnForm();
-		        
+		        controller.savePersonOnForm(); 
 		    }
 		});
 		GroupLayout gl_panelPersonForm = new GroupLayout(panelPersonForm);
@@ -341,10 +356,18 @@ public class GuiMain {
 
     public void setFrmRexster(JFrame frmRexster) {
         this.frmRexster = frmRexster;
+        frmRexster.setMinimumSize(new Dimension(837, 671));
         frmRexster.addComponentListener(new ComponentAdapter() {
         	@Override
         	public void componentResized(ComponentEvent arg0) {
-        		System.out.println(arg0);
+        		 Dimension d=getFrmRexster().getSize();
+                 Dimension minD=getFrmRexster().getMinimumSize();
+                 
+                 if(d.width<minD.width)
+                     d.width=minD.width;
+                 if(d.height<minD.height)
+                     d.height=minD.height;
+                 getFrmRexster().setSize(d);
         	}
         });
     }

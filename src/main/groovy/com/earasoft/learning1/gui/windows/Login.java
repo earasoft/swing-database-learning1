@@ -222,9 +222,10 @@ public class Login {
         controller.init();
     }
 
+    boolean developmentMode = true;
+    
     private void auth(){
-    	
-    	if(txtUsername.getText().equals("admin") && Util.checksum(Arrays.toString(passwordField.getPassword())).equals("xTKABkTa5GrTjtJxHJZnaFHpuNS4s9vHu4mCnULwkxM=")){   
+    	if(txtUsername.getText().equals("admin") && Util.checksum(Arrays.toString(passwordField.getPassword())).equals("xTKABkTa5GrTjtJxHJZnaFHpuNS4s9vHu4mCnULwkxM=") || developmentMode){   
     		
           EventQueue.invokeLater(new Runnable() {
               public void run() {
@@ -241,11 +242,9 @@ public class Login {
           logger.info("AUDIT - User: (" + txtUsername.getText() + ") Login Success");
           frmLogin.dispose();
         }else{
-        	
-            view.getLoginView().setStatus("Authenication Failed!");
             logger.warn("AUDIT - User: (" + txtUsername.getText() + ") Login Failure");
+            view.getLoginView().setStatus("Authenication Failed!");
             view.getLoginView().reset();
-            
         }
     }
     

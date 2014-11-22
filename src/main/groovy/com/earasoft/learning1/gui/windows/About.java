@@ -23,6 +23,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.earasoft.learning1.gui.ViewBind;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
+import javax.swing.JTextArea;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class About {
     private static final Logger logger = LoggerFactory.getLogger(About.class);
@@ -69,7 +75,7 @@ public class About {
         getFrmAbout().setTitle("About");
         getFrmAbout().setResizable(false);
         getFrmAbout().setType(Type.POPUP);
-        getFrmAbout().setBounds(100, 100, 450, 197);
+        getFrmAbout().setBounds(100, 100, 558, 197);
         getFrmAbout().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         JButton btnOk = new JButton("OK");
@@ -78,20 +84,32 @@ public class About {
                 dispose();
             }
         });
+        
+        JTextArea txtdesc = new JTextArea();
+        txtdesc.setLineWrap(true);
+        txtdesc.setEditable(false);
+        txtdesc.setWrapStyleWord(true);
+        txtdesc.setBackground(UIManager.getColor("InternalFrame.borderColor"));
+        txtdesc.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        txtdesc.setText("This Software was written for Database Class Fall 2014");
         GroupLayout groupLayout = new GroupLayout(getFrmAbout().getContentPane());
         groupLayout.setHorizontalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-                    .addContainerGap(387, Short.MAX_VALUE)
-                    .addComponent(btnOk)
-                    .addContainerGap())
+        	groupLayout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(txtdesc, GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+        				.addComponent(btnOk, Alignment.TRAILING))
+        			.addContainerGap())
         );
         groupLayout.setVerticalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-                    .addContainerGap(135, Short.MAX_VALUE)
-                    .addComponent(btnOk)
-                    .addContainerGap())
+        	groupLayout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(txtdesc, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnOk)
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         getFrmAbout().getContentPane().setLayout(groupLayout);
         
@@ -101,6 +119,7 @@ public class About {
     }
     
     public void dispose(){
+    	
         getFrmAbout().setVisible(false); //you can't see me!
         getFrmAbout().dispose(); //Destroy the JFrame object
     }
@@ -111,5 +130,6 @@ public class About {
 
     public void setFrmAbout(JFrame frmAbout) {
         this.frmAbout = frmAbout;
+        frmAbout.setAlwaysOnTop(true);
     }
 }
