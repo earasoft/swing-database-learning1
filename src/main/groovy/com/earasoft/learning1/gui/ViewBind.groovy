@@ -1,7 +1,7 @@
 package com.earasoft.learning1.gui
 
 import com.earasoft.db.dao.Person
-import com.earasoft.db.dao.impl.PersonDAO
+import com.earasoft.db.dao.impl.PersonDAO;
 import com.earasoft.learning1.gui.views.GuiMain;
 
 /**

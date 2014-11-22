@@ -42,27 +42,30 @@ public class Login {
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Login window = new Login();
-                    window.getFrmLogin().setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//                    Login window = new Login();
+//                    window.getFrmLogin().setVisible(true);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
+    
+    private Controller controller;
+    private ViewBind view;
     
     /**
      * Create the application.
      */
-    public Login() {
-        initialize();
-    }
-    
     public Login(Controller controller, ViewBind view) {
         // TODO Auto-generated constructor stub
+    	this.controller = controller;
+    	this.view = view;
+    	
+    	initialize();
     }
 
     /**

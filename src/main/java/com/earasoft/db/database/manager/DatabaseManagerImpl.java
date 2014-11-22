@@ -9,13 +9,12 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.earasoft.db.SQLStrings;
 import com.earasoft.db.dao.People;
 import com.earasoft.db.dao.Person;
 import com.earasoft.db.dao.impl.PeopleDAO;
 import com.earasoft.db.database.Database;
-import com.earasoft.db.database.mysql.MySqlDatabase;
-import com.earasoft.db.database.sqlite.SqliteDatabase;
+import com.earasoft.db.database.MySQLDatabase;
+import com.earasoft.db.database.SqliteDatabase;
 
 public class DatabaseManagerImpl implements DatabaseManager {
 	private static final Logger logger = LoggerFactory.getLogger(DatabaseManagerImpl.class);
@@ -24,20 +23,21 @@ public class DatabaseManagerImpl implements DatabaseManager {
     
 	final private Database database;
 	final private String databaseString;
+	final private SQLExec sqlExec;
 	
 	private Connection currentConnection = null;
 	
 	public DatabaseManagerImpl(Configuration storageConfig) throws Exception{
 		this.databaseString = storageConfig.getString(DATABASE_KEY, DATABASE_KEY_DEFAULT).trim();
 		
-		logger.info(this.databaseString);
 		if(this.databaseString.equals("sqlite")){
 			this.database = new SqliteDatabase(storageConfig.subset("database.sqlite"));
 		}else if(this.databaseString.equals("mysql")){
-	    	this.database = new MySqlDatabase(storageConfig.subset("database.mysql"));
+	    	this.database = new MySQLDatabase(storageConfig.subset("database.mysql"));
 		}else{
 			throw new Exception("Database ["+this.databaseString+"] not found");
 		}
+		sqlExec = new SQLExec(this.database.getName());
 	}
 	
 	/* (non-Javadoc)
@@ -60,7 +60,8 @@ public class DatabaseManagerImpl implements DatabaseManager {
 		    this.currentConnection = this.database.getConnection();
             this.currentConnection.setAutoCommit(false);
 		}
-		this.database.init(currentConnection);
+		this.sqlExec.initialize(currentConnection);
+		this.currentConnection.commit();
 	}
 	
 	/* (non-Javadoc)
@@ -72,11 +73,8 @@ public class DatabaseManagerImpl implements DatabaseManager {
 		    this.currentConnection = this.database.getConnection();
             this.currentConnection.setAutoCommit(false);
 		}
-
-		Statement statement = this.currentConnection.createStatement();
-		statement.setQueryTimeout(10);  // set timeout to 10 sec.
-		statement.executeUpdate(SQLStrings.DROP_PERSON_TABLE);
-		statement.close();
+		this.sqlExec.clear(currentConnection);
+		this.currentConnection.commit();
 	}
 	
 	/* (non-Javadoc)
