@@ -1,4 +1,4 @@
-package com.earasoft.learning1.gui.views;
+package com.earasoft.learning1.gui.windows;
 
 import java.awt.EventQueue;
 
@@ -48,6 +48,7 @@ import javax.swing.border.BevelBorder;
 
 import com.earasoft.db.dao.Person;
 import com.earasoft.learning1.gui.Controller;
+import com.earasoft.learning1.gui.Init;
 import com.earasoft.learning1.gui.Models;
 import com.earasoft.learning1.gui.ViewBind;
 
@@ -69,6 +70,8 @@ import javax.swing.JLayeredPane;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class GuiMain {
     private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
@@ -87,19 +90,7 @@ public class GuiMain {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-	    //Use Init.java to run windows
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					GuiMain window = new GuiMain();
-//					window.frmRexster.setVisible(true);
-//
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-	    
+		Init init = new Init();
 	}
 
 
@@ -337,8 +328,8 @@ public class GuiMain {
 		});
 		mnHelp.add(mntmAbout);
 		//last lines
-		
-		controller.init();
+		view.getGuiMainView().center();
+		controller.loadPeople();
 		logger.debug("Main Window Init");
 		
 		
@@ -350,5 +341,11 @@ public class GuiMain {
 
     public void setFrmRexster(JFrame frmRexster) {
         this.frmRexster = frmRexster;
+        frmRexster.addComponentListener(new ComponentAdapter() {
+        	@Override
+        	public void componentResized(ComponentEvent arg0) {
+        		System.out.println(arg0);
+        	}
+        });
     }
 }

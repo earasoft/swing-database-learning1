@@ -12,6 +12,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.io.FileUtils;
 
@@ -34,7 +36,21 @@ public class Util {
 	}// end PrintSepLine()
 	
 
-	
+	public static String checksum(String input){
+		MessageDigest messageDigest;
+		String encryptedString = "";
+		try {
+			messageDigest = MessageDigest.getInstance("SHA-256");
+			messageDigest.update(input.getBytes());
+			
+			encryptedString = Base64.encodeBytes(messageDigest.digest());
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return encryptedString;
+	}
 	/**
 	 * Used to get the current system time and convert it to formatted date.
 	 *

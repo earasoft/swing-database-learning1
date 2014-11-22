@@ -22,6 +22,6 @@ public interface DatabaseManager {
 	
 	public abstract People people();
 	
-	public abstract Person person();
+	//public abstract Person person();
 
 }

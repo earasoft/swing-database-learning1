@@ -2,8 +2,8 @@ package com.earasoft.learning1.gui;
 
 import java.awt.EventQueue;
 
-import com.earasoft.learning1.gui.views.GuiMain;
-import com.earasoft.learning1.gui.views.Login;
+import com.earasoft.learning1.gui.windows.GuiMain;
+import com.earasoft.learning1.gui.windows.Login;
 
 public class Init {
     private Controller controller;
@@ -18,10 +18,9 @@ public class Init {
     }
     
     public void init(){
-        controller = new Controller();
-        view = controller.getView();
+      controller = new Controller();
+      view = controller.getView();
         
-      
       EventQueue.invokeLater(new Runnable() {
           public void run() {
               try {
@@ -33,17 +32,6 @@ public class Init {
           }
       });
         
-        
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    GuiMain window = new GuiMain(controller, view);
-                    window.getFrmRexster().setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
     
 }

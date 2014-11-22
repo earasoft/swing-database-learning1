@@ -1,4 +1,4 @@
-package com.earasoft.learning1.gui.views;
+package com.earasoft.learning1.gui.windows;
 
 import java.awt.EventQueue;
 
@@ -25,6 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.border.EtchedBorder;
 
 import com.earasoft.learning1.gui.Controller;
+import com.earasoft.learning1.gui.Init;
 import com.earasoft.learning1.gui.ViewBind;
 
 import java.awt.event.ActionListener;
@@ -32,8 +33,20 @@ import java.awt.event.ActionEvent;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+import javax.swing.JTextArea;
+
+import org.shared.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.awt.SystemColor;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 public class Login {
-    
+	private static final Logger logger = LoggerFactory.getLogger(Login.class);
     private JFrame frmLogin;
     private JPasswordField passwordField;
     private JTextField txtUsername;
@@ -42,23 +55,16 @@ public class Login {
      * Launch the application.
      */
     public static void main(String[] args) {
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    Login window = new Login();
-//                    window.getFrmLogin().setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+    	Init init = new Init();
     }
     
     private Controller controller;
     private ViewBind view;
+    private JTextArea txtStatus;
     
     /**
      * Create the application.
+     * @wbp.parser.entryPoint
      */
     public Login(Controller controller, ViewBind view) {
         // TODO Auto-generated constructor stub
@@ -72,6 +78,8 @@ public class Login {
      * Initialize the contents of the frame.
      */
     private void initialize() {
+    	view.setLoginView(this);
+    	
         setFrmLogin(new JFrame());
         getFrmLogin().setResizable(false);
         getFrmLogin().setTitle("Login Window");
@@ -115,14 +123,21 @@ public class Login {
                     .addComponent(panelStatus, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(22, Short.MAX_VALUE))
         );
+        
+        txtStatus = new JTextArea();
+        txtStatus.setLineWrap(true);
+        txtStatus.setBackground(SystemColor.scrollbar);
+        txtStatus.setEditable(false);
         GroupLayout gl_panelStatus = new GroupLayout(panelStatus);
         gl_panelStatus.setHorizontalGroup(
-            gl_panelStatus.createParallelGroup(Alignment.LEADING)
-                .addGap(0, 459, Short.MAX_VALUE)
+        	gl_panelStatus.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panelStatus.createSequentialGroup()
+        			.addComponent(txtStatus, GroupLayout.PREFERRED_SIZE, 457, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gl_panelStatus.setVerticalGroup(
-            gl_panelStatus.createParallelGroup(Alignment.LEADING)
-                .addGap(0, 146, Short.MAX_VALUE)
+        	gl_panelStatus.createParallelGroup(Alignment.LEADING)
+        		.addComponent(txtStatus, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
         );
         panelStatus.setLayout(gl_panelStatus);
         
@@ -133,15 +148,17 @@ public class Login {
         lblPassword.setFont(new Font("Dialog", Font.BOLD, 18));
         
         JButton btnLogin = new JButton("Login");
+        btnLogin.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyReleased(KeyEvent arg0) {       		
+        		if(arg0.getKeyCode() == 10){
+        			auth();
+        		}
+        	}
+        });
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(txtUsername.getText().equals("admin") && Arrays.toString(passwordField.getPassword()).hashCode() == 788759259){
-                    System.out.println("Success");
-                }else{
-                    System.out.println(Arrays.toString(passwordField.getPassword()).hashCode());
-                    System.out.println("Failed");
-                }
-                        
+            	auth();   
             }
         });
         
@@ -150,6 +167,14 @@ public class Login {
         txtUsername.setColumns(10);
         
         passwordField = new JPasswordField();
+        passwordField.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyReleased(KeyEvent arg0) {
+        		if(arg0.getKeyCode() == 10){
+        			auth();
+        		}
+        	}
+        });
         passwordField.setFont(new Font("Dialog", Font.PLAIN, 18));
         GroupLayout gl_panel = new GroupLayout(panel);
         gl_panel.setHorizontalGroup(
@@ -192,8 +217,38 @@ public class Login {
         );
         panel.setLayout(gl_panel);
         getFrmLogin().getContentPane().setLayout(groupLayout);
+        
+        view.getLoginView().center();
+        controller.init();
     }
 
+    private void auth(){
+    	
+    	if(txtUsername.getText().equals("admin") && Util.checksum(Arrays.toString(passwordField.getPassword())).equals("xTKABkTa5GrTjtJxHJZnaFHpuNS4s9vHu4mCnULwkxM=")){   
+    		
+          EventQueue.invokeLater(new Runnable() {
+              public void run() {
+                  try {
+                      GuiMain window = new GuiMain(controller, view);
+                      window.getFrmRexster().setVisible(true);
+                  } catch (Exception e) {
+                      e.printStackTrace();
+                  }
+              }
+          });
+          
+          view.getLoginView().setStatus("Success!");
+          logger.info("AUDIT - User: (" + txtUsername.getText() + ") Login Success");
+          frmLogin.dispose();
+        }else{
+        	
+            view.getLoginView().setStatus("Authenication Failed!");
+            logger.warn("AUDIT - User: (" + txtUsername.getText() + ") Login Failure");
+            view.getLoginView().reset();
+            
+        }
+    }
+    
     public JFrame getFrmLogin() {
         return frmLogin;
     }

@@ -16,7 +16,7 @@ import com.earasoft.db.dao.impl.PeopleDAO;
 import com.earasoft.db.dao.impl.PersonDAO;
 import com.earasoft.db.database.manager.DatabaseManagerBuilder;
 import com.earasoft.db.database.manager.DatabaseManagerImpl;
-import com.earasoft.learning1.gui.views.About;
+import com.earasoft.learning1.gui.windows.About;
 
 public class Controller {
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
@@ -36,7 +36,7 @@ public class Controller {
             public Boolean doInBackground() throws SQLException, ConfigurationException {
                 propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
                 DbMgrDemo = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
-                view.guiMainView.setStatus("Connecting to database")
+                view.notifyAllViews("Connecting to database")
                 DbMgrDemo.openDatabase();
                 return true
             }
@@ -48,7 +48,7 @@ public class Controller {
                     
                     view.notifyAllViews("Success Connecting to database")
                     successfulInit = true
-                    loadPeople()
+                    //loadPeople()
                     
                 } catch (Exception ex) {
                     Throwable ee = ex.getCause()

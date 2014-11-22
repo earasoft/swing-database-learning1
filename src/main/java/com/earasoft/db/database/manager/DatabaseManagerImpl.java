@@ -103,9 +103,4 @@ public class DatabaseManagerImpl implements DatabaseManager {
         return new PeopleDAO(this);
     }
 
-    @Override
-    public Person person() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

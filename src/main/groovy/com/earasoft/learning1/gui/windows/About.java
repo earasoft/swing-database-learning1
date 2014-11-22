@@ -1,4 +1,4 @@
-package com.earasoft.learning1.gui.views;
+package com.earasoft.learning1.gui.windows;
 
 import java.awt.EventQueue;
 
@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.learning1.gui.Controller;
+import com.earasoft.learning1.gui.Init;
 import com.earasoft.learning1.gui.ViewBind;
 
 import java.awt.Dialog.ModalExclusionType;
@@ -21,6 +22,7 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.earasoft.learning1.gui.ViewBind;
 
 public class About {
     private static final Logger logger = LoggerFactory.getLogger(About.class);
@@ -30,18 +32,7 @@ public class About {
      * Launch the application.
      */
     public static void main(String[] args) {
-        //Use Init.java to start window
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    About window = new About();
-//                    window.frmAbout.setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-        
+    	Init init = new Init();
     }
     
     /**
@@ -105,7 +96,7 @@ public class About {
         getFrmAbout().getContentPane().setLayout(groupLayout);
         
         controller.setAboutWindow(this);
-        
+        ViewBind.centerWindow(this.frmAbout);
         logger.debug("About Window Initialized");
     }
     

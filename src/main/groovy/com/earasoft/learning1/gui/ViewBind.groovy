@@ -2,7 +2,13 @@ package com.earasoft.learning1.gui
 
 import com.earasoft.db.dao.Person
 import com.earasoft.db.dao.impl.PersonDAO;
-import com.earasoft.learning1.gui.views.GuiMain;
+import com.earasoft.learning1.gui.view.GuiMainView;
+import com.earasoft.learning1.gui.view.LoginView;
+import com.earasoft.learning1.gui.windows.GuiMain;
+import com.earasoft.learning1.gui.windows.Login
+import java.awt.Dimension
+import java.awt.Window
+import java.awt.Toolkit;
 
 /**
  * Class used to change Gui
@@ -12,11 +18,24 @@ import com.earasoft.learning1.gui.views.GuiMain;
 class ViewBind{
     
     private GuiMainView guiMainView
+	private LoginView loginView
     
+	
+	public setLoginView(Login login){
+		loginView = new LoginView(login)
+	}
+	
+	public LoginView getLoginView(){
+		if(loginView==null)
+			throw new Exception("Error Getting GuiMainView")
+		return loginView;
+	}
+	
+	
     public setGuiMainView(GuiMain guiMain){
         this.guiMainView = new GuiMainView(guiMain);
     }
-    
+	
     public GuiMainView getGuiMainView() {
         if(guiMainView==null)
             throw new Exception("Error Getting GuiMainView")
@@ -27,66 +46,16 @@ class ViewBind{
         if(guiMainView!=null)
             guiMainView.setStatus(message)
         
+		if(loginView!=null)
+			loginView.setStatus(message)
     }
-    
-    class GuiMainView{
-        private GuiMain guiMain;
-        public PersonForm personForm = new PersonForm()
-        
-        public GuiMainView(GuiMain guiMain){
-            this.guiMain = guiMain
-        }
-        
-        public void setStatus(String status){
-            guiMain.lblStatus.setText(status);
-        }
-        
-        public showPeopleList(List<Person> people){
-            for(Person person : people){
-                Models.getListModel().addElement(person);
-            }
-        }
-        
-        public repaintPeopleList(){
-            guiMain.lstPeople.repaint();
-        }
-        
-        class PersonForm{
-            Person person
-            Integer personId
-            boolean isNewPerson
-            
-            public show(Person person){
-                isNewPerson = false
-                this.person = person
-                guiMain.txtFirstName.setText(person.getFirstName())
-                guiMain.txtLastName.setText(person.getLastName())
-                personId = person.getPersonId()
-                guiMain.btnSavePersonForm.setEnabled(true)
-            }
-            
-            public reset(){
-                person = null
-                personId = null
-                
-                isNewPerson = true
-                guiMain.txtFirstName.setText("")
-                guiMain.txtLastName.setText("")
-            }
-            
-            public Map getFormInfo(){
-                return ["orgPersonObj": person,
-                        "isNewPerson":this.isNewPerson,
-                        "data":["personId": personId,
-                                "firstName": guiMain.txtFirstName.getText(),
-                                "lastName": guiMain.txtLastName.getText()]]
-            }
-            
-        }
-    }
-    
-    
-    
-    
+	
+	public static void centerWindow(Window frame) {
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+		frame.setLocation(x, y);
+	}
+	
     
 }
