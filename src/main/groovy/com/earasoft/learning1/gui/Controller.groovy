@@ -43,21 +43,21 @@ public class Controller {
             
             public void done() {
                 try {
-                    def doc = get();
-                    System.out.println(doc);
-                    
+                    def doc = get()
                     view.notifyAllViews("Success Connecting to database")
                     successfulInit = true
                     //loadPeople()
-                    
                 } catch (Exception ex) {
                     Throwable ee = ex.getCause()
                     if (ee instanceof SQLException){
                         view.notifyAllViews("Database Error: " + ee.message)
+						logger.error(ee.getMessage(), ee)
                     } else if (ee instanceof ConfigurationException){
                         view.notifyAllViews("Configuration Error: " + ee.message)
+						logger.error(ee.getMessage(), ee)
                     }else {
                         view.notifyAllViews("Error: " + ex.message)
+						logger.error(ee.getMessage(), ex)
                     }
                 }
             }
@@ -98,8 +98,8 @@ public class Controller {
                 } catch (Exception ex) {
                      Throwable ee = ex.getCause()
                     if (ee instanceof SQLException){
-						logger.error("Error Connecting to database: " + ee.message, ee)
                         view.guiMainView.setStatus("Error Connecting to database: " + ee.message)
+						logger.error("Error Connecting to database: " + ee.message, ee)
                     }else {
                         view.guiMainView.setStatus("Error: " + ex.message)
 						logger.error("Error Connecting to database: " + ex.message, ex)
@@ -111,6 +111,7 @@ public class Controller {
     }
     
 	public void exit(){
+		logger.debug("Exiting Application")
 		System.exit(0);
 	}
     

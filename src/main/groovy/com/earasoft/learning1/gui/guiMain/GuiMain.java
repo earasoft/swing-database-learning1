@@ -1,80 +1,45 @@
-package com.earasoft.learning1.gui.windows;
+package com.earasoft.learning1.gui.guiMain;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.JEditorPane;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.JTree;
-import javax.swing.JPasswordField;
-
-import java.awt.CardLayout;
-
-import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
-import javax.swing.SwingConstants;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JInternalFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.Window.Type;
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.border.TitledBorder;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListModel;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.dao.Person;
 import com.earasoft.learning1.gui.Controller;
 import com.earasoft.learning1.gui.Init;
 import com.earasoft.learning1.gui.Models;
 import com.earasoft.learning1.gui.ViewBind;
-
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.border.LineBorder;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.awt.Color;
-
-import javax.swing.border.EtchedBorder;
-import javax.swing.JLayeredPane;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import com.earasoft.learning1.gui.windows.About;
 
 public class GuiMain {
     private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
@@ -95,7 +60,6 @@ public class GuiMain {
 	public static void main(String[] args) {
 		Init init = new Init();
 	}
-
 
 	/**
      * Create the application.

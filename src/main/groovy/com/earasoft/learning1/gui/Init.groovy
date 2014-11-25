@@ -2,10 +2,17 @@ package com.earasoft.learning1.gui;
 
 import java.awt.EventQueue;
 
-import com.earasoft.learning1.gui.windows.GuiMain;
-import com.earasoft.learning1.gui.windows.Login;
+import com.earasoft.learning1.gui.guiMain.GuiMain;
+import com.earasoft.learning1.gui.guiMain.GuiMainView;
+import com.earasoft.learning1.gui.login.Login;
+import com.earasoft.learning1.gui.login.LoginView;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Init {
+	private static final Logger logger = LoggerFactory.getLogger(Init.class);
     private Controller controller;
     private ViewBind view;
     
@@ -27,7 +34,7 @@ public class Init {
                   Login window = new Login(controller, view);
                   window.getFrmLogin().setVisible(true);
               } catch (Exception e) {
-                  e.printStackTrace();
+                  logger.error(e.getMessage(), e)
               }
           }
       });

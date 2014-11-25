@@ -1,8 +1,19 @@
 package com.earasoft.learning1.gui.windows;
 
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,25 +21,6 @@ import org.slf4j.LoggerFactory;
 import com.earasoft.learning1.gui.Controller;
 import com.earasoft.learning1.gui.Init;
 import com.earasoft.learning1.gui.ViewBind;
-
-import java.awt.Dialog.ModalExclusionType;
-import java.awt.Window.Type;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import com.earasoft.learning1.gui.ViewBind;
-import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
-import javax.swing.JTextArea;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
 
 public class About {
     private static final Logger logger = LoggerFactory.getLogger(About.class);
@@ -119,8 +111,8 @@ public class About {
     }
     
     public void dispose(){
-    	
-        getFrmAbout().setVisible(false); //you can't see me!
+    	logger.debug("Disposing About Window");
+        getFrmAbout().setVisible(false); //Hide Window
         getFrmAbout().dispose(); //Destroy the JFrame object
     }
 

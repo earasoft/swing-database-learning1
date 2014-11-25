@@ -1,4 +1,4 @@
-package com.earasoft.learning1.gui.windows;
+package com.earasoft.learning1.gui.login;
 
 import java.awt.EventQueue;
 
@@ -27,6 +27,7 @@ import javax.swing.border.EtchedBorder;
 import com.earasoft.learning1.gui.Controller;
 import com.earasoft.learning1.gui.Init;
 import com.earasoft.learning1.gui.ViewBind;
+import com.earasoft.learning1.gui.guiMain.GuiMain;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -67,11 +68,9 @@ public class Login {
      * @wbp.parser.entryPoint
      */
     public Login(Controller controller, ViewBind view) {
-        // TODO Auto-generated constructor stub
     	this.controller = controller;
     	this.view = view;
-    	
-    	initialize();
+    	initialize();    	
     }
 
     /**
@@ -233,7 +232,7 @@ public class Login {
                       GuiMain window = new GuiMain(controller, view);
                       window.getFrmRexster().setVisible(true);
                   } catch (Exception e) {
-                      e.printStackTrace();
+                      logger.error(e.getMessage(), e);
                   }
               }
           });

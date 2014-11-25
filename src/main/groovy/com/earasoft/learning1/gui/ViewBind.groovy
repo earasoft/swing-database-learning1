@@ -2,13 +2,17 @@ package com.earasoft.learning1.gui
 
 import com.earasoft.db.dao.Person
 import com.earasoft.db.dao.impl.PersonDAO;
-import com.earasoft.learning1.gui.view.GuiMainView;
-import com.earasoft.learning1.gui.view.LoginView;
-import com.earasoft.learning1.gui.windows.GuiMain;
-import com.earasoft.learning1.gui.windows.Login
+import com.earasoft.learning1.gui.guiMain.GuiMain;
+import com.earasoft.learning1.gui.guiMain.GuiMainView;
+import com.earasoft.learning1.gui.login.Login;
+import com.earasoft.learning1.gui.login.LoginView;
+
 import java.awt.Dimension
 import java.awt.Window
 import java.awt.Toolkit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class used to change Gui
@@ -16,7 +20,7 @@ import java.awt.Toolkit;
  *
  */
 class ViewBind{
-    
+	private static final Logger logger = LoggerFactory.getLogger(ViewBind.class);
     private GuiMainView guiMainView
 	private LoginView loginView
     

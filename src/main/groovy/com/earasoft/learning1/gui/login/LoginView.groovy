@@ -1,9 +1,12 @@
-package com.earasoft.learning1.gui.view
+package com.earasoft.learning1.gui.login
 
-import com.earasoft.learning1.gui.ViewBind;
-import com.earasoft.learning1.gui.windows.Login;
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+import com.earasoft.learning1.gui.ViewBind
 
 public class LoginView{
+	private static final Logger logger = LoggerFactory.getLogger(LoginView.class);
 	private Login login
 	
 	public LoginView(Login login){
@@ -18,7 +21,6 @@ public class LoginView{
 		this.login.txtUsername.setText("")
 		this.login.passwordField.setText("")
 		this.login.txtUsername.grabFocus()
-		
 	}
 	
 	public void center(){
