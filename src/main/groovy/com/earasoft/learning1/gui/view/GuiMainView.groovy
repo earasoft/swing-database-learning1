@@ -29,6 +29,10 @@ public class GuiMainView{
         }
     }
     
+	public showAddedPerson(Person person){
+		Models.getListModel().addElement(person);
+	}
+	
     public repaintPeopleList(){
         guiMain.lstPeople.repaint();
     }
@@ -44,6 +48,9 @@ public class GuiMainView{
 		}
 		
         public show(Person person){
+			println "PERSON: " + person
+			println "PERSON: " + person.toStringFull()
+			//logger.debug("Show Person:" + person)
             isNewPerson = false
             this.person = person
 			
@@ -53,6 +60,7 @@ public class GuiMainView{
             personId = person.getPersonId()
             guiMain.btnSavePersonForm.setEnabled(true)
 			validate()
+			this.guiMainView.setStatus("Opened Person: " + person);
         }
         
 		public resetTextField(JTextField textField, String input = null){

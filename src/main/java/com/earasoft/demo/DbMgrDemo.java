@@ -11,6 +11,7 @@ public class DbMgrDemo {
 	public static void main(String[] args) throws Exception {
 		PropertiesConfiguration propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
 		DatabaseManager DbMgrDemo = new DatabaseManagerImpl(propertiesConfiguration);
+		DbMgrDemo.clearDatabase();
 		DbMgrDemo.openDatabase();
 		
 		

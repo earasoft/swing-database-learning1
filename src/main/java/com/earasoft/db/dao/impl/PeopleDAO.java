@@ -53,8 +53,19 @@ public class PeopleDAO implements People {
     public Person addPerson(Person person) throws SQLException{
 		PreparedStatement prep = addPersonPrepStatement(person.getFirstName(), person.getLastName(), person.getPhoneNumber());		
 		prep.executeUpdate();
+		Integer personId = null;
+		
+		ResultSet rs = prep.getGeneratedKeys();
+		if (rs.next()){
+			personId = rs.getInt(1);
+		}
+		
+		rs.close();
 		prep.close();
+		person.setPersonId(personId);
 		person.setDatabase(databaseManager);
+		
+		System.out.println("***" + person.toStringFull());
 		return person;
 	}
 	
@@ -99,7 +110,7 @@ public class PeopleDAO implements People {
 	
     private PreparedStatement addPersonPrepStatement(String firstName, String lastName, String phoneNumber) throws SQLException{
         String sql = "INSERT INTO person (firstName, lastName, phoneNumber) VALUES (?,?,?);";
-        PreparedStatement prep = connection.prepareStatement(sql);
+        PreparedStatement prep = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         prep.setQueryTimeout(30);
         prep.setString(1, firstName);
         prep.setString(2, lastName);

@@ -19,6 +19,13 @@ public class PersonDAO implements Person {
 	private Connection connection;
 	private DatabaseManager databaseManager;
 	
+	public PersonDAO() {
+		this.firstName = "";
+		this.lastName = "";
+		this.phoneNumber = "";	
+	}
+	
+	
 	public PersonDAO(String firstName, String lastName, String phoneNumber) {
 		super();
 		this.firstName = firstName;
@@ -58,7 +65,7 @@ public class PersonDAO implements Person {
      */
     @Override
     public void setPersonId(Integer personId) {
-        //this.personId = personId;
+        this.personId = personId;
     }
 
     @Override
@@ -161,7 +168,6 @@ public class PersonDAO implements Person {
     
     @Override
     public void save() throws SQLException {
-        // TODO Auto-generated method stub
         PreparedStatement prep = setLastNamePrepStatement(this.lastName, this.firstName, this.personId);
         prep.executeUpdate();
         prep.close();
@@ -171,6 +177,10 @@ public class PersonDAO implements Person {
      * Prepared Statements 
      */
     public PreparedStatement setLastNamePrepStatement(String lastName,String firstName, Integer personId) throws SQLException{
+    	if(lastName.equals(null))throw new SQLException("Missing last name");
+    	if(firstName.equals(null))throw new SQLException("Missing firstname");
+    	if(personId.equals(null))throw new SQLException("Missing person Id");
+    	
         String sql = "UPDATE person SET lastName = ?, firstName = ? where personId = ?;";
         PreparedStatement prep = connection.prepareStatement(sql);
         prep.setString(1, lastName);

@@ -98,9 +98,11 @@ public class Controller {
                 } catch (Exception ex) {
                      Throwable ee = ex.getCause()
                     if (ee instanceof SQLException){
+						logger.error("Error Connecting to database: " + ee.message, ee)
                         view.guiMainView.setStatus("Error Connecting to database: " + ee.message)
                     }else {
                         view.guiMainView.setStatus("Error: " + ex.message)
+						logger.error("Error Connecting to database: " + ex.message, ex)
                     }
                 }
             }
@@ -118,21 +120,43 @@ public class Controller {
        if(view.guiMainView.personForm.validate() == false) return
 	   
        Map formInfo = view.guiMainView.personForm.getFormInfo()
-       println (formInfo.toString())
+	   logger.debug("formInfo Variable:" + formInfo.toString())
        
        try{
-		   
-           Person currentPerson = formInfo["orgPersonObj"]
+		   Person currentPerson
+		   if(formInfo["isNewPerson"] == true){
+			   currentPerson = new PersonDAO()
+		   }else{
+		   		currentPerson = formInfo["orgPersonObj"]
+		   }
+           
            currentPerson.setFirstName(formInfo["data"]["firstName"])
            currentPerson.setLastName(formInfo["data"]["lastName"])
-           currentPerson.save()
+		   
+		   
+		   if(formInfo["isNewPerson"] == true){
+			   currentPerson.setDatabase(DbMgrDemo)
+			   currentPerson = DbMgrDemo.people().addPerson(currentPerson)
+			   println "CURRENT:" + currentPerson.toStringFull()
+			   view.guiMainView.showAddedPerson(currentPerson)
+		   }else{
+		   println "CURRENTSAVE:" + currentPerson.toStringFull()
+		   		currentPerson.save()
+		   }
+		   
            DbMgrDemo.connection.commit()
            view.guiMainView.setStatus("Saved Person: " + currentPerson)
+		   
+		   
+		   //view.guiMainView.personForm.reset()
+		   view.guiMainView.personForm.show(currentPerson)
        }catch(SQLException ex){
            DbMgrDemo.connection.rollback()
            view.guiMainView.setStatus("Database Error: " + ex.getMessage())
+		   logger.error(ex.getMessage(), ex)
        }catch(Exception ex){
            view.guiMainView.setStatus("Error: " + ex.getMessage())
+		   logger.error(ex.getMessage(), ex)
        }
        view.guiMainView.repaintPeopleList()
    }

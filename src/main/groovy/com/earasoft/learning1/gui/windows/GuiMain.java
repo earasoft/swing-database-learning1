@@ -289,7 +289,7 @@ public class GuiMain {
                     //System.out.println("Double clicked on " + person.toStringFull());
                     
                     view.getGuiMainView().personForm.show(person);//  showPersonOnForm(person);
-                    view.getGuiMainView().setStatus("Opened Person: " + person);
+                    
                 }
 		    }
 		});
