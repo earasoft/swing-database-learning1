@@ -36,8 +36,9 @@ class ViewBind{
 	}
 	
 	
-    public setGuiMainView(GuiMain guiMain){
+    public GuiMainView setGuiMainView(GuiMain guiMain){
         this.guiMainView = new GuiMainView(guiMain);
+		return this.guiMainView
     }
 	
     public GuiMainView getGuiMainView() {

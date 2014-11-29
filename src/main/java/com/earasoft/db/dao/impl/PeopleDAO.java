@@ -126,7 +126,7 @@ public class PeopleDAO implements People {
     }
     
     private PreparedStatement getPeoplePrepStatement() throws SQLException{
-        String sql = "SELECT personId, firstName, lastName, phoneNumber FROM person;";
+        String sql = "SELECT personId, firstName, lastName, phoneNumber FROM person ORDER BY lower(lastname);";
         PreparedStatement prep = connection.prepareStatement(sql);
         return prep;
     }

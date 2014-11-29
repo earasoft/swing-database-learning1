@@ -2,6 +2,7 @@ package com.earasoft.learning1.gui.login
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.shared.Util;
 
 import com.earasoft.learning1.gui.ViewBind
 
@@ -23,8 +24,17 @@ public class LoginView{
 		this.login.txtUsername.grabFocus()
 	}
 	
+	public Map getFormInfo(){
+		return ["Username": this.login.txtUsername.getText(),
+			    "Password": Util.checksum(Arrays.toString(this.login.passwordField.getPassword()))]
+	}
+	
 	public void center(){
-		ViewBind.centerWindow(this.login.getFrmLogin())
+		ViewBind.centerWindow(this.login.frmLogin)
 	}	
+	
+	public void dispose(){
+		this.login.frmLogin.dispose();
+	}
 	
 }

@@ -26,7 +26,7 @@ public class PeopleUtils {
 			Person person = null;
 			if(exist){
 				person = new PersonDAO(rs.getString("firstName"), rs.getString("lastName"), rs.getString("phoneNumber"));
-				person.setConnection(connection);
+				person.setDatabase(databaseManager);
 			}
 			//System.out.println(person.toStringFull());
 			

@@ -18,9 +18,10 @@ import javax.swing.UIManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.earasoft.learning1.gui.Controller;
-import com.earasoft.learning1.gui.Init;
+import com.earasoft.learning1.gui.SharedController;
+import com.earasoft.learning1.gui.Boot;
 import com.earasoft.learning1.gui.ViewBind;
+import com.earasoft.learning1.gui.guiMain.GuiMainController;
 
 public class About {
     private static final Logger logger = LoggerFactory.getLogger(About.class);
@@ -30,7 +31,7 @@ public class About {
      * Launch the application.
      */
     public static void main(String[] args) {
-    	Init init = new Init();
+    	Boot init = new Boot();
     }
     
     /**
@@ -40,13 +41,13 @@ public class About {
     public boolean isRunning(){
         return true;
     }
-    private Controller controller;
+    private GuiMainController controller;
     private ViewBind view;
     
     /**
      * @wbp.parser.entryPoint
      */
-    public About(Controller controller, ViewBind view) {
+    public About(GuiMainController controller, ViewBind view) {
         this.controller = controller;
         this.view = view;
         initialize();

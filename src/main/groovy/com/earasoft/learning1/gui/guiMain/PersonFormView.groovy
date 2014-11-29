@@ -19,9 +19,7 @@ import com.earasoft.db.dao.Person
 			this.guiMain = guiMain
 		}
 		
-        public show(Person person){
-			println "PERSON: " + person
-			println "PERSON: " + person.toStringFull()
+        public show(Person person, boolean saved = false){
 			//logger.debug("Show Person:" + person)
             isNewPerson = false
             this.person = person
@@ -32,7 +30,13 @@ import com.earasoft.db.dao.Person
             personId = person.getPersonId()
             guiMain.btnSavePersonForm.setEnabled(true)
 			validate()
-			this.guiMainView.setStatus("Opened Person: " + person);
+			
+			if(saved){
+				this.guiMainView.setStatus("Saved Person: " + person);
+			}else{
+				this.guiMainView.setStatus("Opened Person: " + person);
+			}
+			
         }
         
 		public resetTextField(JTextField textField, String input = null){

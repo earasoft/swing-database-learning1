@@ -37,7 +37,7 @@ public class GuiMainView{
 	}
 	
     public repaintPeopleList(){
-        guiMain.lstPeople.repaint();
+        guiMain.lstResources.repaint();
     }
 	
 	public void center(){

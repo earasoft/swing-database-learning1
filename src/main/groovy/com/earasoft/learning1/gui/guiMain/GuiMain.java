@@ -35,53 +35,67 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.dao.Person;
-import com.earasoft.learning1.gui.Controller;
-import com.earasoft.learning1.gui.Init;
+import com.earasoft.learning1.gui.SharedController;
+import com.earasoft.learning1.gui.Boot;
 import com.earasoft.learning1.gui.Models;
 import com.earasoft.learning1.gui.ViewBind;
+import com.earasoft.learning1.gui.login.LoginController;
 import com.earasoft.learning1.gui.windows.About;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import java.awt.Component;
+
+import javax.swing.JPasswordField;
 
 public class GuiMain {
     private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
 
 	private JFrame frmRexster;
-	private Controller controller;
-	private ViewBind view;
+	
+	private GuiMainController guiMainController;
+	 private SharedController sharedController;
+	private ViewBind viewBind;
 	
 	int counter = 15;
 	protected JTextField txtFirstName;
 	protected JTextField txtLastName;
 	protected JLabel lblStatus;
-	private JButton btnSavePersonForm;
-	private JList<Person> lstPeople;
+	protected JButton btnSavePersonForm;
+	protected JList<Person> lstResources;
+	protected JPasswordField pwdResourcepassword;
+	protected JTextField txtPhoneNumber;
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Init init = new Init();
+		Boot init = new Boot();
 	}
 
-	/**
+    /**
      * Create the application.
      * @wbp.parser.entryPoint
      */
-	public GuiMain(Controller controller, ViewBind view) {
-	    this.controller = controller;
-	    this.view = view;
-	    initialize();
+    public GuiMain(GuiMainController controller, ViewBind viewBind, SharedController sharedController) {
+    	this.guiMainController = controller;
+    	this.viewBind = viewBind;
+    	this.sharedController = sharedController;
+    	initialize();    	
     }
-
+    
+    GuiMainView guiMainView;
     /**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-        view.setGuiMainView(this);
+        this.guiMainView = viewBind.setGuiMainView(this);
         
 		setFrmRexster(new JFrame());
 		getFrmRexster().addWindowListener(new WindowAdapter() {
 		    @Override
 		    public void windowClosing(WindowEvent e) {
-		        About aboutWindowInstance = controller.getAboutWindow();
+		        About aboutWindowInstance = guiMainController.getAboutWindow();
 		        if(aboutWindowInstance != null){
 		            aboutWindowInstance.dispose();
 		        }
@@ -89,27 +103,25 @@ public class GuiMain {
 		});
 		
 		getFrmRexster().setTitle("Client");
-		getFrmRexster().setBounds(100, 100, 837, 657);
+		getFrmRexster().setBounds(100, 100, 837, 692);
 		getFrmRexster().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		JTabbedPane tabbedPaneAllMain = new JTabbedPane(JTabbedPane.TOP);
 		
 		JPanel panelStatus = new JPanel();
 		panelStatus.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		GroupLayout groupLayout = new GroupLayout(getFrmRexster().getContentPane());
 		groupLayout.setHorizontalGroup(
-		    groupLayout.createParallelGroup(Alignment.LEADING)
-		        .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-		            .addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-		            .addContainerGap())
-		        .addComponent(panelStatus, GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(panelStatus, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(tabbedPaneAllMain, GroupLayout.PREFERRED_SIZE, 821, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
-		    groupLayout.createParallelGroup(Alignment.LEADING)
-		        .addGroup(groupLayout.createSequentialGroup()
-		            .addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(panelStatus, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(tabbedPaneAllMain, GroupLayout.PREFERRED_SIZE, 605, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelStatus, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
 		);
 		
 		lblStatus = new JLabel("Status");
@@ -126,55 +138,70 @@ public class GuiMain {
 		);
 		panelStatus.setLayout(gl_panelStatus);
 		
-		JPanel panelPeople = new JPanel();
-		tabbedPane.addTab("People", null, panelPeople, null);
+		JPanel panelMain = new JPanel();
+		tabbedPaneAllMain.addTab("Main", null, panelMain, null);
 		
-		JScrollPane scrollPanePeople = new JScrollPane();
+		JTabbedPane tabbedPaneMainView = new JTabbedPane(JTabbedPane.TOP);
+		GroupLayout gl_panelMain = new GroupLayout(panelMain);
+		gl_panelMain.setHorizontalGroup(
+			gl_panelMain.createParallelGroup(Alignment.LEADING)
+				.addComponent(tabbedPaneMainView, GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
+		);
+		gl_panelMain.setVerticalGroup(
+			gl_panelMain.createParallelGroup(Alignment.TRAILING)
+				.addComponent(tabbedPaneMainView, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+		);
 		
-		JButton btnPersonAdd = new JButton("Add");
-		btnPersonAdd.addActionListener(new ActionListener() {
+		JPanel panelTimesheet = new JPanel();
+		tabbedPaneMainView.addTab("Timesheet", null, panelTimesheet, null);
+		panelMain.setLayout(gl_panelMain);
+		
+		JPanel panelResources = new JPanel();
+		tabbedPaneAllMain.addTab("Resources (Admin)", null, panelResources, null);
+		
+		JScrollPane scrollPaneResources = new JScrollPane();
+		
+		JButton btnAddNewResource = new JButton("Add New Resource");
+		btnAddNewResource.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        view.getGuiMainView().personForm.reset();
+		        guiMainView.personForm.reset();
 		    }
 		});
 		
-		JButton btnPersonRemove = new JButton("Remove");
+		JButton btnResourceTerminate = new JButton("Terminate Resource");
 		
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		GroupLayout gl_panelPeople = new GroupLayout(panelPeople);
-		gl_panelPeople.setHorizontalGroup(
-		    gl_panelPeople.createParallelGroup(Alignment.LEADING)
-		        .addGroup(gl_panelPeople.createSequentialGroup()
-		            .addContainerGap()
-		            .addGroup(gl_panelPeople.createParallelGroup(Alignment.LEADING)
-		                .addComponent(scrollPanePeople, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-		                .addGroup(gl_panelPeople.createSequentialGroup()
-		                    .addGap(10)
-		                    .addGroup(gl_panelPeople.createParallelGroup(Alignment.TRAILING, false)
-		                        .addComponent(btnPersonRemove, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		                        .addComponent(btnPersonAdd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))))
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(tabbedPane_1, GroupLayout.PREFERRED_SIZE, 585, GroupLayout.PREFERRED_SIZE)
-		            .addContainerGap(51, Short.MAX_VALUE))
+		JTabbedPane tabbedPane_resources = new JTabbedPane(JTabbedPane.TOP);
+		GroupLayout gl_panelResources = new GroupLayout(panelResources);
+		gl_panelResources.setHorizontalGroup(
+			gl_panelResources.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelResources.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelResources.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnResourceTerminate, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAddNewResource, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scrollPaneResources, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(tabbedPane_resources, GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+					.addContainerGap())
 		);
-		gl_panelPeople.setVerticalGroup(
-		    gl_panelPeople.createParallelGroup(Alignment.LEADING)
-		        .addGroup(gl_panelPeople.createSequentialGroup()
-		            .addGap(12)
-		            .addGroup(gl_panelPeople.createParallelGroup(Alignment.LEADING, false)
-		                .addComponent(tabbedPane_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                .addGroup(gl_panelPeople.createSequentialGroup()
-		                    .addComponent(scrollPanePeople, GroupLayout.PREFERRED_SIZE, 409, GroupLayout.PREFERRED_SIZE)
-		                    .addGap(49)
-		                    .addComponent(btnPersonAdd)
-		                    .addPreferredGap(ComponentPlacement.RELATED)
-		                    .addComponent(btnPersonRemove)))
-		            .addGap(15))
+		gl_panelResources.setVerticalGroup(
+			gl_panelResources.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelResources.createSequentialGroup()
+					.addGap(12)
+					.addGroup(gl_panelResources.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(tabbedPane_resources, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(Alignment.TRAILING, gl_panelResources.createSequentialGroup()
+							.addComponent(scrollPaneResources)
+							.addGap(18)
+							.addComponent(btnAddNewResource)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnResourceTerminate)))
+					.addContainerGap())
 		);
 		
-		JPanel panelPersonForm = new JPanel();
-		tabbedPane_1.addTab("Person Info", null, panelPersonForm, null);
-		panelPersonForm.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		JPanel panelResourceForm = new JPanel();
+		tabbedPane_resources.addTab("Resource", null, panelResourceForm, null);
+		panelResourceForm.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		JLabel lblFirstName = new JLabel("First Name");
 		
@@ -183,7 +210,7 @@ public class GuiMain {
 		txtFirstName.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				view.getGuiMainView().personForm.validate();
+				guiMainView.personForm.validate();
 			}
 		});
 		txtFirstName.setColumns(10);
@@ -195,7 +222,7 @@ public class GuiMain {
 		txtLastName.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				view.getGuiMainView().personForm.validate();
+				guiMainView.personForm.validate();
 			}
 		});
 		txtLastName.setColumns(10);
@@ -204,66 +231,180 @@ public class GuiMain {
 		btnSavePersonForm.setEnabled(false);
 		btnSavePersonForm.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        controller.savePersonOnForm(); 
+		        guiMainController.savePersonOnForm(); 
 		    }
 		});
-		GroupLayout gl_panelPersonForm = new GroupLayout(panelPersonForm);
-		gl_panelPersonForm.setHorizontalGroup(
-		    gl_panelPersonForm.createParallelGroup(Alignment.TRAILING)
-		        .addGroup(Alignment.LEADING, gl_panelPersonForm.createSequentialGroup()
-		            .addContainerGap()
-		            .addComponent(lblFirstName)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		            .addPreferredGap(ComponentPlacement.UNRELATED)
-		            .addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		            .addContainerGap(25, Short.MAX_VALUE))
-		        .addGroup(gl_panelPersonForm.createSequentialGroup()
-		            .addContainerGap(502, Short.MAX_VALUE)
-		            .addComponent(btnSavePersonForm)
-		            .addContainerGap())
-		);
-		gl_panelPersonForm.setVerticalGroup(
-		    gl_panelPersonForm.createParallelGroup(Alignment.TRAILING)
-		        .addGroup(Alignment.LEADING, gl_panelPersonForm.createSequentialGroup()
-		            .addContainerGap()
-		            .addGroup(gl_panelPersonForm.createParallelGroup(Alignment.BASELINE)
-		                .addComponent(lblFirstName)
-		                .addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                .addComponent(lblLastName)
-		                .addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		            .addPreferredGap(ComponentPlacement.RELATED, 414, Short.MAX_VALUE)
-		            .addComponent(btnSavePersonForm)
-		            .addContainerGap())
-		);
-		panelPersonForm.setLayout(gl_panelPersonForm);
 		
-		lstPeople = new JList<Person>();
-		lstPeople.addMouseListener(new MouseAdapter() {
+		JLabel lblPhoneNumber = new JLabel("Phone Number");
+		
+		JLabel lblPassword = new JLabel("Password");
+		
+		pwdResourcepassword = new JPasswordField();
+		pwdResourcepassword.setEnabled(false);
+		
+		txtPhoneNumber = new JTextField();
+		txtPhoneNumber.setEnabled(false);
+		txtPhoneNumber.setColumns(10);
+		GroupLayout gl_panelResourceForm = new GroupLayout(panelResourceForm);
+		gl_panelResourceForm.setHorizontalGroup(
+			gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelResourceForm.createSequentialGroup()
+					.addContainerGap(544, Short.MAX_VALUE)
+					.addComponent(btnSavePersonForm)
+					.addContainerGap())
+				.addGroup(gl_panelResourceForm.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(Alignment.LEADING, gl_panelResourceForm.createSequentialGroup()
+							.addComponent(lblPhoneNumber)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtPhoneNumber))
+						.addGroup(Alignment.LEADING, gl_panelResourceForm.createSequentialGroup()
+							.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblFirstName)
+								.addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPassword))
+							.addGap(34)
+							.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(pwdResourcepassword)
+								.addComponent(txtLastName)
+								.addComponent(txtFirstName, GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
+					.addContainerGap(374, Short.MAX_VALUE))
+		);
+		gl_panelResourceForm.setVerticalGroup(
+			gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelResourceForm.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblFirstName)
+						.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblLastName)
+						.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPhoneNumber)
+						.addComponent(txtPhoneNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPassword)
+						.addComponent(pwdResourcepassword, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+					.addComponent(btnSavePersonForm)
+					.addContainerGap())
+		);
+		panelResourceForm.setLayout(gl_panelResourceForm);
+		
+		lstResources = new JList<Person>();
+		lstResources.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount() == 2){
-                    int index = lstPeople.locationToIndex(e.getPoint());
-                    ListModel<Person> dlm = lstPeople.getModel();
+                    int index = lstResources.locationToIndex(e.getPoint());
+                    ListModel<Person> dlm = lstResources.getModel();
                     Person person = (Person) dlm.getElementAt(index);
-                    lstPeople.ensureIndexIsVisible(index);
-                    
+                    lstResources.ensureIndexIsVisible(index);
                     //System.out.println("Double clicked on " + person.toStringFull());
-                    
-                    view.getGuiMainView().personForm.show(person);//  showPersonOnForm(person);
-                    
+                    guiMainView.personForm.show(person);//  showPersonOnForm(person);
                 }
 		    }
 		});
-
-		lstPeople.setModel(Models.getListModel());
-		scrollPanePeople.setViewportView(lstPeople);
-		panelPeople.setLayout(gl_panelPeople);
 		
-		JPanel panel_3 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_3, null);
+				lstResources.setModel(Models.getListModel());
+				scrollPaneResources.setViewportView(lstResources);
+				panelResources.setLayout(gl_panelResources);
+				
+				JPanel panelTasks = new JPanel();
+				tabbedPaneAllMain.addTab("Tasks (Admin)", null, panelTasks, null);
+				
+				JButton btnAddTask = new JButton("Add New Task");
+				
+				JButton btnDeleteTask = new JButton("Delete Task");
+				
+				JTabbedPane tabbedPaneTasksMain = new JTabbedPane(JTabbedPane.TOP);
+				
+				JScrollPane scrollPaneTasks = new JScrollPane();
+				GroupLayout gl_panelTasks = new GroupLayout(panelTasks);
+				gl_panelTasks.setHorizontalGroup(
+					gl_panelTasks.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelTasks.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_panelTasks.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btnAddTask, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+								.addComponent(btnDeleteTask, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+								.addComponent(scrollPaneTasks, 0, 0, Short.MAX_VALUE))
+							.addGap(20)
+							.addComponent(tabbedPaneTasksMain, GroupLayout.PREFERRED_SIZE, 627, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+				gl_panelTasks.setVerticalGroup(
+					gl_panelTasks.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panelTasks.createSequentialGroup()
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGroup(gl_panelTasks.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(tabbedPaneTasksMain, GroupLayout.PREFERRED_SIZE, 552, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panelTasks.createSequentialGroup()
+									.addComponent(scrollPaneTasks, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnAddTask)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnDeleteTask)))
+							.addGap(56))
+				);
+				
+				JPanel panelTask = new JPanel();
+				tabbedPaneTasksMain.addTab("Task", null, panelTask, null);
+				
+				JList<Person> lstTasks = new JList<Person>();
+				scrollPaneTasks.setViewportView(lstTasks);
+				panelTasks.setLayout(gl_panelTasks);
+				
+				JPanel panelProjects = new JPanel();
+				tabbedPaneAllMain.addTab("Projects (Admin)", null, panelProjects, null);
+				
+				JButton btnAddProject = new JButton("Add New Project");
+				
+				JButton btnDeleteProject = new JButton("Delete Project");
+				
+				JScrollPane scrollPaneProjects = new JScrollPane();
+				
+				JTabbedPane tabbedPaneProjectMain = new JTabbedPane(JTabbedPane.TOP);
+				GroupLayout gl_panelProjects = new GroupLayout(panelProjects);
+				gl_panelProjects.setHorizontalGroup(
+					gl_panelProjects.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelProjects.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_panelProjects.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPaneProjects, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+								.addComponent(btnDeleteProject, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+								.addComponent(btnAddProject, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(tabbedPaneProjectMain, GroupLayout.PREFERRED_SIZE, 634, GroupLayout.PREFERRED_SIZE)
+							.addGap(8))
+				);
+				gl_panelProjects.setVerticalGroup(
+					gl_panelProjects.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelProjects.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_panelProjects.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tabbedPaneProjectMain, GroupLayout.PREFERRED_SIZE, 555, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panelProjects.createSequentialGroup()
+									.addComponent(scrollPaneProjects, GroupLayout.PREFERRED_SIZE, 478, GroupLayout.PREFERRED_SIZE)
+									.addGap(11)
+									.addComponent(btnAddProject)
+									.addGap(8)
+									.addComponent(btnDeleteProject)))
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+				
+				JPanel panelProject = new JPanel();
+				tabbedPaneProjectMain.addTab("Project", null, panelProject, null);
+				
+				JList<Person> lstProjects = new JList<Person>();
+				scrollPaneProjects.setViewportView(lstProjects);
+				panelProjects.setLayout(gl_panelProjects);
+				frmRexster.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelStatus, lblStatus, panelMain, panelTimesheet, panelResources, scrollPaneResources, lstResources, btnAddNewResource, tabbedPaneMainView, btnResourceTerminate, tabbedPane_resources, panelResourceForm, tabbedPaneAllMain, btnSavePersonForm, lblFirstName, lblLastName, txtFirstName, txtLastName, panelTasks, panelProjects}));
 		getFrmRexster().getContentPane().setLayout(groupLayout);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -275,7 +416,7 @@ public class GuiMain {
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.exit();
+				guiMainController.exit();
 			}
 		});
 		mnFile.add(mntmExit);
@@ -289,12 +430,11 @@ public class GuiMain {
 		    
 		    public void actionPerformed(ActionEvent e) {
 		        
-		        if(controller.getAboutWindow() == null){
+		        if(guiMainController.getAboutWindow() == null){
 		            EventQueue.invokeLater(new Runnable() {
 	                    public void run() {
 	                        try {
-	                            About window = new About(controller, view);
-	                            
+	                            About window = new About(guiMainController, viewBind);
 	                            window.getFrmAbout().setVisible(true);
 	                        } catch (Exception ex) {
 	                            ex.printStackTrace();
@@ -307,11 +447,9 @@ public class GuiMain {
 		});
 		mnHelp.add(mntmAbout);
 		//last lines
-		view.getGuiMainView().center();
-		controller.loadPeople();
-		logger.debug("Main Window Init");
-		
-		
+		guiMainView.center();
+		guiMainController.loadPeople();
+		logger.debug("Main Window Boot");
 	}
 
     public JFrame getFrmRexster() {
@@ -320,7 +458,7 @@ public class GuiMain {
 
     public void setFrmRexster(JFrame frmRexster) {
         this.frmRexster = frmRexster;
-        frmRexster.setMinimumSize(new Dimension(837, 671));
+        frmRexster.setMinimumSize(new Dimension(837, 692));
         frmRexster.addComponentListener(new ComponentAdapter() {
         	@Override
         	public void componentResized(ComponentEvent arg0) {

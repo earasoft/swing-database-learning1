@@ -28,8 +28,6 @@ public interface Person {
 
 	public abstract void setDatabase(DatabaseManager databaseManager);
 	
-	public abstract void setConnection(Connection connection);
-	
 	public abstract void save()  throws SQLException;
     
 }

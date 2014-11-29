@@ -24,10 +24,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.BoxLayout;
 import javax.swing.border.EtchedBorder;
 
-import com.earasoft.learning1.gui.Controller;
-import com.earasoft.learning1.gui.Init;
+import com.earasoft.learning1.gui.SharedController;
+import com.earasoft.learning1.gui.Boot;
 import com.earasoft.learning1.gui.ViewBind;
 import com.earasoft.learning1.gui.guiMain.GuiMain;
+import com.earasoft.learning1.gui.guiMain.GuiMainController;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -48,28 +49,31 @@ import java.awt.event.KeyEvent;
 
 public class Login {
 	private static final Logger logger = LoggerFactory.getLogger(Login.class);
-    private JFrame frmLogin;
-    private JPasswordField passwordField;
-    private JTextField txtUsername;
+   
+	private final LoginController loginController;
+    private final SharedController sharedController;
+    private final ViewBind viewBind;
+    
+	protected JFrame frmLogin;
+	protected JPasswordField passwordField;
+	protected JTextField txtUsername;
+	protected JTextArea txtStatus;
     
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
-    	Init init = new Init();
+    	Boot init = new Boot();
     }
-    
-    private Controller controller;
-    private ViewBind view;
-    private JTextArea txtStatus;
-    
+   
     /**
      * Create the application.
      * @wbp.parser.entryPoint
      */
-    public Login(Controller controller, ViewBind view) {
-    	this.controller = controller;
-    	this.view = view;
+    public Login(LoginController controller, ViewBind viewBind, SharedController sharedController) {
+    	this.loginController = controller;
+    	this.viewBind = viewBind;
+    	this.sharedController = sharedController;
     	initialize();    	
     }
 
@@ -77,7 +81,7 @@ public class Login {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-    	view.setLoginView(this);
+    	viewBind.setLoginView(this);
     	
         setFrmLogin(new JFrame());
         getFrmLogin().setResizable(false);
@@ -151,13 +155,13 @@ public class Login {
         	@Override
         	public void keyReleased(KeyEvent arg0) {       		
         		if(arg0.getKeyCode() == 10){
-        			auth();
+        			loginController.authenticate();
         		}
         	}
         });
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	auth();   
+            	loginController.authenticate(); 
             }
         });
         
@@ -170,7 +174,7 @@ public class Login {
         	@Override
         	public void keyReleased(KeyEvent arg0) {
         		if(arg0.getKeyCode() == 10){
-        			auth();
+        			loginController.authenticate();;
         		}
         	}
         });
@@ -217,36 +221,10 @@ public class Login {
         panel.setLayout(gl_panel);
         getFrmLogin().getContentPane().setLayout(groupLayout);
         
-        view.getLoginView().center();
-        controller.init();
+        viewBind.getLoginView().center();
+        sharedController.init();
     }
 
-    boolean developmentMode = true;
-    
-    private void auth(){
-    	if(txtUsername.getText().equals("admin") && Util.checksum(Arrays.toString(passwordField.getPassword())).equals("xTKABkTa5GrTjtJxHJZnaFHpuNS4s9vHu4mCnULwkxM=") || developmentMode){   
-    		
-          EventQueue.invokeLater(new Runnable() {
-              public void run() {
-                  try {
-                      GuiMain window = new GuiMain(controller, view);
-                      window.getFrmRexster().setVisible(true);
-                  } catch (Exception e) {
-                      logger.error(e.getMessage(), e);
-                  }
-              }
-          });
-          
-          view.getLoginView().setStatus("Success!");
-          logger.info("AUDIT - User: (" + txtUsername.getText() + ") Login Success");
-          frmLogin.dispose();
-        }else{
-            logger.warn("AUDIT - User: (" + txtUsername.getText() + ") Login Failure");
-            view.getLoginView().setStatus("Authenication Failed!");
-            view.getLoginView().reset();
-        }
-    }
-    
     public JFrame getFrmLogin() {
         return frmLogin;
     }

@@ -87,14 +87,6 @@ public class PersonDAO implements Person {
 	}
 	
 	/* (non-Javadoc)
-     * @see com.earasoft.db.doa.PersonI#setConnection(java.sql.Connection)
-     */
-	@Override
-    public void setConnection(Connection connection) {
-		this.connection = connection;
-	}
-
-	/* (non-Javadoc)
      * @see com.earasoft.db.doa.PersonI#setFirstName(java.lang.String)
      */
 	@Override
@@ -180,6 +172,7 @@ public class PersonDAO implements Person {
     	if(lastName.equals(null))throw new SQLException("Missing last name");
     	if(firstName.equals(null))throw new SQLException("Missing firstname");
     	if(personId.equals(null))throw new SQLException("Missing person Id");
+    	if(connection == null)throw new SQLException("Connection Error");
     	
         String sql = "UPDATE person SET lastName = ?, firstName = ? where personId = ?;";
         PreparedStatement prep = connection.prepareStatement(sql);
@@ -192,7 +185,7 @@ public class PersonDAO implements Person {
 	@Override
 	public void setDatabase(DatabaseManager databaseManager) {
 		this.databaseManager = databaseManager;
-		
+		this.connection = this.databaseManager.getConnection();
 	}
 
 
