@@ -12,20 +12,20 @@ public interface Resource {
 	public Integer resourceId(Integer resourceId); // Setter
 	
 	//Team
-	public String resourceTeam(); // Getter
-	public String resourceTeam(String resourceTeam); //Setter
+	public String getResourceTeam(); // Getter
+	public String setResourceTeam(String resourceTeam); //Setter
 	
 	//Works On Project
-	public Set<Project> worksOnProjects(); //Getter
+	public Set<Project> getWorksOnProjects(); //Getter
 	
 
 	//First Name
-    public String firstName();
-    public String firstName(String firstName);
+    public String getFirstName();
+    public String setFirstName(String firstName);
     
     //Last Name
-    public String lastName();
-    public String lastName(String lastName);
+    public String getLastName();
+    public String setLastName(String lastName);
     
     //Phone Number
     public String getPhoneNumber();

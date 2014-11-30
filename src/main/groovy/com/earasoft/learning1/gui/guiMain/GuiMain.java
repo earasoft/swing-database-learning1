@@ -47,6 +47,9 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 
 import javax.swing.JPasswordField;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class GuiMain {
     private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
@@ -85,6 +88,7 @@ public class GuiMain {
     }
     
     GuiMainView guiMainView;
+    private JTable table;
     /**
 	 * Initialize the contents of the frame.
 	 */
@@ -256,54 +260,71 @@ public class GuiMain {
 		txtPhoneNumber = new JTextField();
 		txtPhoneNumber.setEnabled(false);
 		txtPhoneNumber.setColumns(10);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+		    new Object[][] {
+		        {null, null, null, null, null},
+		    },
+		    new String[] {
+		        "New column", "New column", "New column", "New column", "Phone"
+		    }
+		));
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(4).setResizable(false);
 		GroupLayout gl_panelResourceForm = new GroupLayout(panelResourceForm);
 		gl_panelResourceForm.setHorizontalGroup(
-			gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelResourceForm.createSequentialGroup()
-					.addContainerGap(544, Short.MAX_VALUE)
-					.addComponent(btnSavePersonForm)
-					.addContainerGap())
-				.addGroup(gl_panelResourceForm.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(Alignment.LEADING, gl_panelResourceForm.createSequentialGroup()
-							.addComponent(lblPhoneNumber)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtPhoneNumber))
-						.addGroup(Alignment.LEADING, gl_panelResourceForm.createSequentialGroup()
-							.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblFirstName)
-								.addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPassword))
-							.addGap(34)
-							.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(pwdResourcepassword)
-								.addComponent(txtLastName)
-								.addComponent(txtFirstName, GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
-					.addContainerGap(374, Short.MAX_VALUE))
+		    gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_panelResourceForm.createSequentialGroup()
+		            .addContainerGap(559, Short.MAX_VALUE)
+		            .addComponent(btnSavePersonForm)
+		            .addContainerGap())
+		        .addGroup(gl_panelResourceForm.createSequentialGroup()
+		            .addContainerGap()
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+		                .addComponent(lblPhoneNumber)
+		                .addComponent(lblFirstName)
+		                .addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+		                .addComponent(lblPassword))
+		            .addPreferredGap(ComponentPlacement.UNRELATED)
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING, false)
+		                .addComponent(txtFirstName, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+		                .addComponent(txtPhoneNumber)
+		                .addComponent(pwdResourcepassword, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+		                .addComponent(txtLastName))
+		            .addGap(224))
+		        .addGroup(gl_panelResourceForm.createSequentialGroup()
+		            .addContainerGap()
+		            .addComponent(table, GroupLayout.PREFERRED_SIZE, 510, GroupLayout.PREFERRED_SIZE)
+		            .addContainerGap(106, Short.MAX_VALUE))
 		);
 		gl_panelResourceForm.setVerticalGroup(
-			gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelResourceForm.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFirstName)
-						.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblLastName)
-						.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPhoneNumber)
-						.addComponent(txtPhoneNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPassword)
-						.addComponent(pwdResourcepassword, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
-					.addComponent(btnSavePersonForm)
-					.addContainerGap())
+		    gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_panelResourceForm.createSequentialGroup()
+		            .addContainerGap()
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(lblFirstName)
+		                .addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(lblLastName)
+		                .addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(lblPhoneNumber)
+		                .addComponent(txtPhoneNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(lblPassword)
+		                .addComponent(pwdResourcepassword, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+		            .addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+		            .addComponent(table, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
+		            .addGap(44)
+		            .addComponent(btnSavePersonForm)
+		            .addContainerGap())
 		);
 		panelResourceForm.setLayout(gl_panelResourceForm);
 		

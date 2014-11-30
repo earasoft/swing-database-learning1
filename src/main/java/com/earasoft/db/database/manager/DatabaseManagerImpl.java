@@ -31,7 +31,8 @@ public class DatabaseManagerImpl implements DatabaseManager {
 		this.databaseString = storageConfig.getString(DATABASE_KEY, DATABASE_KEY_DEFAULT).trim();
 		
 		if(this.databaseString.equals("sqlite")){
-			this.database = new SqliteDatabase(storageConfig.subset("database.sqlite"));
+		    throw new Exception("Database ["+this.databaseString+"] Not Fully Supported");
+			//this.database = new SqliteDatabase(storageConfig.subset("database.sqlite"));
 		}else if(this.databaseString.equals("mysql")){
 	    	this.database = new MySQLDatabase(storageConfig.subset("database.mysql"));
 		}else{
