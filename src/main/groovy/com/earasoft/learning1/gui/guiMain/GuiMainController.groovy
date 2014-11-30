@@ -49,12 +49,14 @@ class GuiMainController  implements ControllerI {
 
 		SwingWorker<List<Person>, Void> worker = new SwingWorker<List<Person>, Void>() {
 					public List<Person> doInBackground() throws SQLException {
+                        logger.debug("Getting people")
 						People personDAO = new PeopleDAO(databaseManager);
 						return personDAO.getPeople(); // heavy task
 					}
 
 					public void done() {
 						try {
+                            logger.debug("Getting People Results")
 							List<Person> doc = get();
 							guiMainView.showPeopleList(doc)
 							guiMainView.setStatus("Loaded $doc.size People")

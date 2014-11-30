@@ -171,32 +171,42 @@ public class GuiMain {
 		JButton btnResourceTerminate = new JButton("Terminate Resource");
 		
 		JTabbedPane tabbedPane_resources = new JTabbedPane(JTabbedPane.TOP);
+		
+		JButton btnRefreshResources = new JButton("Refresh Resources");
+		btnRefreshResources.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        guiMainController.loadPeople();
+		    }
+		});
 		GroupLayout gl_panelResources = new GroupLayout(panelResources);
 		gl_panelResources.setHorizontalGroup(
-			gl_panelResources.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelResources.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelResources.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnResourceTerminate, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAddNewResource, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(scrollPaneResources, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(tabbedPane_resources, GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
-					.addContainerGap())
+		    gl_panelResources.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_panelResources.createSequentialGroup()
+		            .addContainerGap()
+		            .addGroup(gl_panelResources.createParallelGroup(Alignment.LEADING)
+		                .addComponent(btnResourceTerminate, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+		                .addComponent(btnAddNewResource, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+		                .addComponent(btnRefreshResources, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+		                .addComponent(scrollPaneResources, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+		            .addPreferredGap(ComponentPlacement.UNRELATED)
+		            .addComponent(tabbedPane_resources, GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
+		            .addContainerGap())
 		);
 		gl_panelResources.setVerticalGroup(
-			gl_panelResources.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelResources.createSequentialGroup()
-					.addGap(12)
-					.addGroup(gl_panelResources.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(tabbedPane_resources, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(Alignment.TRAILING, gl_panelResources.createSequentialGroup()
-							.addComponent(scrollPaneResources)
-							.addGap(18)
-							.addComponent(btnAddNewResource)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnResourceTerminate)))
-					.addContainerGap())
+		    gl_panelResources.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_panelResources.createSequentialGroup()
+		            .addGap(12)
+		            .addGroup(gl_panelResources.createParallelGroup(Alignment.TRAILING, false)
+		                .addComponent(tabbedPane_resources, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                .addGroup(gl_panelResources.createSequentialGroup()
+		                    .addComponent(scrollPaneResources, GroupLayout.PREFERRED_SIZE, 438, GroupLayout.PREFERRED_SIZE)
+		                    .addGap(18)
+		                    .addComponent(btnRefreshResources)
+		                    .addPreferredGap(ComponentPlacement.UNRELATED)
+		                    .addComponent(btnAddNewResource)
+		                    .addPreferredGap(ComponentPlacement.UNRELATED)
+		                    .addComponent(btnResourceTerminate)))
+		            .addContainerGap())
 		);
 		
 		JPanel panelResourceForm = new JPanel();
@@ -232,6 +242,7 @@ public class GuiMain {
 		btnSavePersonForm.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        guiMainController.savePersonOnForm(); 
+		        guiMainController.loadPeople();
 		    }
 		});
 		
