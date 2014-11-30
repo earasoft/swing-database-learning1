@@ -27,6 +27,7 @@ public class GuiMainView{
     }
     
     public showPeopleList(List<Person> people){
+        Models.getListModel().clear()
         for(Person person : people){
             Models.getListModel().addElement(person);
         }
