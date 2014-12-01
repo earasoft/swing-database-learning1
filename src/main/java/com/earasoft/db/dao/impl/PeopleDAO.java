@@ -13,15 +13,17 @@ import javax.swing.AbstractListModel;
 
 import com.earasoft.db.dao.People;
 import com.earasoft.db.dao.Person;
+import com.earasoft.db.database.manager.DatabaseManager;
 import com.earasoft.db.database.manager.DatabaseManagerImpl;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PeopleDAO implements People {
 	private final Connection connection;
-	private final DatabaseManagerImpl databaseManager;
+	private final DatabaseManager databaseManager;
 	
-	public PeopleDAO(DatabaseManagerImpl databaseManager){
+	public PeopleDAO(DatabaseManager databaseManager){
 	    this.databaseManager = databaseManager;
 		this.connection = this.databaseManager.getConnection();
 		

@@ -109,7 +109,7 @@ class GuiMainController  implements ControllerI {
 
 			if(formInfo["isNewPerson"] == true){
 				currentPerson.setDatabase(databaseManager)
-				currentPerson = databaseManager.people().addPerson(currentPerson)
+				currentPerson = databaseManager.getPeople().addPerson(currentPerson)
 				println "CURRENT:" + currentPerson.toStringFull()
 				guiMainView.showAddedPerson(currentPerson)
 			}else{

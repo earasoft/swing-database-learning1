@@ -11,7 +11,11 @@ import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.dao.People;
 import com.earasoft.db.dao.Person;
+import com.earasoft.db.dao.Projects;
+import com.earasoft.db.dao.Resources;
+import com.earasoft.db.dao.Tasks;
 import com.earasoft.db.dao.impl.PeopleDAO;
+import com.earasoft.db.dao.impl.ResourcesDAO;
 import com.earasoft.db.database.Database;
 import com.earasoft.db.database.MySQLDatabase;
 import com.earasoft.db.database.SqliteDatabase;
@@ -100,8 +104,26 @@ public class DatabaseManagerImpl implements DatabaseManager {
 	}
 
     @Override
-    public People people() {
+    public People getPeople() {
         return new PeopleDAO(this);
     }
+
+	@Override
+	public Resources getResources() {
+		return new ResourcesDAO(this);
+	}
+
+	@Override
+	public Tasks getTasks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Projects getProjects() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
 
 }
