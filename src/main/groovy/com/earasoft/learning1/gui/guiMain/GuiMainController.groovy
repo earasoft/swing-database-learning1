@@ -29,8 +29,11 @@ class GuiMainController  implements ControllerI {
 	private final DatabaseManager databaseManager
 	private final SharedController sharedController
 	private final GuiMainController self
-
-
+	
+	protected final GuiMainReportsTasksController reportsTasksController
+	protected final GuiMainResourceController resourceController
+	protected final GuiMainTimesheetController timesheetController
+	
 	/**
 	 * Create the application.
 	 * @wbp.parser.entryPoint
@@ -40,6 +43,9 @@ class GuiMainController  implements ControllerI {
 		this.sharedController = sharedController
 		this.viewBind = sharedController.getViewBind()
 		this.databaseManager = sharedController.getDatabaseManger()
+		this.reportsTasksController = new GuiMainReportsTasksController(this.sharedController, this.self)
+		this.resourceController = new GuiMainResourceController(this.sharedController, this.self)
+		this.timesheetController = new GuiMainTimesheetController(this.sharedController, this.self)
 	}
 
 	public void loadPeople(){
@@ -103,7 +109,7 @@ class GuiMainController  implements ControllerI {
 
 			if(formInfo["isNewPerson"] == true){
 				currentPerson.setDatabase(databaseManager)
-				currentPerson = databaseManager.people().addPerson(currentPerson)
+				currentPerson = databaseManager.getPeople().addPerson(currentPerson)
 				println "CURRENT:" + currentPerson.toStringFull()
 				guiMainView.showAddedPerson(currentPerson)
 			}else{
@@ -156,10 +162,12 @@ class GuiMainController  implements ControllerI {
 			return true
 	}
 
+	@Override
 	public ViewBind getViewBind(){
 		return this.viewBind
 	}
 
+	@Override
 	public DatabaseManager getDatabaseManger(){
 		return this.databaseManager
 	}

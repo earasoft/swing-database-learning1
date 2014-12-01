@@ -19,7 +19,7 @@ public class PersonDemo {
 		DbMgrDemo.openDatabase();
 		
 		
-		People personDAO = DbMgrDemo.people();
+		People personDAO = DbMgrDemo.getPeople();
 		
 		//System.out.println(personDAO.checkIfPersonExist("1549490016"));
 		

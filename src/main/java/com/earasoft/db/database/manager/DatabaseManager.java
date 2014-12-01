@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 import com.earasoft.db.dao.People;
 import com.earasoft.db.dao.Person;
+import com.earasoft.db.dao.Projects;
+import com.earasoft.db.dao.Resources;
+import com.earasoft.db.dao.Tasks;
 
 public interface DatabaseManager {
 
@@ -20,8 +23,12 @@ public interface DatabaseManager {
 
 	public abstract void close() throws SQLException;
 	
-	public abstract People people();
+	public abstract People getPeople();
 	
-	//public abstract Person person();
-
+	public abstract Resources getResources();
+	
+	public abstract Tasks getTasks();
+	
+	public abstract Projects getProjects();
+	
 }

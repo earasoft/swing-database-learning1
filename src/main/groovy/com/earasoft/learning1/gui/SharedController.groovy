@@ -26,14 +26,23 @@ public class SharedController implements ControllerI {
     PropertiesConfiguration propertiesConfiguration
     DatabaseManagerImpl DbMgrDemo
     
-    boolean successfulInit = false
+    private boolean successfulInit = false
     
     public SharedController(){
         this.view = new ViewBind();
     }
     
-    public init(){
-        SwingWorker<Boolean, Void> worker1 = new SwingWorker<Boolean, Void>() {
+	public ViewBind getViewBind(){
+		return view
+	}
+	
+	public DatabaseManager getDatabaseManger(){
+		return DbMgrDemo
+	}
+
+	@Override
+	public void initialize() {
+		SwingWorker<Boolean, Void> worker1 = new SwingWorker<Boolean, Void>() {
             public Boolean doInBackground() throws SQLException, ConfigurationException {
                 propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
                 DbMgrDemo = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
@@ -47,38 +56,30 @@ public class SharedController implements ControllerI {
                     def doc = get()
                     view.notifyAllViews("Success Connecting to database")
                     successfulInit = true
-                    //loadPeople()
                 } catch (Exception ex) {
                     Throwable ee = ex.getCause()
                     if (ee instanceof SQLException){
                         view.notifyAllViews("Database Error: " + ee.message)
 						logger.error(ee.getMessage(), ee)
+						successfulInit = false
                     } else if (ee instanceof ConfigurationException){
                         view.notifyAllViews("Configuration Error: " + ee.message)
 						logger.error(ee.getMessage(), ee)
+						successfulInit = false
                     }else {
                         view.notifyAllViews("Error: " + ex.message)
 						logger.error(ee.getMessage(), ex)
+						successfulInit = false
                     }
                 }
             }
         };
         worker1.execute();
-    }
-	
-
-	public ViewBind getViewBind(){
-		return view
-	}
-	
-	public DatabaseManager getDatabaseManger(){
-		return DbMgrDemo
-	}
-
-	@Override
-	public void initialize() {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean isSuccessfulInit(){
+		return successfulInit
 	}
 	
 }
