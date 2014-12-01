@@ -56,6 +56,12 @@ class LoginController  implements ControllerI {
 	boolean developmentMode = true;
 	protected void authenticate(){
 		LoginView loginView = viewBind.getLoginView()
+		
+		if(!this.sharedController.isSuccessfulInit()){
+			loginView.setStatus("Error with Iniatation");
+			return
+		}
+		
 		Map formInfo = loginView.getFormInfo()
 		
 		if(formInfo["Username"].equals("admin") && formInfo["Password"].equals("xTKABkTa5GrTjtJxHJZnaFHpuNS4s9vHu4mCnULwkxM=") || developmentMode){

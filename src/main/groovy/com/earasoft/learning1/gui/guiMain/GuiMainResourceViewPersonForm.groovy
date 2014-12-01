@@ -6,7 +6,7 @@ import javax.swing.JTextField
 
 import com.earasoft.db.dao.Person
 
- class PersonFormView{
+ class GuiMainResourceViewPersonForm{
 		GuiMainView guiMainView
 		GuiMain guiMain
 		
@@ -14,7 +14,7 @@ import com.earasoft.db.dao.Person
         Integer personId
         boolean isNewPerson
         
-		public PersonFormView(GuiMainView guiMainView, GuiMain guiMain){
+		public GuiMainResourceViewPersonForm(GuiMainView guiMainView, GuiMain guiMain){
 			this.guiMainView  = guiMainView
 			this.guiMain = guiMain
 		}

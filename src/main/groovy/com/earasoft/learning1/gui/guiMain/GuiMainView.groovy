@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class GuiMainView{
 	private static final Logger logger = LoggerFactory.getLogger(GuiMainView.class);
     private GuiMain guiMain;
-    public PersonFormView personForm = new PersonFormView(this, guiMain)
+    public GuiMainResourceViewPersonForm personForm = new GuiMainResourceViewPersonForm(this, guiMain)
     
     public GuiMainView(GuiMain guiMain){
         this.guiMain = guiMain

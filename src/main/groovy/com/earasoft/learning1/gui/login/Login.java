@@ -46,6 +46,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.UIManager;
 
 public class Login {
 	private static final Logger logger = LoggerFactory.getLogger(Login.class);
@@ -128,8 +129,9 @@ public class Login {
         );
         
         txtStatus = new JTextArea();
+        txtStatus.setWrapStyleWord(true);
         txtStatus.setLineWrap(true);
-        txtStatus.setBackground(SystemColor.scrollbar);
+        txtStatus.setBackground(SystemColor.window);
         txtStatus.setEditable(false);
         GroupLayout gl_panelStatus = new GroupLayout(panelStatus);
         gl_panelStatus.setHorizontalGroup(
@@ -222,7 +224,7 @@ public class Login {
         getFrmLogin().getContentPane().setLayout(groupLayout);
         
         viewBind.getLoginView().center();
-        sharedController.init();
+        sharedController.initialize();
     }
 
     public JFrame getFrmLogin() {
