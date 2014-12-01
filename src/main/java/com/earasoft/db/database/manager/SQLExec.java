@@ -43,8 +43,8 @@ public class SQLExec {
 		public static final String CREATE_TASK_TABLE = "CREATE TABLE IF NOT EXISTS task (taskID INTEGER, startDate date, endDate date, remainingHours INTEGER, PRIMARY KEY (taskID));";
 		public static final String CREATE_CONTAIN_TABLE = "CREATE TABLE IF NOT EXISTS contain (taskID INTEGER, resourceID INTEGER, dateSubmitted date,PRIMARY KEY (taskID, resourceID, dateSubmitted));";
 		public static final String CREATE_ASSIGNEDTO_TABLE = "CREATE TABLE IF NOT EXISTS assignedTo (taskID INTEGER, resourceID INTEGER, PRIMARY KEY (taskID, resourceID));";
-		public static final String ALTER_CONTAIN_TABLE = "ALTER TABLE contain FOREIGN KEY taskID REFERENCES task(taskID) FOREIGN KEY resourceID REFERENCES resource(resourceID) FOREIGN KEY dateSubmitted REFERENCES timesheet(dateSubmitted);";
-		
+		public static final String ALTER_CONTAIN_TABLE = "ALTER TABLE contain ADD FOREIGN KEY (taskID) REFERENCES task(taskID), ADD FOREIGN KEY (resourceID) REFERENCES resource(resourceID), ADD FOREIGN KEY (dateSubmitted) REFERENCES timesheet(dateSubmitted);";
+		public static final String ALTER_ASSIGNEDTO_TABLE = "ALTER TABLE assignedTo ADD FOREIGN KEY (resourceID) REFERENCES resource(resourceID), ADD FOREIGN KEY (taskID) REFERENCES task(taskID);";
 	}
 	
 	
@@ -69,6 +69,8 @@ public class SQLExec {
             statement.executeUpdate(SQLExec.MySQL.CREATE_TIMESHEET_TABLE);            
             statement.executeUpdate(SQLExec.MySQL.CREATE_CONTAIN_TABLE);
             statement.executeUpdate(SQLExec.MySQL.CREATE_ASSIGNEDTO_TABLE);
+            statement.executeUpdate(SQLExec.MySQL.ALTER_ASSIGNEDTO_TABLE);
+            statement.executeUpdate(SQLExec.MySQL.ALTER_CONTAIN_TABLE);
         }
         
         statement.close();
