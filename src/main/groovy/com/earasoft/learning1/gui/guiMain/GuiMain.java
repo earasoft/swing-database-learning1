@@ -53,6 +53,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import javax.swing.JScrollBar;
 import javax.swing.AbstractListModel;
+import javax.swing.JEditorPane;
 
 public class GuiMain {
     private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
@@ -104,6 +105,12 @@ public class GuiMain {
     private JTextField textField_7;
     private JTextField textField_8;
     private JTextField textField_9;
+    private JTextField textField_10;
+    private JTextField textField_11;
+    private JTextField textField_12;
+    private JTextField textField_13;
+    private JTextField textField_14;
+    private JTextField textField_15;
     /**
 	 * Initialize the contents of the frame.
 	 */
@@ -539,34 +546,44 @@ public class GuiMain {
 		JLabel lblState = new JLabel("State");
 		
 		JLabel lblZip = new JLabel("Zip");
+		
+		textField_10 = new JTextField();
+		textField_10.setEnabled(false);
+		textField_10.setColumns(10);
+		
+		textField_11 = new JTextField();
+		textField_11.setEnabled(false);
+		textField_11.setColumns(10);
+		
+		textField_12 = new JTextField();
+		textField_12.setEnabled(false);
+		textField_12.setColumns(10);
+		
+		textField_13 = new JTextField();
+		textField_13.setEnabled(false);
+		textField_13.setColumns(10);
+		
+		textField_14 = new JTextField();
+		textField_14.setEnabled(false);
+		textField_14.setColumns(10);
+		
+		textField_15 = new JTextField();
+		textField_15.setEnabled(false);
+		textField_15.setColumns(10);
 		GroupLayout gl_panelResourceForm = new GroupLayout(panelResourceForm);
 		gl_panelResourceForm.setHorizontalGroup(
 		    gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
 		        .addGroup(gl_panelResourceForm.createSequentialGroup()
 		            .addContainerGap()
-		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
-		                .addGroup(Alignment.TRAILING, gl_panelResourceForm.createSequentialGroup()
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.TRAILING)
+		                .addGroup(gl_panelResourceForm.createSequentialGroup()
 		                    .addComponent(btnSavePersonForm)
 		                    .addContainerGap())
 		                .addGroup(gl_panelResourceForm.createSequentialGroup()
-		                    .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
-		                        .addComponent(lblPhoneNumber)
-		                        .addComponent(lblFirstName)
-		                        .addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE))
-		                    .addPreferredGap(ComponentPlacement.UNRELATED)
-		                    .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING, false)
-		                        .addComponent(txtFirstName, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-		                        .addComponent(txtPhoneNumber)
-		                        .addComponent(txtLastName))
-		                    .addGap(224))
-		                .addGroup(gl_panelResourceForm.createSequentialGroup()
 		                    .addComponent(lblPassword)
 		                    .addPreferredGap(ComponentPlacement.UNRELATED)
-		                    .addComponent(pwdResourcepassword, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+		                    .addComponent(pwdResourcepassword, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
 		                    .addGap(148))
-		                .addGroup(gl_panelResourceForm.createSequentialGroup()
-		                    .addComponent(lblAddress, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-		                    .addContainerGap(539, Short.MAX_VALUE))
 		                .addGroup(gl_panelResourceForm.createSequentialGroup()
 		                    .addComponent(lblCity, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
 		                    .addContainerGap(539, Short.MAX_VALUE))
@@ -578,10 +595,40 @@ public class GuiMain {
 		                    .addContainerGap(539, Short.MAX_VALUE))
 		                .addGroup(gl_panelResourceForm.createSequentialGroup()
 		                    .addComponent(lblPosition, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-		                    .addContainerGap(554, Short.MAX_VALUE))
+		                    .addPreferredGap(ComponentPlacement.UNRELATED)
+		                    .addComponent(textField_14, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+		                    .addContainerGap(224, Short.MAX_VALUE))
 		                .addGroup(gl_panelResourceForm.createSequentialGroup()
 		                    .addComponent(lblTeam, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-		                    .addContainerGap(554, Short.MAX_VALUE))))
+		                    .addPreferredGap(ComponentPlacement.UNRELATED)
+		                    .addComponent(textField_15, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+		                    .addContainerGap(224, Short.MAX_VALUE))
+		                .addGroup(gl_panelResourceForm.createSequentialGroup()
+		                    .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+		                        .addGroup(Alignment.TRAILING, gl_panelResourceForm.createSequentialGroup()
+		                            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+		                                .addComponent(lblPhoneNumber)
+		                                .addComponent(lblFirstName)
+		                                .addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE))
+		                            .addPreferredGap(ComponentPlacement.UNRELATED))
+		                        .addGroup(gl_panelResourceForm.createSequentialGroup()
+		                            .addComponent(lblAddress, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+		                            .addGap(3)))
+		                    .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING, false)
+		                        .addGroup(Alignment.TRAILING, gl_panelResourceForm.createSequentialGroup()
+		                            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING, false)
+		                                .addComponent(txtFirstName, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+		                                .addComponent(txtPhoneNumber)
+		                                .addComponent(txtLastName))
+		                            .addGap(224))
+		                        .addGroup(gl_panelResourceForm.createSequentialGroup()
+		                            .addPreferredGap(ComponentPlacement.RELATED)
+		                            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.TRAILING)
+		                                .addComponent(textField_11, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+		                                .addComponent(textField_10, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+		                                .addComponent(textField_12, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+		                                .addComponent(textField_13, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE))
+		                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
 		);
 		gl_panelResourceForm.setVerticalGroup(
 		    gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
@@ -599,17 +646,31 @@ public class GuiMain {
 		                .addComponent(lblPhoneNumber)
 		                .addComponent(txtPhoneNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		            .addPreferredGap(ComponentPlacement.UNRELATED)
-		            .addComponent(lblAddress)
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(lblAddress)
+		                .addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(lblCity)
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(lblCity)
+		                .addComponent(textField_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(lblState)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(lblZip)
-		            .addPreferredGap(ComponentPlacement.UNRELATED)
-		            .addComponent(lblPosition)
-		            .addPreferredGap(ComponentPlacement.UNRELATED)
-		            .addComponent(lblTeam)
+		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
+		                .addGroup(gl_panelResourceForm.createSequentialGroup()
+		                    .addComponent(lblState)
+		                    .addPreferredGap(ComponentPlacement.RELATED)
+		                    .addComponent(lblZip)
+		                    .addPreferredGap(ComponentPlacement.UNRELATED)
+		                    .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+		                        .addComponent(lblPosition)
+		                        .addComponent(textField_14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		                    .addPreferredGap(ComponentPlacement.UNRELATED)
+		                    .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
+		                        .addComponent(lblTeam)
+		                        .addComponent(textField_15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+		                .addGroup(gl_panelResourceForm.createSequentialGroup()
+		                    .addComponent(textField_12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                    .addPreferredGap(ComponentPlacement.RELATED)
+		                    .addComponent(textField_13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 		            .addGap(57)
 		            .addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
 		                .addComponent(lblPassword)
@@ -866,6 +927,58 @@ public class GuiMain {
 				JList<Person> lstProjects = new JList<Person>();
 				scrollPaneProjects.setViewportView(lstProjects);
 				panelProjects.setLayout(gl_panelProjects);
+				
+				JPanel panelReports = new JPanel();
+				tabbedPaneAllMain.addTab("Reports", null, panelReports, null);
+				
+				JScrollPane scrollPane_2 = new JScrollPane();
+				
+				JButton btnGenerateReport = new JButton("Generate Report");
+				
+				JComboBox comboBox_11 = new JComboBox();
+				
+				JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+				GroupLayout gl_panelReports = new GroupLayout(panelReports);
+				gl_panelReports.setHorizontalGroup(
+				    gl_panelReports.createParallelGroup(Alignment.LEADING)
+				        .addGroup(gl_panelReports.createSequentialGroup()
+				            .addContainerGap()
+				            .addGroup(gl_panelReports.createParallelGroup(Alignment.LEADING)
+				                .addGroup(gl_panelReports.createSequentialGroup()
+				                    .addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 796, GroupLayout.PREFERRED_SIZE)
+				                    .addContainerGap())
+				                .addGroup(gl_panelReports.createSequentialGroup()
+				                    .addComponent(comboBox_11, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+				                    .addPreferredGap(ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+				                    .addComponent(btnGenerateReport)
+				                    .addGap(249))
+				                .addGroup(gl_panelReports.createSequentialGroup()
+				                    .addComponent(tabbedPane_1, GroupLayout.PREFERRED_SIZE, 784, GroupLayout.PREFERRED_SIZE)
+				                    .addContainerGap())))
+				);
+				gl_panelReports.setVerticalGroup(
+				    gl_panelReports.createParallelGroup(Alignment.LEADING)
+				        .addGroup(Alignment.TRAILING, gl_panelReports.createSequentialGroup()
+				            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				            .addGroup(gl_panelReports.createParallelGroup(Alignment.BASELINE)
+				                .addComponent(btnGenerateReport)
+				                .addComponent(comboBox_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				            .addPreferredGap(ComponentPlacement.RELATED)
+				            .addComponent(tabbedPane_1, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+				            .addGap(11)
+				            .addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 427, GroupLayout.PREFERRED_SIZE)
+				            .addContainerGap())
+				);
+				
+				JPanel panel_1 = new JPanel();
+				tabbedPane_1.addTab("Report 1", null, panel_1, null);
+				
+				JPanel panel_2 = new JPanel();
+				tabbedPane_1.addTab("Report2", null, panel_2, null);
+				
+				JEditorPane editorPane = new JEditorPane();
+				scrollPane_2.setViewportView(editorPane);
+				panelReports.setLayout(gl_panelReports);
 		getFrmRexster().getContentPane().setLayout(groupLayout);
 		frmRexster.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelStatus, lblStatus, panelMain, panelResources, scrollPaneResources, lstResources, btnAddNewResource, btnResourceTerminate, tabbedPane_resources, panelResourceForm, tabbedPaneAllMain, btnSavePersonForm, lblFirstName, lblLastName, txtFirstName, txtLastName, panelProjects}));
 
