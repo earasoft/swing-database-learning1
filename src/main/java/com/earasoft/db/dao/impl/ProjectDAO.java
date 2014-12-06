@@ -42,12 +42,9 @@ public class ProjectDAO implements Project {
 		return projectId;
 	}
 
-	@Override
-	public void setProjectId() {
-		this.projectId= projectId;
+	
 		
-	}
-
+	
 	@Override
 	public Date getStartDate() {
 		return startDate;
@@ -136,5 +133,13 @@ public class ProjectDAO implements Project {
         prep.executeUpdate();
         prep.close();
     }
+
+	@Override
+	public void setProjectId(Integer projectId) {
+		this.projectId=projectId;
+		
+	}
+
+	
 
 }

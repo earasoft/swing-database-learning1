@@ -11,20 +11,16 @@ import com.earasoft.db.database.manager.DatabaseManager;
 
 public interface Project {
 	
-	public abstract Integer getProjectId();
-	
+	public abstract Integer getProjectId();	
 	public abstract void setProjectId(Integer projectId);
 	
-	public abstract Date getStartDate();
-    
+	public abstract Date getStartDate();    
     public abstract void setStartDate(Date startDate);
     
-    public abstract Date getEndDate();
-    
+    public abstract Date getEndDate();    
     public abstract void setEndDate(Date endDate);
     
-    public abstract String getManager();
-    
+    public abstract String getManager();    
     public abstract void setManager(String manager);
 
 	public abstract String toStringFull();
@@ -32,5 +28,7 @@ public interface Project {
 	public abstract void setDatabase(DatabaseManager databaseManager);
 	
 	public abstract void save()  throws SQLException;
+
+	void setProjectId();
 	
 }
