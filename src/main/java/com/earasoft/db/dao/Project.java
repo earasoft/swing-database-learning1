@@ -13,7 +13,7 @@ public interface Project {
 	
 	public abstract Integer getProjectId();
 	
-	public abstract void setProjectId();
+	public abstract void setProjectId(Integer projectId);
 	
 	public abstract Date getStartDate();
     

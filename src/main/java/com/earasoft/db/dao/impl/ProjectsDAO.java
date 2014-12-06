@@ -1,10 +1,10 @@
 package com.earasoft.db.dao.impl;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -55,9 +55,35 @@ public class ProjectsDAO implements Projects {
 
 	@Override
 	public Project addProject(Project project) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement prep = addProjectPrepStatement(project.getProjectId(), project.getStartDate(), project.getEndDate(), project.getManager());		
+		prep.executeUpdate();
+		Integer projectId = null;
+		
+		ResultSet rs = prep.getGeneratedKeys();
+		if (rs.next()){
+			projectId = rs.getInt(1);
+		}
+		
+		rs.close();
+		prep.close();
+		project.setProjectId(projectId);
+		project.setDatabase(databaseManager);
+		
+		System.out.println("***" + project.toStringFull());
+		return project;
+	
 	}
+	
+    private PreparedStatement addProjectPrepStatement(Integer projectID, Date startDate, Date endDate, String manager) throws SQLException{
+        String sql = "INSERT INTO project (projectID, startDate, endDate) VALUES (?,?,?);";
+        PreparedStatement prep = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        prep.setQueryTimeout(30);
+        prep.setInt(1, projectID);
+        prep.setDate(2, (java.sql.Date) startDate);
+        prep.setDate(3, (java.sql.Date) endDate);
+        prep.setString(4, manager);
+        return prep;
+    }
 	
 	private PreparedStatement getProjectPrepStatement() throws SQLException{
         String sql = "SELECT projectId, startDate, endDate FROM project ORDER BY lower(projectId);";
