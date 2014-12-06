@@ -5,11 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.dao.Person;
 import com.earasoft.db.database.manager.DatabaseManager;
+import com.earasoft.db.security.RolesE;
 
 public class PersonDAO implements Person {
     private Integer personId;
@@ -186,6 +188,118 @@ public class PersonDAO implements Person {
 	public void setDatabase(DatabaseManager databaseManager) {
 		this.databaseManager = databaseManager;
 		this.connection = this.databaseManager.getConnection();
+	}
+
+
+	@Override
+	public String getAddress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setAddress(String address) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String getCity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setCity(String city) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String getState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setState(String state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String getZip() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setZip(String zip) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String getPosition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setPosition(String position) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String getTeam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setTeam(String team) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setRole(RolesE role) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setPassword(String password) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

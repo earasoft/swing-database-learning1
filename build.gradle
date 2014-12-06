@@ -15,6 +15,8 @@ version = '1.0.0'
 
 ext {
     implementationTitle = 'swing-database-learning1'
+	mainClassName = 'com.earasoft.learning1.gui.Boot'
+	
 }
 
 sourceCompatibility = 1.7
@@ -49,7 +51,7 @@ task jarDist(type: Jar, dependsOn: copyAllDependencies){
     //
     manifest {
         attributes 'Implementation-Title': implementationTitle, 'Implementation-Version': version
-        //attributes 'Main-Class': mainClassName
+        attributes 'Main-Class': mainClassName
         attributes 'Class-path': libraries.join(' ')
     }
     
