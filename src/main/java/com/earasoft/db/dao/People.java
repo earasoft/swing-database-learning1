@@ -25,7 +25,4 @@ public interface People {
     
     public abstract Person addPerson(Person person) throws SQLException;
     
-    public abstract void commit() throws SQLException;
-    
-    public abstract void rollback() throws SQLException;
 }

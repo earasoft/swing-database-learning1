@@ -28,7 +28,7 @@ public class PersonDemo {
 			personDAO.addPerson(new PersonDAO("f54","R4","555-555-4444"));
 			System.out.println("person: " + i);
 		}
-		personDAO.commit();
+		
 		
 		personDAO.getPeople();
 		personDAO.getPeople();
@@ -38,6 +38,7 @@ public class PersonDemo {
 		}
 		//System.out.println(personDAO.getPeopleByLastname("Rive%"));
 		
+		DbMgrDemo.getConnection().commit();
 	}
 
 }
