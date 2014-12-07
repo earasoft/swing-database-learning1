@@ -94,14 +94,14 @@ public class GuiMain {
     }
     
     GuiMainView guiMainView;
-    private JTextField textField;
+    private JTextField txtProjectName;
     private JTextField txtCalcuated;
     private JTextField txtCalculated;
-    private JTextField textField_3;
-    private JTextField textField_1;
-    private JTextField textField_2;
+    private JTextField txtTaskName;
+    private JTextField txtTaskStart;
+    private JTextField txtTaskEnd;
     private JTextField txtCalculated_1;
-    private JTextField textField_4;
+    private JTextField txtTaskTotalHours;
     private JTextField textField_5;
     private JTextField textField_6;
     private JTextField textField_7;
@@ -765,8 +765,8 @@ public class GuiMain {
 				
 				JLabel lblManager = new JLabel("Manager");
 				
-				textField = new JTextField();
-				textField.setColumns(10);
+				txtProjectName = new JTextField();
+				txtProjectName.setColumns(10);
 				
 				txtCalcuated = new JTextField();
 				txtCalcuated.setText("Calcuated");
@@ -793,7 +793,7 @@ public class GuiMain {
 										.addGroup(gl_panelProject.createSequentialGroup()
 											.addComponent(lblProjectName)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(textField, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+											.addComponent(txtProjectName, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
 										.addGroup(gl_panelProject.createSequentialGroup()
 											.addComponent(lblStartDate)
 											.addPreferredGap(ComponentPlacement.RELATED)
@@ -814,7 +814,7 @@ public class GuiMain {
 							.addContainerGap()
 							.addGroup(gl_panelProject.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblProjectName)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtProjectName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblManager)
 								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -835,18 +835,18 @@ public class GuiMain {
 				
 				JLabel lblTaskName = new JLabel("Task Name");
 				
-				textField_3 = new JTextField();
-				textField_3.setColumns(10);
+				txtTaskName = new JTextField();
+				txtTaskName.setColumns(10);
 				
 				JLabel label = new JLabel("Start Date");
 				
 				JLabel label_1 = new JLabel("End Date");
 				
-				textField_1 = new JTextField();
-				textField_1.setColumns(10);
+				txtTaskStart = new JTextField();
+				txtTaskStart.setColumns(10);
 				
-				textField_2 = new JTextField();
-				textField_2.setColumns(10);
+				txtTaskEnd = new JTextField();
+				txtTaskEnd.setColumns(10);
 				
 				JLabel lblRemindingHours = new JLabel("Reminding Hours");
 				
@@ -860,8 +860,8 @@ public class GuiMain {
 				
 				JLabel lblHours = new JLabel("Total Hours");
 				
-				textField_4 = new JTextField();
-				textField_4.setColumns(10);
+				txtTaskTotalHours = new JTextField();
+				txtTaskTotalHours.setColumns(10);
 				GroupLayout gl_panel = new GroupLayout(panel);
 				gl_panel.setHorizontalGroup(
 				    gl_panel.createParallelGroup(Alignment.LEADING)
@@ -877,7 +877,7 @@ public class GuiMain {
 				                        .addGroup(gl_panel.createSequentialGroup()
 				                            .addComponent(lblHours)
 				                            .addPreferredGap(ComponentPlacement.RELATED)
-				                            .addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                            .addComponent(txtTaskTotalHours, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				                        .addGroup(gl_panel.createSequentialGroup()
 				                            .addComponent(lblRemindingHours)
 				                            .addPreferredGap(ComponentPlacement.RELATED)
@@ -885,15 +885,15 @@ public class GuiMain {
 				                        .addGroup(gl_panel.createSequentialGroup()
 				                            .addComponent(lblTaskName)
 				                            .addPreferredGap(ComponentPlacement.RELATED)
-				                            .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                            .addComponent(txtTaskName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				                        .addGroup(gl_panel.createSequentialGroup()
 				                            .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				                                .addComponent(label, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
 				                                .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
 				                            .addPreferredGap(ComponentPlacement.UNRELATED)
 				                            .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				                                .addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				                                .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
+				                                .addComponent(txtTaskEnd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				                                .addComponent(txtTaskStart, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
 				                .addComponent(btnDeleteNewTask, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
 				            .addContainerGap(210, Short.MAX_VALUE))
 				);
@@ -910,16 +910,16 @@ public class GuiMain {
 				                            .addGap(12)
 				                            .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 				                                .addComponent(label)
-				                                .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                                .addComponent(txtTaskStart, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				                            .addGap(9)
 				                            .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 				                                .addComponent(label_1)
-				                                .addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-				                        .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                                .addComponent(txtTaskEnd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				                        .addComponent(txtTaskName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				                    .addGap(12)
 				                    .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 				                        .addComponent(lblHours)
-				                        .addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                        .addComponent(txtTaskTotalHours, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				                    .addGap(8)
 				                    .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 				                        .addComponent(lblRemindingHours)
