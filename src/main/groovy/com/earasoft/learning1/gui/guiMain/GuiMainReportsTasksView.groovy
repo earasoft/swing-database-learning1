@@ -89,6 +89,15 @@ import com.earasoft.db.dao.Task
 			}else{
 				guiMain.txtTaskEnd.setBackground(Color.WHITE)
 			}
+			
+			if(guiMain.txtTaskTotalHours.getText().trim().size() == 0){
+				guiMain.txtTaskTotalHours.setBackground(Color.RED)
+				valid = false
+				fieldsToFix.add("Task Hours")
+			}else{
+				guiMain.txtTaskEnd.setBackground(Color.WHITE)
+			}
+			
 			if(valid){
 				guiMain.btnSavePersonForm.setEnabled(true)
 				guiMainView.setStatus("Fields are valid")
