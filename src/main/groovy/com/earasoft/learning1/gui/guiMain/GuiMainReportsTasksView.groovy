@@ -13,7 +13,6 @@ import com.earasoft.db.dao.Task
 		GuiMain guiMain
 		
 		Task task
-		String taskName		
 		Boolean isNewTask
 		
 		
@@ -29,11 +28,12 @@ import com.earasoft.db.dao.Task
 			this.task = task
 			
 			resetTextField(guiMain.txtTaskName, task.getTaskName())
-			resetTextField(guiMain.txtTaskStart, task.getTaskStart())
-			resetTextField(guiMain.txtTaskEnd, task.getTaskEnd())
+			resetTextField(guiMain.txtTaskStart, task.getStartDate())
+			resetTextField(guiMain.txtTaskEnd, task.getEndDate())
+			resetTextField(guiMain.txtTaskTotalHours, task.getTotalHours())
 			
-			taskName = task.getTaskName()
-			guiMain.btnSavePersonForm.setEnabled(true)
+			
+			guiMain.btnAddNewTask.setEnabled(true)
 			validate()
 			
 			if(saved){
@@ -53,13 +53,13 @@ import com.earasoft.db.dao.Task
 				textField.setText(input)
 		}
 		
-		public Map getFormInfo(){
+		public Map getTaskInfo(){
 			return ["orgTaskObj": task,
 					"isNewTask":this.isNewTask,
-					"data":["personId": personId,
-							"TaskName": guiMain.txtTaskName.getText(),
-							"TaskStart": guiMain.txtTaskStart.getText(),
-							"TaskEnd": guiMain.txtTaskEnd.getText()]]
+					"data":["taskName": guiMain.txtTaskName.getText(),
+							"taskStart": guiMain.txtTaskStart.getText(),
+							"taskEnd": guiMain.txtTaskEnd.getText(),
+							"totalHours": guiMain.txtTaskTotalHours()]]
 		}
 		
 		public boolean validate(){

@@ -16,7 +16,7 @@ public interface Task {
 	public abstract Date getEndDate();
 	public abstract void setEndDate(Date endDate);
 	
-	public abstract Integer getHours();
+	public abstract Integer getTotalHours();
 	public abstract void setHours(Integer hours);
 	
 	public abstract Integer getRemainingHours();

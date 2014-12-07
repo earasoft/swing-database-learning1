@@ -31,105 +31,106 @@ public List<Task> getTasks() throws SQLException{
 	
 	rs.close();
 	prep.close();
-	return task;
+	return tasks;
 }
 
-private PreparedStatement getTaskPrepStatement() throws SQLException{
+private PreparedStatement getTasksPrepStatement() throws SQLException{
     String sql = "SELECT taskName, startDate, endDate, hours FROM task ORDER BY lower(taskName);";
     PreparedStatement prep = connection.prepareStatement(sql);
     return prep;
 }
 
 private List<Task> resultSetTaskListFillerHelper(ResultSet rs) throws SQLException{
-    List<Person> taskList = new ArrayList<Task>();
+    List<Task> taskList = new ArrayList<Task>();
     
     while(rs.next()){
          String taskName = rs.getString("taskName");
          Date startDate = rs.getDate("startDate");
          Date endDate = rs.getDate("endDate");
          Integer hours = rs.getInt("hours");
-         taskList.add(new TaskDAO(taskName, startDate, endDate, hours, this.databaseManager));
+         taskList.add(new TaskDAO(this.databaseManager));
      }
     
     return taskList;
 }
 
-	@Override
-	public String getTaskName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@Override
+public String getTaskName() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
-	@Override
-	public void setTaskName(String taskName) {
-		// TODO Auto-generated method stub
-		
-	}
+@Override
+public void setTaskName(String taskName) {
+	// TODO Auto-generated method stub
+	
+}
 
-	@Override
-	public Date getStartDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@Override
+public Date getStartDate() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
-	@Override
-	public void setStartDate(Date startDate) {
-		// TODO Auto-generated method stub
-		
-	}
+@Override
+public void setStartDate(Date startDate) {
+	// TODO Auto-generated method stub
+	
+}
 
-	@Override
-	public Date getEndDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@Override
+public Date getEndDate() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
-	@Override
-	public void setEndDate(Date endDate) {
-		// TODO Auto-generated method stub
-		
-	}
+@Override
+public void setEndDate(Date endDate) {
+	// TODO Auto-generated method stub
+	
+}
 
-	@Override
-	public Integer getHours() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@Override
+public Integer getTotalHours() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
-	@Override
-	public void setHours(Integer hours) {
-		// TODO Auto-generated method stub
-		
-	}
+@Override
+public void setHours(Integer hours) {
+	// TODO Auto-generated method stub
+	
+}
 
-	@Override
-	public Integer getRemainingHours() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@Override
+public Integer getRemainingHours() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
-	@Override
-	public void setRemainingHours(Integer remainingHours) {
-		// TODO Auto-generated method stub
-		
-	}
+@Override
+public void setRemainingHours(Integer remainingHours) {
+	// TODO Auto-generated method stub
+	
+}
 
-	@Override
-	public String toStringFull() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@Override
+public String toStringFull() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
-	@Override
-	public void setDatabase(DatabaseManager databaseManager) {
-		// TODO Auto-generated method stub
-		
-	}
+@Override
+public void setDatabase(DatabaseManager databaseManager) {
+	// TODO Auto-generated method stub
+	
+}
 
-	@Override
-	public void save() throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+@Override
+public void save() throws SQLException {
+	// TODO Auto-generated method stub
+	
+}
 
+	
 }

@@ -17,6 +17,7 @@ public class GuiMainView{
 	private static final Logger logger = LoggerFactory.getLogger(GuiMainView.class);
     private GuiMain guiMain;
     public GuiMainResourceViewPersonForm personForm = new GuiMainResourceViewPersonForm(this, guiMain)
+	public GuiMainReportsTasksView tasksView = new GuiMainReportsTasksView(this, guiMain)
     
     public GuiMainView(GuiMain guiMain){
         this.guiMain = guiMain

@@ -113,6 +113,8 @@ public class GuiMain {
     private JTextField textField_13;
     private JTextField textField_14;
     private JTextField textField_15;
+    private JButton btnAddNewTask;
+    private JButton btnDeleteNewTask;
     /**
 	 * Initialize the contents of the frame.
 	 */
@@ -165,276 +167,6 @@ public class GuiMain {
 		            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panelStatus.setLayout(gl_panelStatus);
-		
-		JPanel panelMain = new JPanel();
-		tabbedPaneAllMain.addTab("Timesheet", null, panelMain, null);
-		
-		JLabel lblTask = new JLabel("Task");
-		
-		JComboBox comboBox_1 = new JComboBox();
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		
-		JLabel lblDateSubmitted = new JLabel("Date Submitted");
-		
-		JLabel lblProject = new JLabel("Project");
-		
-		JComboBox comboBox_2 = new JComboBox();
-		
-		JButton btnSubmit = new JButton("Submit");
-		
-		JButton btnSave = new JButton("Save");
-		
-		JLabel lblWeekHours = new JLabel("Week Hours");
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		
-		JLabel label_2 = new JLabel("Project");
-		
-		JComboBox comboBox_3 = new JComboBox();
-		
-		JLabel label_3 = new JLabel("Project");
-		
-		JComboBox comboBox_4 = new JComboBox();
-		
-		JLabel label_4 = new JLabel("Project");
-		
-		JComboBox comboBox_5 = new JComboBox();
-		
-		JLabel label_5 = new JLabel("Project");
-		
-		JComboBox comboBox_6 = new JComboBox();
-		
-		JLabel label_6 = new JLabel("Task");
-		
-		JComboBox comboBox_7 = new JComboBox();
-		
-		JLabel label_7 = new JLabel("Week Hours");
-		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		
-		JLabel label_8 = new JLabel("Task");
-		
-		JComboBox comboBox_8 = new JComboBox();
-		
-		JLabel label_9 = new JLabel("Week Hours");
-		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		
-		JLabel label_10 = new JLabel("Task");
-		
-		JComboBox comboBox_9 = new JComboBox();
-		
-		JLabel label_11 = new JLabel("Week Hours");
-		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		
-		JLabel label_12 = new JLabel("Task");
-		
-		JComboBox comboBox_10 = new JComboBox();
-		
-		JLabel label_13 = new JLabel("Week Hours");
-		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		GroupLayout gl_panelMain = new GroupLayout(panelMain);
-		gl_panelMain.setHorizontalGroup(
-		    gl_panelMain.createParallelGroup(Alignment.LEADING)
-		        .addGroup(gl_panelMain.createSequentialGroup()
-		            .addContainerGap()
-		            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                .addGroup(gl_panelMain.createSequentialGroup()
-		                    .addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-		                    .addPreferredGap(ComponentPlacement.RELATED)
-		                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addComponent(label_3, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(12)
-		                            .addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addComponent(label_8, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(18)
-		                            .addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(12)
-		                            .addComponent(label_9, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(12)
-		                            .addComponent(textField_7, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addComponent(lblProject)
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addComponent(lblTask)
-		                            .addPreferredGap(ComponentPlacement.UNRELATED)
-		                            .addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(12)
-		                            .addGroup(gl_panelMain.createParallelGroup(Alignment.TRAILING)
-		                                .addComponent(lblWeekHours)
-		                                .addComponent(btnSave))
-		                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addPreferredGap(ComponentPlacement.RELATED)
-		                                    .addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		                                .addGroup(Alignment.TRAILING, gl_panelMain.createSequentialGroup()
-		                                    .addPreferredGap(ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-		                                    .addComponent(btnSubmit)
-		                                    .addPreferredGap(ComponentPlacement.RELATED))))
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addComponent(label_2, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(12)
-		                            .addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addComponent(label_6, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(18)
-		                            .addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(12)
-		                            .addComponent(label_7, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-		                            .addGap(12)
-		                            .addComponent(textField_6, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addComponent(label_4, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-		                                    .addGap(12)
-		                                    .addComponent(comboBox_5, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-		                                    .addPreferredGap(ComponentPlacement.RELATED)
-		                                    .addComponent(comboBox_6, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)))
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addComponent(label_12, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-		                                    .addGap(18)
-		                                    .addComponent(comboBox_10, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-		                                    .addGap(12)
-		                                    .addComponent(label_13, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-		                                    .addGap(12)
-		                                    .addComponent(textField_9, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addComponent(label_10, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-		                                    .addGap(18)
-		                                    .addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-		                                    .addGap(12)
-		                                    .addComponent(label_11, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-		                                    .addGap(12)
-		                                    .addComponent(textField_8, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))))))
-		                .addComponent(lblDateSubmitted))
-		            .addGap(101))
-		);
-		gl_panelMain.setVerticalGroup(
-		    gl_panelMain.createParallelGroup(Alignment.TRAILING)
-		        .addGroup(gl_panelMain.createSequentialGroup()
-		            .addComponent(lblDateSubmitted)
-		            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                .addGroup(Alignment.TRAILING, gl_panelMain.createSequentialGroup()
-		                    .addGap(15)
-		                    .addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 534, GroupLayout.PREFERRED_SIZE)
-		                    .addContainerGap(13, Short.MAX_VALUE))
-		                .addGroup(gl_panelMain.createSequentialGroup()
-		                    .addGap(35)
-		                    .addGroup(gl_panelMain.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(lblProject)
-		                        .addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(lblTask)
-		                        .addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(lblWeekHours)
-		                        .addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		                    .addGap(18)
-		                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(4)
-		                            .addComponent(label_2))
-		                        .addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(4)
-		                            .addComponent(label_6))
-		                        .addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(4)
-		                            .addComponent(label_7))
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(2)
-		                            .addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-		                    .addGap(18)
-		                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addGap(4)
-		                                    .addComponent(label_3))
-		                                .addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		                            .addGap(18)
-		                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addGap(10)
-		                                    .addComponent(label_4))
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addGap(6)
-		                                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                                        .addGroup(gl_panelMain.createSequentialGroup()
-		                                            .addGap(4)
-		                                            .addComponent(label_10))
-		                                        .addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                                        .addGroup(gl_panelMain.createSequentialGroup()
-		                                            .addGap(4)
-		                                            .addComponent(label_11))
-		                                        .addGroup(gl_panelMain.createSequentialGroup()
-		                                            .addGap(2)
-		                                            .addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		                                        .addComponent(comboBox_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(4)
-		                            .addComponent(label_8))
-		                        .addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(4)
-		                            .addComponent(label_9))
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(2)
-		                            .addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-		                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(13)
-		                            .addComponent(label_5))
-		                        .addGroup(gl_panelMain.createSequentialGroup()
-		                            .addGap(18)
-		                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addGap(4)
-		                                    .addGroup(gl_panelMain.createParallelGroup(Alignment.BASELINE)
-		                                        .addComponent(label_12)
-		                                        .addComponent(comboBox_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-		                                .addComponent(comboBox_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addGap(4)
-		                                    .addComponent(label_13))
-		                                .addGroup(gl_panelMain.createSequentialGroup()
-		                                    .addGap(2)
-		                                    .addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-		                    .addPreferredGap(ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
-		                    .addGroup(gl_panelMain.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(btnSave)
-		                        .addComponent(btnSubmit))
-		                    .addGap(25))))
-		);
-		
-		JList list_1 = new JList();
-		list_1.setModel(new AbstractListModel() {
-		    String[] values = new String[] {"12/07/2014"};
-		    public int getSize() {
-		        return values.length;
-		    }
-		    public Object getElementAt(int index) {
-		        return values[index];
-		    }
-		});
-		scrollPane_1.setViewportView(list_1);
-		panelMain.setLayout(gl_panelMain);
 		
 		JPanel panelResources = new JPanel();
 		tabbedPaneAllMain.addTab("Resources (Admin)", null, panelResources, null);
@@ -854,9 +586,15 @@ public class GuiMain {
 				txtCalculated_1.setText("Calculated");
 				txtCalculated_1.setColumns(10);
 				
-				JButton btnAddNewTask = new JButton("Add New Task");
+				btnAddNewTask = new JButton("Add New Task");
+				btnAddNewTask.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						guiMainController.reportsTasksController.saveTaskForm();
+					}
+				});
 				
-				JButton btnDeleteNewTask = new JButton("Delete New Task");
+				
+				btnDeleteNewTask = new JButton("Delete New Task");
 				
 				JLabel lblHours = new JLabel("Total Hours");
 				
@@ -991,8 +729,278 @@ public class GuiMain {
 				JEditorPane editorPane = new JEditorPane();
 				scrollPane_2.setViewportView(editorPane);
 				panelReports.setLayout(gl_panelReports);
+				
+				JPanel panelMain = new JPanel();
+				tabbedPaneAllMain.addTab("Timesheet", null, panelMain, null);
+				
+				JLabel lblTask = new JLabel("Task");
+				
+				JComboBox comboBox_1 = new JComboBox();
+				
+				JScrollPane scrollPane_1 = new JScrollPane();
+				
+				JLabel lblDateSubmitted = new JLabel("Date Submitted");
+				
+				JLabel lblProject = new JLabel("Project");
+				
+				JComboBox comboBox_2 = new JComboBox();
+				
+				JButton btnSubmit = new JButton("Submit");
+				
+				JButton btnSave = new JButton("Save");
+				
+				JLabel lblWeekHours = new JLabel("Week Hours");
+				
+				textField_5 = new JTextField();
+				textField_5.setColumns(10);
+				
+				JLabel label_2 = new JLabel("Project");
+				
+				JComboBox comboBox_3 = new JComboBox();
+				
+				JLabel label_3 = new JLabel("Project");
+				
+				JComboBox comboBox_4 = new JComboBox();
+				
+				JLabel label_4 = new JLabel("Project");
+				
+				JComboBox comboBox_5 = new JComboBox();
+				
+				JLabel label_5 = new JLabel("Project");
+				
+				JComboBox comboBox_6 = new JComboBox();
+				
+				JLabel label_6 = new JLabel("Task");
+				
+				JComboBox comboBox_7 = new JComboBox();
+				
+				JLabel label_7 = new JLabel("Week Hours");
+				
+				textField_6 = new JTextField();
+				textField_6.setColumns(10);
+				
+				JLabel label_8 = new JLabel("Task");
+				
+				JComboBox comboBox_8 = new JComboBox();
+				
+				JLabel label_9 = new JLabel("Week Hours");
+				
+				textField_7 = new JTextField();
+				textField_7.setColumns(10);
+				
+				JLabel label_10 = new JLabel("Task");
+				
+				JComboBox comboBox_9 = new JComboBox();
+				
+				JLabel label_11 = new JLabel("Week Hours");
+				
+				textField_8 = new JTextField();
+				textField_8.setColumns(10);
+				
+				JLabel label_12 = new JLabel("Task");
+				
+				JComboBox comboBox_10 = new JComboBox();
+				
+				JLabel label_13 = new JLabel("Week Hours");
+				
+				textField_9 = new JTextField();
+				textField_9.setColumns(10);
+				GroupLayout gl_panelMain = new GroupLayout(panelMain);
+				gl_panelMain.setHorizontalGroup(
+				    gl_panelMain.createParallelGroup(Alignment.LEADING)
+				        .addGroup(gl_panelMain.createSequentialGroup()
+				            .addContainerGap()
+				            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                .addGroup(gl_panelMain.createSequentialGroup()
+				                    .addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+				                    .addPreferredGap(ComponentPlacement.RELATED)
+				                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addComponent(label_3, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(12)
+				                            .addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+				                            .addPreferredGap(ComponentPlacement.RELATED)
+				                            .addComponent(label_8, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(18)
+				                            .addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(12)
+				                            .addComponent(label_9, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(12)
+				                            .addComponent(textField_7, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addComponent(lblProject)
+				                            .addPreferredGap(ComponentPlacement.RELATED)
+				                            .addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+				                            .addPreferredGap(ComponentPlacement.RELATED)
+				                            .addComponent(lblTask)
+				                            .addPreferredGap(ComponentPlacement.UNRELATED)
+				                            .addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(12)
+				                            .addGroup(gl_panelMain.createParallelGroup(Alignment.TRAILING)
+				                                .addComponent(lblWeekHours)
+				                                .addComponent(btnSave))
+				                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addPreferredGap(ComponentPlacement.RELATED)
+				                                    .addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                                .addGroup(Alignment.TRAILING, gl_panelMain.createSequentialGroup()
+				                                    .addPreferredGap(ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+				                                    .addComponent(btnSubmit)
+				                                    .addPreferredGap(ComponentPlacement.RELATED))))
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addComponent(label_2, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(12)
+				                            .addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+				                            .addPreferredGap(ComponentPlacement.RELATED)
+				                            .addComponent(label_6, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(18)
+				                            .addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(12)
+				                            .addComponent(label_7, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+				                            .addGap(12)
+				                            .addComponent(textField_6, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addComponent(label_4, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+				                                    .addGap(12)
+				                                    .addComponent(comboBox_5, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+				                                    .addPreferredGap(ComponentPlacement.RELATED)
+				                                    .addComponent(comboBox_6, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)))
+				                            .addPreferredGap(ComponentPlacement.RELATED)
+				                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addComponent(label_12, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				                                    .addGap(18)
+				                                    .addComponent(comboBox_10, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+				                                    .addGap(12)
+				                                    .addComponent(label_13, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+				                                    .addGap(12)
+				                                    .addComponent(textField_9, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addComponent(label_10, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				                                    .addGap(18)
+				                                    .addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+				                                    .addGap(12)
+				                                    .addComponent(label_11, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+				                                    .addGap(12)
+				                                    .addComponent(textField_8, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))))))
+				                .addComponent(lblDateSubmitted))
+				            .addGap(101))
+				);
+				gl_panelMain.setVerticalGroup(
+				    gl_panelMain.createParallelGroup(Alignment.TRAILING)
+				        .addGroup(gl_panelMain.createSequentialGroup()
+				            .addComponent(lblDateSubmitted)
+				            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                .addGroup(Alignment.TRAILING, gl_panelMain.createSequentialGroup()
+				                    .addGap(15)
+				                    .addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 534, GroupLayout.PREFERRED_SIZE)
+				                    .addContainerGap(13, Short.MAX_VALUE))
+				                .addGroup(gl_panelMain.createSequentialGroup()
+				                    .addGap(35)
+				                    .addGroup(gl_panelMain.createParallelGroup(Alignment.BASELINE)
+				                        .addComponent(lblProject)
+				                        .addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				                        .addComponent(lblTask)
+				                        .addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				                        .addComponent(lblWeekHours)
+				                        .addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                    .addGap(18)
+				                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(4)
+				                            .addComponent(label_2))
+				                        .addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(4)
+				                            .addComponent(label_6))
+				                        .addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(4)
+				                            .addComponent(label_7))
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(2)
+				                            .addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				                    .addGap(18)
+				                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addGap(4)
+				                                    .addComponent(label_3))
+				                                .addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                            .addGap(18)
+				                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addGap(10)
+				                                    .addComponent(label_4))
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addGap(6)
+				                                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                                        .addGroup(gl_panelMain.createSequentialGroup()
+				                                            .addGap(4)
+				                                            .addComponent(label_10))
+				                                        .addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				                                        .addGroup(gl_panelMain.createSequentialGroup()
+				                                            .addGap(4)
+				                                            .addComponent(label_11))
+				                                        .addGroup(gl_panelMain.createSequentialGroup()
+				                                            .addGap(2)
+				                                            .addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				                                        .addComponent(comboBox_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(4)
+				                            .addComponent(label_8))
+				                        .addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(4)
+				                            .addComponent(label_9))
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(2)
+				                            .addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				                    .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(13)
+				                            .addComponent(label_5))
+				                        .addGroup(gl_panelMain.createSequentialGroup()
+				                            .addGap(18)
+				                            .addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addGap(4)
+				                                    .addGroup(gl_panelMain.createParallelGroup(Alignment.BASELINE)
+				                                        .addComponent(label_12)
+				                                        .addComponent(comboBox_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				                                .addComponent(comboBox_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addGap(4)
+				                                    .addComponent(label_13))
+				                                .addGroup(gl_panelMain.createSequentialGroup()
+				                                    .addGap(2)
+				                                    .addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
+				                    .addPreferredGap(ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
+				                    .addGroup(gl_panelMain.createParallelGroup(Alignment.BASELINE)
+				                        .addComponent(btnSave)
+				                        .addComponent(btnSubmit))
+				                    .addGap(25))))
+				);
+				
+				JList list_1 = new JList();
+				list_1.setModel(new AbstractListModel() {
+				    String[] values = new String[] {"12/07/2014"};
+				    public int getSize() {
+				        return values.length;
+				    }
+				    public Object getElementAt(int index) {
+				        return values[index];
+				    }
+				});
+				scrollPane_1.setViewportView(list_1);
+				panelMain.setLayout(gl_panelMain);
+				frmRexster.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelStatus, lblStatus, panelMain, panelResources, scrollPaneResources, lstResources, btnAddNewResource, btnResourceTerminate, tabbedPane_resources, panelResourceForm, tabbedPaneAllMain, btnSavePersonForm, lblFirstName, lblLastName, txtFirstName, txtLastName, panelProjects}));
 		getFrmRexster().getContentPane().setLayout(groupLayout);
-		frmRexster.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelStatus, lblStatus, panelMain, panelResources, scrollPaneResources, lstResources, btnAddNewResource, btnResourceTerminate, tabbedPane_resources, panelResourceForm, tabbedPaneAllMain, btnSavePersonForm, lblFirstName, lblLastName, txtFirstName, txtLastName, panelProjects}));
 
 		JMenuBar menuBar = new JMenuBar();
 		getFrmRexster().setJMenuBar(menuBar);
