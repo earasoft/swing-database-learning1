@@ -8,7 +8,7 @@ import com.earasoft.db.database.manager.DatabaseManager;
 
 public interface Tasks {
 	
-	public abstract Task List<Task> getTask() throws SQLException;
+	public abstract List<Task> getTask() throws SQLException;
 	
 	public abstract Task addTask(String task) throws SQLException;
 	
