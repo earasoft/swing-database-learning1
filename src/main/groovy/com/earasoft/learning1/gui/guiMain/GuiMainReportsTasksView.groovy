@@ -10,11 +10,9 @@ import com.earasoft.db.dao.Task
 
  class GuiMainReportsTasksView{
 		GuiMainView guiMainView
-		GuiMain guiMain
-		
+		GuiMain guiMain		
 		Task task
-		Boolean isNewTask
-		
+		Boolean isNewTask	
 		
 		
 		public GuiMainReportsTasksView(GuiMainView guiMainView, GuiMain guiMain){
@@ -59,7 +57,7 @@ import com.earasoft.db.dao.Task
 					"data":["taskName": guiMain.txtTaskName.getText(),
 							"taskStart": guiMain.txtTaskStart.getText(),
 							"taskEnd": guiMain.txtTaskEnd.getText(),
-							"totalHours": guiMain.txtTaskTotalHours()]]
+							"totalHours": guiMain.txtTaskTotalHours.getText()]]
 		}
 		
 		public boolean validate(){
@@ -95,7 +93,7 @@ import com.earasoft.db.dao.Task
 				valid = false
 				fieldsToFix.add("Task Hours")
 			}else{
-				guiMain.txtTaskEnd.setBackground(Color.WHITE)
+				guiMain.txtTaskTotalHours.setBackground(Color.WHITE)
 			}
 			
 			if(valid){

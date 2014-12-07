@@ -80,7 +80,7 @@ class GuiMainReportsTasksController  implements ControllerI {
 		GuiMainReportsTasksView guiMainView = viewBind.getGuiMainView().tasksView
 		if(guiMainView.validate() == false){ return }
 
-		Map formInfo = guiMainView.getFormInfo()
+		Map formInfo = guiMainView.getTaskInfo()
 		logger.debug("formInfo Variable:" + formInfo.toString())
 
 		try{
@@ -123,6 +123,10 @@ class GuiMainReportsTasksController  implements ControllerI {
 			logger.error(ex.getMessage(), ex)
 		}
 		guiMainView.repaintTasksList()
+	}
+	
+	public void setStatus(String status){
+		guiMain.lblStatus.setText(status);
 	}
 
 	@Override
