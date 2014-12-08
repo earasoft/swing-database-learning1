@@ -130,6 +130,7 @@ public class GuiMain {
     private JTextField textField_15;
     private JButton btnAddNewTask;
     private JButton btnDeleteNewTask;
+    private JList<Project> lstProjects_1;
     /**
 	 * Initialize the contents of the frame.
 	 */
@@ -627,6 +628,11 @@ public class GuiMain {
 				txtTaskEnd = new JTextField();
 				txtTaskEnd.setColumns(10);
 				
+				JLabel lblHours = new JLabel("Total Hours");
+				
+				txtTaskTotalHours = new JTextField();
+				txtTaskTotalHours.setColumns(10);
+				
 				JLabel lblRemainingHours = new JLabel("Remaining Hours");
 				
 				txtCalculated_1 = new JTextField();
@@ -643,7 +649,9 @@ public class GuiMain {
 							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
 					    	//DbMgrDemo.clearDatabase();
 					    	Connection.openDatabase();					    	
-					    	String sql = "INSERT INTO task VALUES('" + txtTaskName.getText() + "','" + txtProjectName.getText()+ "','" + txtStartDate.getText() + "','" + txtEndDate.getText() + "');";
+					    	String sql = "INSERT INTO task VALUES('" + txtTaskName.getText() + "','" + txtProjectName.getText()+ "','" + txtStartDate.getText() + "','" + txtEndDate.getText() 
+//					    			+ "','" txtTaskTotalHours.getText() 
+					    			+ "');";
 					    	Statement statement = Connection.getConnection().prepareStatement(sql);
 					    	statement.executeUpdate(sql);
 					    	Connection.getConnection().commit();
@@ -666,10 +674,10 @@ public class GuiMain {
 					}
 				});
 				
-				JLabel lblHours = new JLabel("Total Hours");
+//				JLabel lblHours = new JLabel("Total Hours");
 				
-				txtTaskTotalHours = new JTextField();
-				txtTaskTotalHours.setColumns(10);
+//				txtTaskTotalHours = new JTextField();
+//				txtTaskTotalHours.setColumns(10);
 				GroupLayout gl_panel = new GroupLayout(panel);
 				gl_panel.setHorizontalGroup(
 				    gl_panel.createParallelGroup(Alignment.LEADING)
@@ -744,8 +752,8 @@ public class GuiMain {
 				panel.setLayout(gl_panel);
 				panelProject.setLayout(gl_panelProject);
 				
-				JList<Project> lstProjects = new JList<Project>();
-				scrollPaneProjects.setViewportView(lstProjects);
+				lstProjects_1 = new JList<Project>();
+				scrollPaneProjects.setViewportView(lstProjects_1);
 				panelProjects.setLayout(gl_panelProjects);
 				
 				JPanel panelReports = new JPanel();
