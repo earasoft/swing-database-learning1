@@ -18,7 +18,7 @@ public class SQLExec {
 	}
 	
 	static class Sqlite{
-		public static final String CREATE_PERSON_TABLE = "CREATE TABLE IF NOT EXISTS person (personId INTEGER PRIMARY KEY AUTOINCREMENT, firstName varchar(100), lastName varchar(255), phoneNumber varchar(32));";
+		public static final String CREATE_PERSON_TABLE = "CREATE TABLE IF NOT EXISTS person (personId INTEGER PRIMARY KEY AUTOINCREMENT, firstName varchar(100), lastName varchar(255), phoneNumber varchar(32), address varchar(32), city varchar(32));";
 		public static final String CREATE_PERSON_INDEX_LAST_NAME = "CREATE INDEX personByLastName ON person (lastName ASC);";
 		
 		public static final String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS user (userId INTEGER PRIMARY KEY AUTOINCREMENT, username varchar(100), password varchar(255), role varchar(32));";

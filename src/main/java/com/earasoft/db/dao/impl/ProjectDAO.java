@@ -10,14 +10,14 @@ import java.util.Date;
 
 public class ProjectDAO implements Project {
 	
-	private Integer projectId;
+	private String projectId;
 	private Date startDate;
 	private Date endDate;
 	private String manager;
 	private Connection connection;
 	private DatabaseManager databaseManager;
 
-	public ProjectDAO(Integer projectId, Date startDate, Date endDate, String manager) {
+	public ProjectDAO(String projectId, Date startDate, Date endDate, String manager) {
 		super();
 		this.projectId = projectId;
 		this.startDate = startDate;
@@ -26,8 +26,8 @@ public class ProjectDAO implements Project {
 		
 	}
 	
-	public ProjectDAO(Integer projectId, Date startDate, Date endDate, String manager, DatabaseManager databaseManager) {
-		this.projectId = projectId;
+	public ProjectDAO(String projectId2, Date startDate, Date endDate, String manager, DatabaseManager databaseManager) {
+		this.projectId = projectId2;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.manager = manager;
@@ -38,7 +38,7 @@ public class ProjectDAO implements Project {
 	
 
 	@Override
-	public Integer getProjectId() {
+	public String getProjectId() {
 		return projectId;
 	}
 
@@ -106,7 +106,7 @@ public class ProjectDAO implements Project {
     /*
      * Prepared Statements 
      */
-    public PreparedStatement setLastNamePrepStatement(Date lastName,Date firstName, Integer personId) throws SQLException{
+    public PreparedStatement setLastNamePrepStatement(Date lastName,Date firstName, String projectId2) throws SQLException{
     	if(startDate.equals(null))throw new SQLException("Missing start date.");
     	if(endDate.equals(null))throw new SQLException("Missing end date.");
     	if(projectId.equals(null))throw new SQLException("Missing project Id");
@@ -116,7 +116,7 @@ public class ProjectDAO implements Project {
         PreparedStatement prep = connection.prepareStatement(sql);
         prep.setDate(1, (java.sql.Date) startDate);
         prep.setDate(2, (java.sql.Date) endDate);
-        prep.setInt(3, projectId);
+        prep.setString(3, projectId);
         return prep;
     }
 
@@ -135,13 +135,19 @@ public class ProjectDAO implements Project {
     }
 
 	@Override
-	public void setProjectId(Integer projectId) {
+	public void setProjectId(String projectId) {
 		this.projectId=projectId;
 		
 	}
 
 	@Override
 	public void setProjectId() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setProjectId(Integer projectId) {
 		// TODO Auto-generated method stub
 		
 	}

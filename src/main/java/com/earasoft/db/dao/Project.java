@@ -8,6 +8,8 @@ import java.util.Date;
 //right to have the dates as strings
 
 
+
+
 import com.earasoft.db.database.manager.DatabaseManager;
 
 public interface Project {
@@ -31,5 +33,6 @@ public interface Project {
 	public abstract void save()  throws SQLException;
 
 	void setProjectId();
+	void setProjectId(String projectId);
 	
 }

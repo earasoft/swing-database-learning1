@@ -74,11 +74,11 @@ public class ProjectsDAO implements Projects {
 	
 	}
 	
-    private PreparedStatement addProjectPrepStatement(Integer projectID, Date startDate, Date endDate, String manager) throws SQLException{
+    private PreparedStatement addProjectPrepStatement(String string, Date startDate, Date endDate, String manager) throws SQLException{
         String sql = "INSERT INTO project (projectID, startDate, endDate) VALUES (?,?,?);";
         PreparedStatement prep = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         prep.setQueryTimeout(30);
-        prep.setInt(1, projectID);
+        prep.setString(1, string);
         prep.setDate(2, (java.sql.Date) startDate);
         prep.setDate(3, (java.sql.Date) endDate);
         prep.setString(4, manager);
@@ -95,7 +95,7 @@ public class ProjectsDAO implements Projects {
 	       List<Project> projectList = new ArrayList<Project>();
 	       
 	       while(rs.next()){
-	            Integer projectId = rs.getInt("projectId");
+	            String projectId = rs.getString("projectId");
 	            Date startDate = rs.getDate("startDate");
 	            Date endDate = rs.getDate("endDate");
 	            String manager = rs.getString("manager");

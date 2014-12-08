@@ -26,6 +26,10 @@ import com.earasoft.db.dao.Person
 			
 			resetTextField(guiMain.txtFirstName, person.getFirstName())
 			resetTextField(guiMain.txtLastName, person.getLastName())
+			resetTextField(guiMain.txtPhoneNumber, person.getPhoneNumber())
+			resetTextField(guiMain.txtAddress, person.getAddress())
+			resetTextField(guiMain.txtCity, person.getCity())
+			
 			
             personId = person.getPersonId()
             guiMain.btnSavePersonForm.setEnabled(true)
@@ -54,6 +58,9 @@ import com.earasoft.db.dao.Person
             isNewPerson = true
 			resetTextField(guiMain.txtFirstName)
 			resetTextField(guiMain.txtLastName)
+			resetTextField(guiMain.txtPhoneNumber)
+			resetTextField(guiMain.txtAddress)
+			resetTextField(guiMain.txtCity)
 			guiMain.btnSavePersonForm.setEnabled(false)
 			this.guiMainView.setStatus("Form Reset: Ready to add new person")
         }
@@ -63,7 +70,10 @@ import com.earasoft.db.dao.Person
                     "isNewPerson":this.isNewPerson,
                     "data":["personId": personId,
                             "firstName": guiMain.txtFirstName.getText(),
-                            "lastName": guiMain.txtLastName.getText()]]
+                            "lastName": guiMain.txtLastName.getText(),
+							"phoneNumber" : guiMain.txtPhoneNumber.getText(),
+							"address": guiMain.txtAddress.getText(),
+							"city": guiMain.txtCity.getText()]]
         }
 		
 		public boolean validate(){
@@ -84,6 +94,30 @@ import com.earasoft.db.dao.Person
 				fieldsToFix.add("Last Name")
 			}else{
 				guiMain.txtLastName.setBackground(Color.WHITE)
+			}
+			
+			if(guiMain.txtPhoneNumber.getText().trim().size() == 0){
+				guiMain.txtPhoneNumber.setBackground(Color.RED)
+				valid = false
+				fieldsToFix.add("Phone Number")
+			}else{
+				guiMain.txtPhoneNumber.setBackground(Color.WHITE)
+			}
+			
+			if(guiMain.txtAddress.getText().trim().size() == 0){
+				guiMain.txtAddress.setBackground(Color.RED)
+				valid = false
+				fieldsToFix.add("Address")
+			}else{
+				guiMain.txtAddress.setBackground(Color.WHITE)
+			}
+			
+			if(guiMain.txtCity.getText().trim().size() == 0){
+				guiMain.txtCity.setBackground(Color.RED)
+				valid = false
+				fieldsToFix.add("City")
+			}else{
+				guiMain.txtCity.setBackground(Color.WHITE)
 			}
 			
 			if(valid){

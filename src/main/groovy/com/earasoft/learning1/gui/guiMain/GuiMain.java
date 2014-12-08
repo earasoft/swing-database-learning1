@@ -126,12 +126,12 @@ public class GuiMain {
     private JTextField textField_7;
     private JTextField textField_8;
     private JTextField textField_9;
-    private JTextField textField_10;
-    private JTextField textField_11;
-    private JTextField textField_12;
-    private JTextField textField_13;
-    private JTextField textField_14;
-    private JTextField textField_15;
+    private JTextField txtAddress;
+    private JTextField txtCity;
+    private JTextField txtState;
+    private JTextField txtZip;
+    private JTextField txtPosition;
+    private JTextField txtTeam;
     private JButton btnAddNewTask;
     private JButton btnDeleteNewTask;
     /**
@@ -286,6 +286,12 @@ public class GuiMain {
 		
 		txtPhoneNumber = new JTextField();
 		txtPhoneNumber.setEnabled(false);
+		txtPhoneNumber.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				guiMainView.personForm.validate();
+			}
+		});
 		txtPhoneNumber.setColumns(10);
 		
 		JLabel lblAddress = new JLabel("Street Address");
@@ -300,29 +306,65 @@ public class GuiMain {
 		
 		JLabel lblZip = new JLabel("Zip");
 		
-		textField_10 = new JTextField();
-		textField_10.setEnabled(false);
-		textField_10.setColumns(10);
+		txtAddress = new JTextField();
+		txtAddress.setEnabled(false);
+		txtAddress.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				guiMainView.personForm.validate();
+			}
+		});		
+		txtAddress.setColumns(10);
 		
-		textField_11 = new JTextField();
-		textField_11.setEnabled(false);
-		textField_11.setColumns(10);
+		txtCity = new JTextField();
+		txtCity.setEnabled(false);
+		txtCity.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				guiMainView.personForm.validate();
+			}
+		});
+		txtCity.setColumns(10);
 		
-		textField_12 = new JTextField();
-		textField_12.setEnabled(false);
-		textField_12.setColumns(10);
+		txtState = new JTextField();
+		txtState.setEnabled(false);
+		txtState.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				guiMainView.personForm.validate();
+			}
+		});
+		txtState.setColumns(10);
 		
-		textField_13 = new JTextField();
-		textField_13.setEnabled(false);
-		textField_13.setColumns(10);
+		txtZip = new JTextField();
+		txtZip.setEnabled(false);
+		txtZip.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				guiMainView.personForm.validate();
+			}
+		});
+		txtZip.setColumns(10);
 		
-		textField_14 = new JTextField();
-		textField_14.setEnabled(false);
-		textField_14.setColumns(10);
+		txtPosition = new JTextField();
+		txtPosition.setEnabled(false);
+		txtPosition.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				guiMainView.personForm.validate();
+			}
+		});
+		txtPosition.setColumns(10);
 		
-		textField_15 = new JTextField();
-		textField_15.setEnabled(false);
-		textField_15.setColumns(10);
+		txtTeam = new JTextField();
+		txtTeam.setEnabled(false);
+		txtTeam.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				guiMainView.personForm.validate();
+			}
+		});
+		txtTeam.setColumns(10);
 		
 		JLabel lblRole = new JLabel("Role");
 		
@@ -354,12 +396,12 @@ public class GuiMain {
 						.addGroup(Alignment.TRAILING, gl_panelResourceForm.createSequentialGroup()
 							.addComponent(lblPosition, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField_14, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+							.addComponent(txtPosition, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap(196, Short.MAX_VALUE))
 						.addGroup(Alignment.TRAILING, gl_panelResourceForm.createSequentialGroup()
 							.addComponent(lblTeam, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField_15, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+							.addComponent(txtTeam, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap(196, Short.MAX_VALUE))
 						.addGroup(Alignment.TRAILING, gl_panelResourceForm.createSequentialGroup()
 							.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.TRAILING)
@@ -382,10 +424,10 @@ public class GuiMain {
 								.addGroup(gl_panelResourceForm.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.TRAILING)
-										.addComponent(textField_11, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_10, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_12, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_13, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE))
+										.addComponent(txtCity, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtAddress, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtState, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtZip, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE))
 									.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 						.addGroup(gl_panelResourceForm.createSequentialGroup()
 							.addComponent(lblRole, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
@@ -411,11 +453,11 @@ public class GuiMain {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblAddress)
-						.addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtAddress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblCity)
-						.addComponent(textField_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelResourceForm.createSequentialGroup()
@@ -425,15 +467,15 @@ public class GuiMain {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblPosition)
-								.addComponent(textField_14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(txtPosition, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblTeam)
-								.addComponent(textField_15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(txtTeam, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panelResourceForm.createSequentialGroup()
-							.addComponent(textField_12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(txtState, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField_13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(txtZip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addGap(18)
 					.addGroup(gl_panelResourceForm.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblRole)

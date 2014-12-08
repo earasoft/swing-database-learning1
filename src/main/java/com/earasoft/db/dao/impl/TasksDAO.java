@@ -42,7 +42,7 @@ public class TasksDAO implements Tasks {
 	         Date startDate = rs.getDate("startDate");
 	         Date endDate = rs.getDate("endDate");
 	         Integer hours = rs.getInt("hours");
-	         taskList.add(new TaskDAO(this.databaseManager));
+	         taskList.add(new TaskDAO(taskName, endDate, endDate, hours, hours, this.databaseManager));
 	     }
 	    
 	    return taskList;

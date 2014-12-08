@@ -68,7 +68,7 @@ private List<Task> resultSetTaskListFillerHelper(ResultSet rs) throws SQLExcepti
          Date endDate = rs.getDate("endDate");
          Integer totalHours = rs.getInt("totalHours");
          Integer remaingingHours = rs.getInt("remainginHours");
-         taskList.add(new TaskDAO(this.databaseManager));
+         taskList.add(new TaskDAO(taskName, endDate, endDate, remaingingHours, remaingingHours, this.databaseManager));
      }
     
     return taskList;
