@@ -471,7 +471,7 @@ public class GuiMain {
 							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
 					    	//DbMgrDemo.clearDatabase();
 					    	Connection.openDatabase();					    	
-					    	String sql = "INSERT INTO project VALUES(" + txtProjectName.getText() + "," + txtTaskName.getText()+ "," + txtStartDate.getText() + "," + txtEndDate.getText() +");";
+					    	String sql = "INSERT INTO project VALUES(" + txtProjectName.getText() + "," + txtStartDate.getText() + "," + txtEndDate.getText() +");";
 					    	Statement statement = Connection.getConnection().prepareStatement(sql);
 					    	statement.executeUpdate(sql);
 					    	Connection.getConnection().commit();
@@ -619,10 +619,29 @@ public class GuiMain {
 				
 				btnAddNewTask = new JButton("Add New Task");
 				btnAddNewTask.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						guiMainController.reportsTasksController.saveTaskForm();
-					}
+
+				    public void actionPerformed(ActionEvent e) {
+				    	PropertiesConfiguration propertiesConfiguration;
+						try {
+							propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
+							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
+					    	//DbMgrDemo.clearDatabase();
+					    	Connection.openDatabase();					    	
+					    	String sql = "INSERT INTO task VALUES(" + txtProjectName.getText() + "," + txtTaskName.getText()+ "," + txtStartDate.getText() + "," + txtEndDate.getText() +");";
+					    	Statement statement = Connection.getConnection().prepareStatement(sql);
+					    	statement.executeUpdate(sql);
+					    	Connection.getConnection().commit();
+					    	
+					    	
+					    	
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+				    	
+				        
+				    }
 				});
+				
 				
 				
 				btnDeleteNewTask = new JButton("Delete Task");
