@@ -609,7 +609,7 @@ public class GuiMain {
 				txtTaskEnd = new JTextField();
 				txtTaskEnd.setColumns(10);
 				
-				JLabel lblRemindingHours = new JLabel("Reminding Hours");
+				JLabel lblRemainingHours = new JLabel("Remaining Hours");
 				
 				txtCalculated_1 = new JTextField();
 				txtCalculated_1.setText("Calculated");
@@ -623,7 +623,11 @@ public class GuiMain {
 				});
 				
 				
-				btnDeleteNewTask = new JButton("Delete New Task");
+				btnDeleteNewTask = new JButton("Delete Task");
+				btnDeleteNewTask.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 				
 				JLabel lblHours = new JLabel("Total Hours");
 				
@@ -646,7 +650,7 @@ public class GuiMain {
 				                            .addPreferredGap(ComponentPlacement.RELATED)
 				                            .addComponent(txtTaskTotalHours, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				                        .addGroup(gl_panel.createSequentialGroup()
-				                            .addComponent(lblRemindingHours)
+				                            .addComponent(lblRemainingHours)
 				                            .addPreferredGap(ComponentPlacement.RELATED)
 				                            .addComponent(txtCalculated_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				                        .addGroup(gl_panel.createSequentialGroup()
@@ -689,7 +693,7 @@ public class GuiMain {
 				                        .addComponent(txtTaskTotalHours, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				                    .addGap(8)
 				                    .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-				                        .addComponent(lblRemindingHours)
+				                        .addComponent(lblRemainingHours)
 				                        .addComponent(txtCalculated_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 				            .addGap(18)
 				            .addComponent(btnAddNewTask)
