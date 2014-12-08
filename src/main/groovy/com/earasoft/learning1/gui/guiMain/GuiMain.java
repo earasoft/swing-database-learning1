@@ -649,9 +649,8 @@ public class GuiMain {
 							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
 					    	//DbMgrDemo.clearDatabase();
 					    	Connection.openDatabase();					    	
-					    	String sql = "INSERT INTO task VALUES('" + txtTaskName.getText() + "','" + txtProjectName.getText()+ "','" + txtStartDate.getText() + "','" + txtEndDate.getText() 
-//					    			+ "','" txtTaskTotalHours.getText() 
-					    			+ "');";
+					    	String sql = "INSERT INTO task VALUES('" + txtTaskName.getText() + "','" + txtProjectName.getText()+ "','" + txtStartDate.getText() + "','" 
+					    			+ txtEndDate.getText() + "','" + txtTaskTotalHours.getText() + "');";
 					    	Statement statement = Connection.getConnection().prepareStatement(sql);
 					    	statement.executeUpdate(sql);
 					    	Connection.getConnection().commit();
