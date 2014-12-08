@@ -86,6 +86,7 @@ public class GuiMain {
 	protected JLabel lblStatus;
 	protected JButton btnSavePersonForm;
 	protected JList<Person> lstResources;
+	protected JList<Project> lstProjects;
 	protected JPasswordField pwdResourcepassword;
 	protected JTextField txtPhoneNumber;
 	
@@ -457,6 +458,8 @@ public class GuiMain {
                 }
 		    }
 		});
+		
+		
 		
 				lstResources.setModel(Models.getListModel());
 				scrollPaneResources.setViewportView(lstResources);
