@@ -44,7 +44,7 @@ public class SQLExec {
 		
 		public static final String CREATE_TIMESHEET_TABLE = "CREATE TABLE IF NOT EXISTS timesheet (resourceID INTEGER, dateSubmitted date, hoursPerTask INTEGER, PRIMARY KEY (resourceID, dateSubmitted));";
 		
-		public static final	String CREATE_PROJECT_TABLE = "CREATE TABLE IF NOT EXISTS project (projectID INTEGER PRIMARY KEY, taskID INTEGER, startDate date, endDate date);";
+		public static final	String CREATE_PROJECT_TABLE = "CREATE TABLE IF NOT EXISTS project (projectID varchar(25) PRIMARY KEY, taskID varchar(25), startDate varchar(25), endDate varchar(25));";
 		
 		public static final String CREATE_TASK_TABLE = "CREATE TABLE IF NOT EXISTS task (taskID INTEGER, startDate date, endDate date, remainingHours INTEGER, PRIMARY KEY (taskID));";
 		

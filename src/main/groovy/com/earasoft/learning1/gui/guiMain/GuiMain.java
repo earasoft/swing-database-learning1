@@ -468,13 +468,13 @@ public class GuiMain {
 				    	PropertiesConfiguration propertiesConfiguration;
 						try {
 							propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
-							DatabaseManagerImpl DbMgrDemo = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
+							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
 					    	//DbMgrDemo.clearDatabase();
-					    	DbMgrDemo.openDatabase();
-					    	String sql = "INSERT INTO project VALUES(" + txtProjectName + "," + txtTaskName + "," + txtStartDate + "," + txtEndDate + ")";
-					    	Statement statement = DbMgrDemo.getConnection().prepareStatement(sql);
+					    	Connection.openDatabase();					    	
+					    	String sql = "INSERT INTO project VALUES(" + txtProjectName.getText() + "," + txtTaskName.getText()+ "," + txtStartDate.getText() + "," + txtEndDate.getText() +");";
+					    	Statement statement = Connection.getConnection().prepareStatement(sql);
 					    	statement.executeUpdate(sql);
-					    	DbMgrDemo.getConnection().commit();
+					    	Connection.getConnection().commit();
 					    	
 					    	
 					    	
@@ -534,11 +534,9 @@ public class GuiMain {
 				txtProjectName.setColumns(10);
 				
 				txtStartDate = new JTextField();
-				txtStartDate.setText("Calcuated");
 				txtStartDate.setColumns(10);
 				
 				txtEndDate = new JTextField();
-				txtEndDate.setText("Calculated");
 				txtEndDate.setColumns(10);
 				
 				JComboBox comboBox = new JComboBox();
