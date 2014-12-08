@@ -35,6 +35,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.dao.Person;
+import com.earasoft.db.database.manager.DatabaseManagerBuilder;
+import com.earasoft.db.database.manager.DatabaseManagerImpl;
 import com.earasoft.learning1.gui.SharedController;
 import com.earasoft.learning1.gui.Boot;
 import com.earasoft.learning1.gui.Models;
@@ -42,9 +44,12 @@ import com.earasoft.learning1.gui.ViewBind;
 import com.earasoft.learning1.gui.login.LoginController;
 import com.earasoft.learning1.gui.windows.About;
 
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import java.awt.Component;
+import java.sql.Statement;
 
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
@@ -55,9 +60,15 @@ import javax.swing.JScrollBar;
 import javax.swing.AbstractListModel;
 import javax.swing.JEditorPane;
 import javax.swing.DefaultComboBoxModel;
+
 import com.earasoft.db.security.RolesE;
+import com.earasoft.demo.DbMgrDemo;
+import com.mysql.jdbc.Connection;
 
 public class GuiMain {
+	
+	
+	
     private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
 
 	private JFrame frmRexster;
@@ -95,8 +106,8 @@ public class GuiMain {
     
     GuiMainView guiMainView;
     private JTextField txtProjectName;
-    private JTextField txtCalcuated;
-    private JTextField txtCalculated;
+    private JTextField txtStartDate;
+    private JTextField txtEndDate;
     private JTextField txtTaskName;
     private JTextField txtTaskStart;
     private JTextField txtTaskEnd;
@@ -452,6 +463,24 @@ public class GuiMain {
 				tabbedPaneAllMain.addTab("Projects & Tasks (Admin)", null, panelProjects, null);
 				
 				JButton btnAddProject = new JButton("Add New Project");
+				btnAddProject.addActionListener(new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+				    	PropertiesConfiguration propertiesConfiguration;
+						try {
+							propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
+							DatabaseManagerImpl DbMgrDemo = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
+					    	//DbMgrDemo.clearDatabase();
+					    	DbMgrDemo.openDatabase();
+					    	String sql = "INSERT INTO project VALUES(" + txtProjectName + "," + txtStartDate + "," + txtEndDate + "," + txtTaskName + ")";
+					    	Statement statement = DbMgrDemo.getConnection().prepareStatement(sql);
+					    	DbMgrDemo.getConnection().commit();
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+				    	
+				        
+				    }
+				});
 				
 				JButton btnDeleteProject = new JButton("Delete Project");
 				
@@ -500,13 +529,13 @@ public class GuiMain {
 				txtProjectName = new JTextField();
 				txtProjectName.setColumns(10);
 				
-				txtCalcuated = new JTextField();
-				txtCalcuated.setText("Calcuated");
-				txtCalcuated.setColumns(10);
+				txtStartDate = new JTextField();
+				txtStartDate.setText("Calcuated");
+				txtStartDate.setColumns(10);
 				
-				txtCalculated = new JTextField();
-				txtCalculated.setText("Calculated");
-				txtCalculated.setColumns(10);
+				txtEndDate = new JTextField();
+				txtEndDate.setText("Calculated");
+				txtEndDate.setColumns(10);
 				
 				JComboBox comboBox = new JComboBox();
 				
@@ -529,7 +558,7 @@ public class GuiMain {
 										.addGroup(gl_panelProject.createSequentialGroup()
 											.addComponent(lblStartDate)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(txtCalcuated, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
+											.addComponent(txtStartDate, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
 									.addGap(43)
 									.addGroup(gl_panelProject.createParallelGroup(Alignment.LEADING)
 										.addComponent(lblManager, Alignment.TRAILING)
@@ -537,7 +566,7 @@ public class GuiMain {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_panelProject.createParallelGroup(Alignment.LEADING)
 										.addComponent(comboBox, 0, 145, Short.MAX_VALUE)
-										.addComponent(txtCalculated, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+										.addComponent(txtEndDate, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
 									.addGap(161))))
 				);
 				gl_panelProject.setVerticalGroup(
@@ -552,8 +581,8 @@ public class GuiMain {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panelProject.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblStartDate)
-								.addComponent(txtCalcuated, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtCalculated, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtStartDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtEndDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblEndDate))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
