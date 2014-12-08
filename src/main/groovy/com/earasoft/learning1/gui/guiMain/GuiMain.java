@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.earasoft.db.dao.Person;
+import com.earasoft.db.dao.Project;
 import com.earasoft.db.database.manager.DatabaseManagerBuilder;
 import com.earasoft.db.database.manager.DatabaseManagerImpl;
 import com.earasoft.learning1.gui.SharedController;
@@ -49,7 +50,9 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import java.awt.Component;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Vector;
 
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
@@ -471,11 +474,21 @@ public class GuiMain {
 							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
 					    	//DbMgrDemo.clearDatabase();
 					    	Connection.openDatabase();					    	
-					    	String sql = "INSERT INTO project VALUES(" + txtProjectName.getText() + "," + txtStartDate.getText() + "," + txtEndDate.getText() +");";
+					    	String sql = "INSERT INTO project VALUES("+ txtProjectName.getText() +","+ txtStartDate.getText() +","+ txtEndDate.getText() +");";
 					    	Statement statement = Connection.getConnection().prepareStatement(sql);
 					    	statement.executeUpdate(sql);
-					    	Connection.getConnection().commit();
+					    	Connection.getConnection().commit();   	
 					    	
+					    	Statement st = Connection.getConnection().createStatement();
+				            String query="SELECT projectID FROM project";
+				            ResultSet res = st.executeQuery(query);				            
+				            Vector<String> temp = new Vector<String>();				            
+				            while (res.next()) {
+				                temp.add(res.getString("projectID"));
+				            }
+				            
+				            JList lstProjects = new JList(temp);
+				    
 					    	
 					    	
 						} catch (Exception e1) {
@@ -728,7 +741,7 @@ public class GuiMain {
 				panel.setLayout(gl_panel);
 				panelProject.setLayout(gl_panelProject);
 				
-				JList<Person> lstProjects = new JList<Person>();
+				JList<Project> lstProjects = new JList<Project>();
 				scrollPaneProjects.setViewportView(lstProjects);
 				panelProjects.setLayout(gl_panelProjects);
 				
