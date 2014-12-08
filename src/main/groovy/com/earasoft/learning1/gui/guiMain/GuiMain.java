@@ -759,8 +759,8 @@ public class GuiMain {
 				scrollPaneProjects.setViewportView(lstProjects);
 				panelProjects.setLayout(gl_panelProjects);
 				
-				JPanel panelReports = new JPanel();
-				tabbedPaneAllMain.addTab("Reports", null, panelReports, null);
+//				JPanel panelReports = new JPanel();
+//				tabbedPaneAllMain.addTab("Reports", null, panelReports, null);
 				
 				JScrollPane scrollPane_2 = new JScrollPane();
 				
@@ -768,48 +768,48 @@ public class GuiMain {
 				
 				JComboBox comboBox_11 = new JComboBox();
 				
-				JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-				GroupLayout gl_panelReports = new GroupLayout(panelReports);
-				gl_panelReports.setHorizontalGroup(
-				    gl_panelReports.createParallelGroup(Alignment.LEADING)
-				        .addGroup(gl_panelReports.createSequentialGroup()
-				            .addContainerGap()
-				            .addGroup(gl_panelReports.createParallelGroup(Alignment.LEADING)
-				                .addGroup(gl_panelReports.createSequentialGroup()
-				                    .addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 796, GroupLayout.PREFERRED_SIZE)
-				                    .addContainerGap())
-				                .addGroup(gl_panelReports.createSequentialGroup()
-				                    .addComponent(comboBox_11, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-				                    .addPreferredGap(ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
-				                    .addComponent(btnGenerateReport)
-				                    .addGap(249))
-				                .addGroup(gl_panelReports.createSequentialGroup()
-				                    .addComponent(tabbedPane_1, GroupLayout.PREFERRED_SIZE, 784, GroupLayout.PREFERRED_SIZE)
-				                    .addContainerGap())))
-				);
-				gl_panelReports.setVerticalGroup(
-				    gl_panelReports.createParallelGroup(Alignment.LEADING)
-				        .addGroup(Alignment.TRAILING, gl_panelReports.createSequentialGroup()
-				            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				            .addGroup(gl_panelReports.createParallelGroup(Alignment.BASELINE)
-				                .addComponent(btnGenerateReport)
-				                .addComponent(comboBox_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				            .addPreferredGap(ComponentPlacement.RELATED)
-				            .addComponent(tabbedPane_1, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-				            .addGap(11)
-				            .addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 427, GroupLayout.PREFERRED_SIZE)
-				            .addContainerGap())
-				);
+//				JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+//				GroupLayout gl_panelReports = new GroupLayout(panelReports);
+//				gl_panelReports.setHorizontalGroup(
+//				    gl_panelReports.createParallelGroup(Alignment.LEADING)
+//				        .addGroup(gl_panelReports.createSequentialGroup()
+//				            .addContainerGap()
+//				            .addGroup(gl_panelReports.createParallelGroup(Alignment.LEADING)
+//				                .addGroup(gl_panelReports.createSequentialGroup()
+//				                    .addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 796, GroupLayout.PREFERRED_SIZE)
+//				                    .addContainerGap())
+//				                .addGroup(gl_panelReports.createSequentialGroup()
+//				                    .addComponent(comboBox_11, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+//				                    .addPreferredGap(ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+//				                    .addComponent(btnGenerateReport)
+//				                    .addGap(249))
+//				                .addGroup(gl_panelReports.createSequentialGroup()
+//				                    .addComponent(tabbedPane_1, GroupLayout.PREFERRED_SIZE, 784, GroupLayout.PREFERRED_SIZE)
+//				                    .addContainerGap())))
+//				);
+//				gl_panelReports.setVerticalGroup(
+//				    gl_panelReports.createParallelGroup(Alignment.LEADING)
+//				        .addGroup(Alignment.TRAILING, gl_panelReports.createSequentialGroup()
+//				            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//				            .addGroup(gl_panelReports.createParallelGroup(Alignment.BASELINE)
+//				                .addComponent(btnGenerateReport)
+//				                .addComponent(comboBox_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+//				            .addPreferredGap(ComponentPlacement.RELATED)
+//				            .addComponent(tabbedPane_1, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+//				            .addGap(11)
+//				            .addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 427, GroupLayout.PREFERRED_SIZE)
+//				            .addContainerGap())
+//				);
 				
-				JPanel panel_1 = new JPanel();
-				tabbedPane_1.addTab("Report 1", null, panel_1, null);
-				
-				JPanel panel_2 = new JPanel();
-				tabbedPane_1.addTab("Report2", null, panel_2, null);
-				
-				JEditorPane editorPane = new JEditorPane();
-				scrollPane_2.setViewportView(editorPane);
-				panelReports.setLayout(gl_panelReports);
+//				JPanel panel_1 = new JPanel();
+//				tabbedPane_1.addTab("Report 1", null, panel_1, null);
+//				
+//				JPanel panel_2 = new JPanel();
+//				tabbedPane_1.addTab("Report2", null, panel_2, null);
+//				
+//				JEditorPane editorPane = new JEditorPane();
+//				scrollPane_2.setViewportView(editorPane);
+//				panelReports.setLayout(gl_panelReports);
 				
 				JPanel panelMain = new JPanel();
 				tabbedPaneAllMain.addTab("Timesheet", null, panelMain, null);
