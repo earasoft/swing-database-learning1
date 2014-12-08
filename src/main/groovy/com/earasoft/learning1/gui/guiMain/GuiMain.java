@@ -474,7 +474,7 @@ public class GuiMain {
 							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
 					    	//DbMgrDemo.clearDatabase();
 					    	Connection.openDatabase();					    	
-					    	String sql = "INSERT INTO project VALUES("+ txtProjectName.getText() +","+ txtStartDate.getText() +","+ txtEndDate.getText() +");";
+					    	String sql = "INSERT INTO project VALUES('"+ txtProjectName.getText() +"','"+ txtStartDate.getText() +"','"+ txtEndDate.getText() +"');";
 					    	Statement statement = Connection.getConnection().prepareStatement(sql);
 					    	statement.executeUpdate(sql);
 					    	Connection.getConnection().commit();   	
