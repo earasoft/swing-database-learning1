@@ -7,11 +7,12 @@ import java.util.Date;
 //with the date data type of the SQLExec.java class but it didn't seem
 //right to have the dates as strings
 
+
 import com.earasoft.db.database.manager.DatabaseManager;
 
 public interface Project {
 	
-	public abstract Integer getProjectId();	
+	public abstract String getProjectId();	
 	public abstract void setProjectId(Integer projectId);
 	
 	public abstract Date getStartDate();    

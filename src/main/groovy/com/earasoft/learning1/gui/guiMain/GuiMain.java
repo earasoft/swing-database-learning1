@@ -13,8 +13,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -86,9 +88,11 @@ public class GuiMain {
 	protected JLabel lblStatus;
 	protected JButton btnSavePersonForm;
 	protected JList<Person> lstResources;
-	protected JList<Project> lstProjects;
+	protected JList<String> lstProjects;
 	protected JPasswordField pwdResourcepassword;
 	protected JTextField txtPhoneNumber;
+	
+	private DefaultListModel<String> listModelProjects;
 	
 	/**
 	 * Launch the application.
@@ -130,7 +134,6 @@ public class GuiMain {
     private JTextField textField_15;
     private JButton btnAddNewTask;
     private JButton btnDeleteNewTask;
-    private JList<Project> lstProjects_1;
     /**
 	 * Initialize the contents of the frame.
 	 */
@@ -462,9 +465,21 @@ public class GuiMain {
 		
 		
 		
+		
+		
 				lstResources.setModel(Models.getListModel());
 				scrollPaneResources.setViewportView(lstResources);
 				panelResources.setLayout(gl_panelResources);
+				
+				
+				
+				
+			
+				lstProjects = new JList<String>();
+				listModelProjects = new DefaultListModel<String>() ;
+				lstProjects.setModel(listModelProjects);				
+				
+				
 				
 				JPanel panelProjects = new JPanel();
 				tabbedPaneAllMain.addTab("Projects & Tasks (Admin)", null, panelProjects, null);
@@ -476,32 +491,27 @@ public class GuiMain {
 						try {
 							propertiesConfiguration = new PropertiesConfiguration("config/settings.properties");
 							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
-					    	//DbMgrDemo.clearDatabase();
 					    	Connection.openDatabase();					    	
 					    	String sql = "INSERT INTO project VALUES('"+ txtProjectName.getText() +"','"+ txtStartDate.getText() +"','"+ txtEndDate.getText() +"');";
 					    	Statement statement = Connection.getConnection().prepareStatement(sql);
 					    	statement.executeUpdate(sql);
-					    	Connection.getConnection().commit();   	
+					    	Connection.getConnection().commit();   				    	
 					    	
-					    	Statement st = Connection.getConnection().createStatement();
-				            String query="SELECT projectID FROM project";
-				            ResultSet res = st.executeQuery(query);				            
+					        Statement newStat = Connection.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				            ResultSet res = newStat.executeQuery("SELECT projectID FROM project");				            
 				            Vector<String> temp = new Vector<String>();				            
 				            while (res.next()) {
 				                temp.add(res.getString("projectID"));
-				            }
-				            
-				            JList lstProjects = new JList(temp);
-				    
-					    	
+				                listModelProjects.add(0,res.getString("projectID"));
+				            } 
+				       					   
 					    	
 						} catch (Exception e1) {
 							e1.printStackTrace();
-						}
-				    	
-				        
-				    }
+						}			        
+				    }				    
 				});
+				lstProjects.repaint();
 				
 				JButton btnDeleteProject = new JButton("Delete Project");
 				
@@ -628,11 +638,6 @@ public class GuiMain {
 				txtTaskEnd = new JTextField();
 				txtTaskEnd.setColumns(10);
 				
-				JLabel lblHours = new JLabel("Total Hours");
-				
-				txtTaskTotalHours = new JTextField();
-				txtTaskTotalHours.setColumns(10);
-				
 				JLabel lblRemainingHours = new JLabel("Remaining Hours");
 				
 				txtCalculated_1 = new JTextField();
@@ -649,8 +654,7 @@ public class GuiMain {
 							DatabaseManagerImpl Connection = DatabaseManagerBuilder.getDatabaseManager(propertiesConfiguration);
 					    	//DbMgrDemo.clearDatabase();
 					    	Connection.openDatabase();					    	
-					    	String sql = "INSERT INTO task VALUES('" + txtTaskName.getText() + "','" + txtProjectName.getText()+ "','" + txtTaskStart.getText() + "','" 
-					    			+ txtTaskEnd.getText() + "','" + txtTaskTotalHours.getText() + "');";
+					    	String sql = "INSERT INTO task VALUES('" + txtTaskName.getText() + "','" + txtProjectName.getText()+ "','" + txtStartDate.getText() + "','" + txtEndDate.getText() + "');";
 					    	Statement statement = Connection.getConnection().prepareStatement(sql);
 					    	statement.executeUpdate(sql);
 					    	Connection.getConnection().commit();
@@ -673,10 +677,10 @@ public class GuiMain {
 					}
 				});
 				
-//				JLabel lblHours = new JLabel("Total Hours");
+				JLabel lblHours = new JLabel("Total Hours");
 				
-//				txtTaskTotalHours = new JTextField();
-//				txtTaskTotalHours.setColumns(10);
+				txtTaskTotalHours = new JTextField();
+				txtTaskTotalHours.setColumns(10);
 				GroupLayout gl_panel = new GroupLayout(panel);
 				gl_panel.setHorizontalGroup(
 				    gl_panel.createParallelGroup(Alignment.LEADING)
@@ -751,8 +755,8 @@ public class GuiMain {
 				panel.setLayout(gl_panel);
 				panelProject.setLayout(gl_panelProject);
 				
-				lstProjects_1 = new JList<Project>();
-				scrollPaneProjects.setViewportView(lstProjects_1);
+				JList<String> lstProjects = new JList<String>();
+				scrollPaneProjects.setViewportView(lstProjects);
 				panelProjects.setLayout(gl_panelProjects);
 				
 				JPanel panelReports = new JPanel();
@@ -1080,7 +1084,11 @@ public class GuiMain {
 		logger.debug("Main Window Boot");
 	}
 
-    public JFrame getFrmRexster() {
+    protected JList<String> JList(Vector<String> temp) {
+		return JList(temp);
+	}
+
+	public JFrame getFrmRexster() {
         return frmRexster;
     }
 
